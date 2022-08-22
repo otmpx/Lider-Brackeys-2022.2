@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - PlayerShoot
+  - PlayerMelee
+  - Enemy
+  - StickyCoom
+  - World
+  - Minion
+  - BossShoot
+  - BossMelee
+  - Ball
+  - Skull
+  - Ribcage
+  - Bone
+  - Stool
+  - Barrel
+  - BookA
+  - BookB
+  - BookC
+  - EnemyDowned
+  - DeflectProjectile
+  - DodgeMelee
+  - BossLaser
+  - Bench
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - World
+  - Water
+  - UI
+  - DashPhase
+  - Decoration
+  - Coom
+  - BossPhase
+  - Coomfloor
+  - Projectile
+  - Wall
+  - Undodgeable
+  - PlayerMelee
+  - EnemyMelee
+  - Invulnerable
+  - BoneSpawner
+  - CoomDecor
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0

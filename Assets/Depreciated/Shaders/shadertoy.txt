@@ -1,0 +1,46 @@
+﻿//https://www.youtube.com/watch?v=aNR4n0i2ZlM
+//Creates dumb thing cuz this is basically summation as opposed to making equations equal to each other
+void mainImage( out vec4 fragColor, in vec2 fragCoord )
+{
+    // Normalized pixel coordinates (from 0 to 1)
+    vec2 uv = fragCoord/iResolution.xy;
+    uv = uv + vec2(-0.5, -0.5);
+
+
+    bool eq1 = pow(uv.x, 2.0) + pow(uv.y, 2.0) <0.2; 
+    bool eq2 = uv.y < uv.y - abs(uv.x)*((0.3 - abs(uv.x)/0.2));
+    bool result = eq1 && eq2;
+ // Time varying pixel color
+    //vec3 col = 0.5 + 0.5*cos(iTime+uv.xyx+vec3(0,2,4));
+    
+    vec3 col = mix(vec3(1,1,1), vec3(0,0,0), float(result));
+    
+    // Output to screen
+    
+    
+    fragColor = vec4(col,1);
+}
+
+
+//attempt 2
+void mainImage( out vec4 fragColor, in vec2 fragCoord )
+{
+    // Normalized pixel coordinates (from 0 to 1)
+    vec2 uv = fragCoord/iResolution.xy;
+    uv = uv + vec2(-0.5, -0.5);
+
+
+
+    float y= uv.y - abs(uv.x)*((0.3 - abs(uv.x)/0.2));
+    bool eq1 = pow(uv.x, 2.0) + pow(y, 2.0) <0.2; 
+    //bool result = eq1 && eq2;
+ // Time varying pixel color
+    //vec3 col = 0.5 + 0.5*cos(iTime+uv.xyx+vec3(0,2,4));
+    
+    vec3 col = mix(vec3(1,1,1), vec3(0,0,0), float(eq1));
+    
+    // Output to screen
+    
+    
+    fragColor = vec4(col,1);
+}

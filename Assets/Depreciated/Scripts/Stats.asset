@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a38399bd4d14b4823be177e5d2e16a7b, type: 3}
+  m_Name: Stats
+  m_EditorClassIdentifier: 
+  maxSanity: 100
+  sanityBase: 100
+  sanityScale: 20
+  sanitytext: Increases max sanity by 20
+  sanitySigil: "\u03A8"
+  sanitySprite: {fileID: 21300000, guid: c74eff07f23784975bfd3983bb7f39a4, type: 3}
+  heal: 0
+  healBase: 0
+  healScale: 0.01
+  healText: Regain 1% of max sanity on kill
+  healSigil: "\u03A9"
+  healSprite: {fileID: 21300000, guid: b856bbcffc52b4a2d96da0de30843356, type: 3}
+  moveSpeed: 5
+  moveSpeedBase: 5
+  moveSpeedScale: 0.5
+  moveSpeedText: Increases base movement speed by 0.5
+  moveSpeedSigil: "\u03BB"
+  moveSpeedSprite: {fileID: 21300000, guid: d37a355d6ffe846fdba74be9925adc6e, type: 3}
+  movePenalty: 0.5
+  movePenaltyBase: 0.5
+  movePenaltyScale: -0.075
+  movePenaltyText: Decreases movement penalty when attacking by 15%
+  movePenaltySigil: "\u03A0"
+  movePenaltySprite: {fileID: 21300000, guid: b443bedc26f444dce8bf382f56858758, type: 3}
+  meleeSpeed: 1
+  meleeSpeedBase: 1
+  meleeSpeedScale: 0.15
+  meleeSpeedText: Increases melee speed by 15%
+  meleeSpeedSigil: "\u0398"
+  meleeSpeedSprite: {fileID: 21300000, guid: f75c976863fa14194b5f5d20514b9231, type: 3}
+  fireRate: 0.25
+  fireRateBase: 0.25
+  fireRateCompounded: 0.9
+  fireRateText: Increases fire rate by 10%
+  fireRateSigil: "\u03A3"
+  fireRateSprite: {fileID: 21300000, guid: 2b44851bf563b4497a2683d0b0e9a7ae, type: 3}
+  dashSpeed: 15
+  dashSpeedBase: 15
+  dashSpeedScale: 3
+  dashSpeedText: Increases dashing speed by 3
+  dashSpeedSigil: "\u03B2"
+  dashSpeedSprite: {fileID: 21300000, guid: 7d40b84dd8c0b4f8e8392084e1be4662, type: 3}
+  dashRecovery: 0.2
+  dashRecoveryBase: 0.2
+  dashRecoveryScale: -0.03
+  dashRecoveryText: Decreases dash recovery by 15%
+  dashRecoverySigil: "\u03A6"
+  dashRecoverySprite: {fileID: 21300000, guid: c9a4bbd6f397b4e9bb9b1c03f48f6a3f, type: 3}

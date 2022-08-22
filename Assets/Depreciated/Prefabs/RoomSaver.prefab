@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &431343391353434319
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 431343391353434289}
+  - component: {fileID: 771580598}
+  m_Layer: 0
+  m_Name: RoomSaver
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &431343391353434289
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 431343391353434319}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -7.4912925, y: -10.967894, z: -3.2829967}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &771580598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 431343391353434319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ab5f16f0b636984ca79aa5e099d6d88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tagsToPrefab:
+  - key: Ball
+    val: {fileID: 5075147547018292328, guid: 35281c49b5fe6994eba887ed6e6c2d0c, type: 3}
+  - key: Stool
+    val: {fileID: 6038192664499909824, guid: 6ac7551607259114897e86be966a6019, type: 3}
+  - key: StickyCoom
+    val: {fileID: 4303598888818566342, guid: 8d2bc11e96238ef4596b2df88ebe0939, type: 3}
+  - key: Skull
+    val: {fileID: 5100316381217420648, guid: 15d6c89fa108ded47bd91968f3b9bfca, type: 3}
+  - key: Ribcage
+    val: {fileID: 9169459269818948263, guid: 64b24776e73d17b468954a0c413e3fcf, type: 3}
+  - key: Bone
+    val: {fileID: 7938284915251067968, guid: d4e4803a7e37d124b93d034cc7ad9024, type: 3}
+  - key: Barrel
+    val: {fileID: 6167124613062885532, guid: 67d4e6453c718f04b8602d465af21e30, type: 3}
+  - key: BookA
+    val: {fileID: 7772848435069749464, guid: 1a268c29968463d4496a3864c982c914, type: 3}
+  - key: BookB
+    val: {fileID: 8757331710629088115, guid: 9302110d750593247be926c6ed2abeea, type: 3}
+  - key: BookC
+    val: {fileID: 4238030433323599037, guid: 746e4923abc4a57418f27e4aef028cf9, type: 3}
+  - key: Bench
+    val: {fileID: 3828377325439316873, guid: fd3672fe67d29a241aa7e0bc67f4787e, type: 3}
+  bestSpeedrunTime: 0
