@@ -2446,6 +2446,18 @@ PrefabInstance:
       propertyPath: vCam
       value: 
       objectReference: {fileID: 1949436888}
+    - target: {fileID: 7161791034960933013, guid: 1fb95b15a2e479647872512145334d9d, type: 3}
+      propertyPath: shootRange
+      value: 0.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 7161791034960933013, guid: 1fb95b15a2e479647872512145334d9d, type: 3}
+      propertyPath: FIRE_RATE_INTERVAL
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7161791034960933013, guid: 1fb95b15a2e479647872512145334d9d, type: 3}
+      propertyPath: TOTAL_SHOTS_PER_INTERVAL
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1fb95b15a2e479647872512145334d9d, type: 3}
 --- !u!4 &897505849 stripped
@@ -4744,8 +4756,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particleMesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
   particleMaterial: {fileID: 2100000, guid: fa63ee4b90c0e6a41b6b411db0617bc7, type: 2}
-  particleSize: 1
-  testParticles: 10000
+  particleSize: 0.01
+  testParticles: 0
   regionSize: 10
 --- !u!4 &2035132577
 Transform:
@@ -4755,7 +4767,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2035132575}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.6768631, y: 1.5275071, z: -6.3988795}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

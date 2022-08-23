@@ -21,8 +21,8 @@ public class Player : Actor
     public static Player Instance;
 
     float lastFired = 0f;
-    const float FIRE_RATE_INTERVAL = 0.1f;
-    const int TOTAL_SHOTS_PER_INTERVAL = 5;
+    public float FIRE_RATE_INTERVAL = 0.1f;
+    public int TOTAL_SHOTS_PER_INTERVAL = 5;
     const float MAX_RAYCAST_DIST = 1000f;
 
     protected override void Awake()
@@ -67,7 +67,7 @@ public class Player : Actor
             //Physics.Raycast()
             for (int i = 0; i < TOTAL_SHOTS_PER_INTERVAL; i++)
             {
-                var dir = GetRandomTargetDirCircle().normalized;
+                var dir = GetRandomTargetDirBox().normalized;
                 Debug.DrawRay(cam.transform.position, dir, Color.black, FIRE_RATE_INTERVAL);
                 if (Physics.Raycast(cam.transform.position, dir, out var hit, MAX_RAYCAST_DIST))
                 {

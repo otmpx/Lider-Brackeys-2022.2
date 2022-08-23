@@ -3,36 +3,54 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+public class PointChunkHolder<T>
+{
+    public List<T> points;
+    public MaterialPropertyBlock propBlock;
+
+    public PointChunkHolder()
+    {
+        points = new List<T>();
+        propBlock = new MaterialPropertyBlock();
+        //Size of array cant be mutated but the properties can so just ensure the index doesnt go over this
+        var init = Enumerable.Repeat((Vector4)Color.white, ParticleManager.MAX_POINTS_IN_CHUNK).ToArray();
+        propBlock.SetVectorArray(ParticleManager.COLOR_SHADER_PROPERTY, init);
+    }
+}
+
 public class ParticleManager : MonoBehaviour
 {
     [Header("variability")]
     public Mesh particleMesh;
     public Material particleMaterial;
     public float particleSize = 1f;
-    private static Dictionary<GameObject, List<Vector3>> dynamicLocations;
-    private static Dictionary<GameObject, List<TimedVector>> enemyLocations;
-    private static List<List<Vector3>> staticLocations;
+    private static Dictionary<GameObject, PointChunkHolder<Vector3>> dynamicLocations;
+    private static Dictionary<GameObject, PointChunkHolder<TimedVector>> enemyLocations;
+    private static List<PointChunkHolder<Vector3>> staticLocations;
 
     public static ParticleManager instance;
 
-    private MaterialPropertyBlock block;
-    private int colourShaderProperty;
+    //private MaterialPropertyBlock block;
+    public static readonly int COLOR_SHADER_PROPERTY = Shader.PropertyToID("_Colours");
 
     [Header("Testing variables")]
     public int testParticles = 10000;
     public float regionSize = 10f;
 
+    public const int MAX_POINTS_IN_CHUNK = 100;
+
     private void Awake()
     {
         instance = this;
         //Colors would include the alpha which can be interped with time
-        colourShaderProperty = Shader.PropertyToID("_ParticleColours");
-        block = new MaterialPropertyBlock();
+        staticLocations = new List<PointChunkHolder<Vector3>>();
+        staticLocations.Add(new PointChunkHolder<Vector3>());
     }
 
     void Start()
     {
         //https://forum.unity.com/threads/drawmeshinstancedindirect-not-support-webgl.1285415/ 
+        SpawnTest();
 
     }
 
@@ -45,25 +63,41 @@ public class ParticleManager : MonoBehaviour
 
         //Draw all the static particles
         Vector3 scaleRef = Vector3.one * particleSize;
-        var colourArr = staticLocations.SelectMany(loc => loc).Select(l => Color.white).Cast<Vector4>().ToList();
-        block.SetVectorArray(colourShaderProperty, colourArr);
+        //block.SetVectorArray(colourShaderProperty, colourArr);
         foreach (var staticChunk in staticLocations)
         {
+            if (staticChunk.points.Count == 0) continue;
             //Easier to store and Serialize stuff in vectors than matrix(decide which is more memory and perforamnce efficient)
-            var arr = staticChunk.Select((point => Matrix4x4.TRS(point, Quaternion.identity, scaleRef))).ToList();
-            Graphics.DrawMeshInstanced(particleMesh, 0, particleMaterial, arr, block);
+            var arr = staticChunk.points.Select((point => Matrix4x4.TRS(point, Quaternion.identity, scaleRef))).ToList();
+            //var blockColorArr = staticChunk.points.Select(l => (Vector4)Color.white).ToArray();
+            //staticChunk.propBlock.SetVectorArray(COLOR_SHADER_PROPERTY, blockColorArr);
+
+            Graphics.DrawMeshInstanced(particleMesh, 0, particleMaterial, arr, staticChunk.propBlock);
         }
 
 
         //Draw and remove expired timedParticles on Enemies
 
+    }
+
+    public void SpawnTest()
+    {
+
+        for (int i = 0; i < testParticles; i++)
+        {
+            AddParticle(Random.insideUnitSphere * regionSize);
+        }
 
     }
 
     public static void AddParticle(Vector3 loc)
     {
+        if (staticLocations.Last().points.Count >= MAX_POINTS_IN_CHUNK)
+        {
+            staticLocations.Add(new PointChunkHolder<Vector3>());
+        }
 
-
+        staticLocations.Last().points.Add(loc);
     }
 
     public static void AddParticleToGameObject(Vector3 loc, GameObject parent)
