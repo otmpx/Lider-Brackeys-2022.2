@@ -22,16 +22,16 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - World
+  - Collidable
   - Water
   - UI
   - Enemy
   - Decoration
+  - Scannable
   - 
   - 
   - 
-  - 
-  - Wall
+  - ScanAndCollide
   - 
   - 
   - 

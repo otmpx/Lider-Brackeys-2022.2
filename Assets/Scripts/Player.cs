@@ -10,6 +10,7 @@ public class Player : Actor
     public float mouseSens;
     public Transform vCamFollow;
     public float shootRange = 2.5f;
+    public LayerMask scannable;
 
     Vector2 input;
     bool isShooting;

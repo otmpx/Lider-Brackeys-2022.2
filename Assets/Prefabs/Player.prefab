@@ -182,6 +182,9 @@ MonoBehaviour:
   mouseSens: 300
   vCamFollow: {fileID: 1097916676}
   shootRange: 2.5
+  scannable:
+    serializedVersion: 2
+    m_Bits: 4480
   povController: {fileID: 0}
   headBob: {fileID: 0}
   FIRE_RATE_INTERVAL: 0.1

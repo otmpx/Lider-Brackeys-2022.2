@@ -793,7 +793,7 @@ GameObject:
   - component: {fileID: 113395657}
   - component: {fileID: 113395659}
   - component: {fileID: 113395658}
-  m_Layer: 3
+  m_Layer: 12
   m_Name: Plane N
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2083,7 +2083,7 @@ GameObject:
   - component: {fileID: 480845686}
   - component: {fileID: 480845688}
   - component: {fileID: 480845687}
-  m_Layer: 3
+  m_Layer: 12
   m_Name: Plane W
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5638,7 +5638,7 @@ GameObject:
   - component: {fileID: 1312931896}
   - component: {fileID: 1312931898}
   - component: {fileID: 1312931897}
-  m_Layer: 3
+  m_Layer: 12
   m_Name: Plane E
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6789,7 +6789,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1695762191}
-  m_Layer: 3
+  m_Layer: 12
   m_Name: Borders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8214,7 +8214,7 @@ GameObject:
   - component: {fileID: 1884466112}
   - component: {fileID: 1884466114}
   - component: {fileID: 1884466113}
-  m_Layer: 3
+  m_Layer: 12
   m_Name: Plane S
   m_TagString: Untagged
   m_Icon: {fileID: 0}
