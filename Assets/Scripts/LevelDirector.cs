@@ -16,10 +16,11 @@ public class LevelDirector : MonoBehaviour
     public static LevelDirector Instance;
     public RoomSettings[] allRooms;
     public CinemachineVirtualCamera vCam;
-    public int test;
-    public static int currentRoomIndex = 0;
+    //public static int currentRoomIndex = 0;
     public int coinsCollected;
     public int coinsRequired = 3;
+    public static int roomId;
+    public static RoomSettings CurrentRoom => Instance.allRooms[roomId];
     private void Awake()
     {
         if (Instance == null)
@@ -45,8 +46,7 @@ public class LevelDirector : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         coinsCollected = 0;
-        currentRoomIndex = SceneManager.GetActiveScene().buildIndex;
-        test = currentRoomIndex;
+        //currentRoomIndex = SceneManager.GetActiveScene().buildIndex;
     }
 
 
@@ -71,7 +71,8 @@ public class LevelDirector : MonoBehaviour
         coinsCollected++;
         if (coinsCollected >= coinsRequired)
         {
-            SceneManager.LoadScene(allRooms[currentRoomIndex].sceneName);
+            roomId++;
+            SceneManager.LoadScene(CurrentRoom.sceneName);
         }
     }
 }

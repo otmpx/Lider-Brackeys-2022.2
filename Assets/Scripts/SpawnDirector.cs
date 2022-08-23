@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using Enemy;
+using UnityEngine.SceneManagement;
+
 public class SpawnDirector : MonoBehaviour
 {
     public Transform[] spawnPos;
@@ -23,7 +25,7 @@ public class SpawnDirector : MonoBehaviour
     {
         SpawnPlayer();
         SpawnCoins();
-        for (int i = 0; i < LevelDirector.Instance.allRooms[LevelDirector.currentRoomIndex].enemySpawns; i++)
+        for (int i = 0; i < LevelDirector.CurrentRoom.enemySpawns; i++)
         {
             SpawnEnemy();
         }
@@ -71,7 +73,7 @@ public class SpawnDirector : MonoBehaviour
     {
         if (coinPos == null) return;
         KongrooUtils.ShuffleArray(coinPos);
-        for (int i = 0; i < LevelDirector.Instance.allRooms[LevelDirector.currentRoomIndex].objectiveSpawns; i++)
+        for (int i = 0; i < LevelDirector.CurrentRoom.objectiveSpawns; i++)
         {
             Instantiate(coinPrefab, coinPos[i].transform.position, coinPos[i].transform.rotation);
         }
