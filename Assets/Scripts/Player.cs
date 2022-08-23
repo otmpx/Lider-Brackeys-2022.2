@@ -9,6 +9,7 @@ public class Player : Actor
     public float moveSpeed;
     public float mouseSens;
     public CinemachineVirtualCamera vCam;
+    public Transform vCamFollow;
     public float shootRange = 2.5f;
 
     Vector2 input;
@@ -34,10 +35,11 @@ public class Player : Actor
     protected override void Start()
     {
         base.Start();
-        currentState = new Idle(this);
-        currentState.OnEnter();
+        vCam.Follow = vCamFollow;
         Cursor.lockState = CursorLockMode.Locked;
         cam = Camera.main;
+        currentState = new Idle(this);
+        currentState.OnEnter();
     }
     protected override void Update()
     {

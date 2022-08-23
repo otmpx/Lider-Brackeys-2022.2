@@ -10,8 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8745565718189417086}
   - component: {fileID: 8935415548926957363}
-  - component: {fileID: 2424463866170921952}
-  - component: {fileID: 8368479222473449480}
   m_Layer: 3
   m_Name: Room Manager
   m_TagString: Untagged
@@ -55,53 +53,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomRadius: 35
   noSpawnRadius: 11
-  spawnEnemyPrefabs:
-  - {fileID: 6645822205875947783, guid: f3092b13d5a113b43948c71a47169835, type: 3}
-  - {fileID: 3225770047683560933, guid: c72f1823717f4b54794caca27ac5ec38, type: 3}
-  - {fileID: 6652188797049549687, guid: 95d2b1b4445c75840b31060ce27306f8, type: 3}
-  - {fileID: 650144386727900244, guid: 6ca2657ba0c10934b87e2dca966ed7c9, type: 3}
-  - {fileID: 3907582250692268692, guid: cc1f0b9b5ed6b8d4ca550173d9cbc491, type: 3}
-  - {fileID: 8407604978205867751, guid: 74f21de724952f24790706870d47b6f2, type: 3}
+  skeletonPrefab: {fileID: 6645822205875947780, guid: f3092b13d5a113b43948c71a47169835, type: 3}
   currentEnemies: 0
---- !u!114 &2424463866170921952
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2295404552409738464}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 194460a042571f948a883ab0234196eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  coomMesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
-  coomMat: {fileID: 2100000, guid: 3aae2221ac5fc934590b3e60440cc2a5, type: 2}
-  coomScale: 0.45
---- !u!114 &8368479222473449480
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2295404552409738464}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29b46d072d66c874199b5b5f078b111e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  boss: {fileID: 0}
-  spawnPoints:
-  - {fileID: 8478209759493583409}
-  - {fileID: 4759082450261191379}
-  - {fileID: 7710676034598583585}
-  - {fileID: 3897278061793122579}
-  scaledEnemySpawns: 14
-  totalEnemies: 6
-  randomTextSpawns: 25
-  maxTextRot: 50
-  textPrefab: {fileID: 8875510959101015424, guid: f74df218a1e176940be8716459227cdf, type: 3}
-  portalPrefab: {fileID: 3908284198774117452, guid: 99a3a1d4ee42197439cb4fc184b7a8bf, type: 3}
 --- !u!1 &3530245608034742353
 GameObject:
   m_ObjectHideFlags: 0
