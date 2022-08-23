@@ -1,20 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 using Enemy;
 public class SpawnDirector : MonoBehaviour
 {
+    public Transform[] spawnPos;
+    public Transform[] coinPos;
     public float roomRadius = 20f;
     public float noSpawnRadius = 10f;
+    public Player playerPrefab;
     public Skeleton skeletonPrefab;
-    public int currentEnemies;
+    public Coin coinPrefab;
+    //public int currentEnemies;
     public static SpawnDirector instance;
 
     protected virtual void Awake()
     {
         instance = this;
     }
-
+    private void Start()
+    {
+        SpawnPlayer();
+        SpawnCoins();
+        for (int i = 0; i < LevelDirector.Instance.allRooms[LevelDirector.currentRoomIndex].enemySpawns; i++)
+        {
+            SpawnEnemy();
+        }
+    }
     //Instead of using inheritance on room manager, treat spawn director as a different body part and compositionalise
     public Vector3 RandomNavmeshLocation()
     {
@@ -29,8 +42,15 @@ public class SpawnDirector : MonoBehaviour
 
         return finalPosition;
     }
-
-    public Skeleton SpawnEnemy()
+    public void SpawnPlayer()
+    {
+        int rand = Random.Range(0, spawnPos.Length);
+        Player player = Instantiate(playerPrefab, spawnPos[rand].position, Quaternion.identity, transform.parent).GetComponent<Player>();
+        // Sets initial rotation to the transform rotation of spawnPos
+        player.povController.m_HorizontalAxis.Value = spawnPos[rand].localEulerAngles.y;
+        player.povController.m_VerticalAxis.Value = 0;
+    }
+    public void SpawnEnemy()
     {
         // Spawn enemy in random location outside light radius
 
@@ -43,11 +63,23 @@ public class SpawnDirector : MonoBehaviour
         }
 
         Quaternion randRot = Quaternion.LookRotation(new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized);
-        Skeleton enemy = Instantiate(skeletonPrefab, enemySpawn, randRot).GetComponent<Skeleton>();
-        currentEnemies++;
-        return enemy;
+        Instantiate(skeletonPrefab, enemySpawn, randRot);
+        //currentEnemies++;
+        //return enemy;
     }
-
+    public void SpawnCoins()
+    {
+        if (coinPos == null) return;
+        KongrooUtils.ShuffleArray(coinPos);
+        for (int i = 0; i < LevelDirector.Instance.allRooms[LevelDirector.currentRoomIndex].objectiveSpawns; i++)
+        {
+            Instantiate(coinPrefab, coinPos[i].transform.position, coinPos[i].transform.rotation);
+        }
+        foreach (var item in coinPos)
+        {
+            item.gameObject.SetActive(false);
+        }
+    }
     //protected virtual GameObject SelectEnemyPrefab()
     //{
     //    Color enemyColour = LevelDirector.Instance.CurrentEnemyWeights().Evaluate(Random.value);

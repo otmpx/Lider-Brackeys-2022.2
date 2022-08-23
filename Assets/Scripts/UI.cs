@@ -11,8 +11,8 @@ public class UI : MonoBehaviour
     {
         Instance = this;
     }
-    private void Start()
+    private void Update()
     {
-        levelCounter.text = $"{LevelDirector.Instance.currentRoomIndex} / {LevelDirector.Instance.allRooms.Length}";
+        levelCounter.text = $"{LevelDirector.Instance.coinsCollected} / {LevelDirector.Instance.coinsRequired}";
     }
 }
