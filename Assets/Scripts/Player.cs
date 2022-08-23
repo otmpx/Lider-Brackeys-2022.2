@@ -6,15 +6,22 @@ using System.Linq;
 
 public class Player : Actor
 {
-    public static Player Instance;
     public float moveSpeed;
     public float mouseSens;
-    public float verticalLookRotation;
-    public Vector2 input;
-    public bool isShooting;
     public CinemachineVirtualCamera vCam;
+    public float shootRange = 2.5f;
+
+    Vector2 input;
+    bool isShooting;
     CinemachinePOV povController;
-    public Camera cam;
+    Camera cam;
+
+    public static Player Instance;
+
+    float lastFired = 0f;
+    const float FIRE_RATE_INTERVAL = 0.1f;
+    const int TOTAL_SHOTS_PER_INTERVAL = 5;
+    const float MAX_RAYCAST_DIST = 1000f;
 
     protected override void Awake()
     {
@@ -43,7 +50,47 @@ public class Player : Actor
             moveDir = Vector3.zero;
         isShooting = Input.GetKey(KeyCode.Mouse0);
         transform.localEulerAngles = new Vector3(0, cam.transform.localEulerAngles.y, 0);
+
+        if (Input.GetMouseButton(0))
+            Fire();
     }
+
+    private void Fire()
+    {
+        isShooting = true;
+        var dt = Time.time - lastFired;
+        if (dt > FIRE_RATE_INTERVAL)
+        {
+            //Physics.Raycast()
+            for (int i = 0; i < TOTAL_SHOTS_PER_INTERVAL; i++)
+            {
+                var dir = GetRandomTargetDirCircle().normalized;
+                Debug.DrawRay(cam.transform.position, dir, Color.black, FIRE_RATE_INTERVAL);
+                if(Physics.Raycast(cam.transform.position, dir, out var hit, MAX_RAYCAST_DIST))
+                {
+                    ParticleManager.AddParticle(hit.point);
+                }
+            }
+        }
+    }
+
+    Vector3 GetRandomTargetDirBox()
+    {
+        Vector3 randomY = cam.transform.up * Random.Range(-shootRange, shootRange);
+        Vector3 randomX = cam.transform.right * Random.Range(-shootRange, shootRange);
+
+        return cam.transform.forward + randomX + randomY;
+
+    }
+
+    Vector3 GetRandomTargetDirCircle()
+    {
+        var randVec = Random.insideUnitCircle;
+        var randY = cam.transform.up * randVec.y;
+        var randX = cam.transform.right * randVec.x;
+        return cam.transform.forward + randX + randY;
+    }
+
     public void SetSensitivity()
     {
         povController.m_HorizontalAxis.m_MaxSpeed = mouseSens;
