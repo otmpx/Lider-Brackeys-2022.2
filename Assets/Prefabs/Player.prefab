@@ -46,7 +46,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4579983643798795605
 Transform:
   m_ObjectHideFlags: 0
@@ -182,7 +182,10 @@ MonoBehaviour:
   mouseSens: 300
   vCamFollow: {fileID: 1097916676}
   shootRange: 2.5
+  povController: {fileID: 0}
   headBob: {fileID: 0}
+  FIRE_RATE_INTERVAL: 0.1
+  TOTAL_SHOTS_PER_INTERVAL: 5
 --- !u!136 &2146551133154451579
 CapsuleCollider:
   m_ObjectHideFlags: 0
