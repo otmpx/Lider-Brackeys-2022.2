@@ -8,12 +8,14 @@ public class Player : Actor
 {
     public float moveSpeed;
     public float mouseSens;
-    public CinemachineVirtualCamera vCam;
+    public Transform vCamFollow;
     public float shootRange = 2.5f;
 
     Vector2 input;
     bool isShooting;
-    CinemachinePOV povController;
+
+    [HideInInspector] public CinemachinePOV povController;
+    [HideInInspector] public CinemachineBasicMultiChannelPerlin headBob;
     Camera cam;
 
     public static Player Instance;
@@ -28,16 +30,17 @@ public class Player : Actor
         base.Awake();
         Instance = this;
         rb = GetComponent<Rigidbody>();
-        povController = vCam.GetComponentPipeline().First(cb => cb is CinemachinePOV) as CinemachinePOV;
-
+        povController = LevelDirector.Instance.vCam.GetComponentPipeline().First(cb => cb is CinemachinePOV) as CinemachinePOV;
+        headBob = LevelDirector.Instance.vCam.GetComponentPipeline().First(cb => cb is CinemachineBasicMultiChannelPerlin) as CinemachineBasicMultiChannelPerlin;
+        LevelDirector.Instance.vCam.Follow = vCamFollow;
+        //Cursor.lockState = CursorLockMode.Locked;
+        cam = Camera.main;
     }
     protected override void Start()
     {
         base.Start();
         currentState = new Idle(this);
         currentState.OnEnter();
-        Cursor.lockState = CursorLockMode.Locked;
-        cam = Camera.main;
     }
     protected override void Update()
     {
@@ -66,7 +69,7 @@ public class Player : Actor
             {
                 var dir = GetRandomTargetDirBox().normalized;
                 Debug.DrawRay(cam.transform.position, dir, Color.black, FIRE_RATE_INTERVAL);
-                if(Physics.Raycast(cam.transform.position, dir, out var hit, MAX_RAYCAST_DIST))
+                if (Physics.Raycast(cam.transform.position, dir, out var hit, MAX_RAYCAST_DIST))
                 {
                     ParticleManager.AddParticle(hit.point);
                 }

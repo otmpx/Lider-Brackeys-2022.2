@@ -178,15 +178,11 @@ MonoBehaviour:
   moveDir: {x: 0, y: 0, z: 0}
   targetPos: {x: 0, y: 0, z: 0}
   targetDir: {x: 0, y: 0, z: 0}
-  <pitchMultiplier>k__BackingField: 1
-  deathSoundPrefab: {fileID: 0}
   moveSpeed: 5
   mouseSens: 300
-  verticalLookRotation: 0
-  input: {x: 0, y: 0}
-  isShooting: 0
-  vCam: {fileID: 0}
-  cam: {fileID: 0}
+  vCamFollow: {fileID: 1097916676}
+  shootRange: 2.5
+  headBob: {fileID: 0}
 --- !u!136 &2146551133154451579
 CapsuleCollider:
   m_ObjectHideFlags: 0

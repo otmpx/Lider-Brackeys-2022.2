@@ -4,14 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - PlayerShoot
-  - PlayerMelee
   - Enemy
-  - StickyCoom
   - World
-  - Minion
-  - BossShoot
-  - BossMelee
   - Ball
   - Skull
   - Ribcage
@@ -21,11 +15,9 @@ TagManager:
   - BookA
   - BookB
   - BookC
-  - EnemyDowned
-  - DeflectProjectile
-  - DodgeMelee
-  - BossLaser
   - Bench
+  - PlayerShoot
+  - StickyCoom
   layers:
   - Default
   - TransparentFX
@@ -33,19 +25,19 @@ TagManager:
   - World
   - Water
   - UI
-  - DashPhase
+  - Enemy
   - Decoration
-  - Coom
-  - BossPhase
-  - Coomfloor
-  - Projectile
+  - 
+  - 
+  - 
+  - 
   - Wall
-  - Undodgeable
-  - PlayerMelee
-  - EnemyMelee
-  - Invulnerable
-  - BoneSpawner
-  - CoomDecor
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 
