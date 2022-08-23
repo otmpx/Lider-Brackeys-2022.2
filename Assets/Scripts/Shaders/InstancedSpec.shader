@@ -1,60 +1,68 @@
 Shader "Unlit/InstancedSpec"
 {
-    Properties
-    {
-        _MainTex ("Texture", 2D) = "white" {}
-    }
-    SubShader
-    {
-        Tags { "RenderType"="Opaque" }
-        LOD 100
+	Properties
+	{
+		//_MainTex("Texture", 2D) = "white" {}
+	}
+	SubShader
+	{
+		Tags { "RenderType" = "Transparent" }
+		Lighting Off
+		Blend SrcAlpha OneMinusSrcAlpha
+		Pass
+		{
+			CGPROGRAM
+			#pragma vertex vert
+			#pragma fragment frag
+			#pragma instancing_options maxcount:1024
+			//This may not be allowed if the spare buffers were too big, if that was the case, use DrawMeshInstancedIndirect instead
+			#pragma multi_compile_instancing 
+			//https://forum.unity.com/threads/understanding-instancing-and-drawmeshinstanced.445995/
 
-        Pass
-        {
-            CGPROGRAM
-            #pragma vertex vert
-            #pragma fragment frag
-            #pragma instancing_options maxcount:1024
-            //This may not be allowed if the spare buffers were too big, if that was the case, use DrawMeshInstancedIndirect instead
-            #pragma multi_compile_instancing 
-            //https://forum.unity.com/threads/understanding-instancing-and-drawmeshinstanced.445995/
+			#include "UnityCG.cginc"
 
-            #include "UnityCG.cginc"
+			struct appdata
+			{
+				float4 vertex : POSITION;
+				float2 uv : TEXCOORD0;
+				UNITY_VERTEX_INPUT_INSTANCE_ID
+			};
 
-            struct appdata
-            {
-                float4 vertex : POSITION;
-                float2 uv : TEXCOORD0;
-            };
+			struct v2f
+			{
+				float2 uv : TEXCOORD0;
+				float4 vertex : SV_POSITION;
+				fixed4 colour : COLOR;
+			};
 
-            struct v2f
-            {
-                float2 uv : TEXCOORD0;
-                UNITY_FOG_COORDS(1)
-                float4 vertex : SV_POSITION;
-            };
+			float4 _Colours[1023];
+			sampler2D _MainTex;
+			float4 _MainTex_ST;
 
-            sampler2D _MainTex;
-            float4 _MainTex_ST;
+//https://github.com/AlfonsoLRz/PointCloudRendering/blob/main/PointCloudRendering/Assets/Shaders/Points/pointCloud-frag.glsl
+			//Need the uv coord for rounding on sphere
 
-            v2f vert (appdata v)
-            {
-                v2f o;
-                o.vertex = UnityObjectToClipPos(v.vertex);
-                o.uv = TRANSFORM_TEX(v.uv, _MainTex);
-                UNITY_TRANSFER_FOG(o,o.vertex);
-                return o;
-            }
 
-            fixed4 frag (v2f i) : SV_Target
-            {
-                // sample the texture
-                fixed4 col = tex2D(_MainTex, i.uv);
-                // apply fog
-                UNITY_APPLY_FOG(i.fogCoord, col);
-                return col;
-            }
-            ENDCG
-        }
-    }
+
+			v2f vert(appdata v,uint instanceID: SV_InstanceID)
+			{
+				UNITY_SETUP_INSTANCE_ID(v);
+
+				v2f o;
+				o.vertex = UnityObjectToClipPos(v.vertex);
+				o.uv = TRANSFORM_TEX(v.uv, _MainTex);
+
+#ifdef UNITY_INSTANCING_ENABLED
+				o.colour = _Colours[instanceID];
+#endif
+				return o;
+			}
+
+			fixed4 frag(v2f i) : SV_Target
+			{
+				return i.colour;
+			}
+			ENDCG
+		}
+	}
 }
