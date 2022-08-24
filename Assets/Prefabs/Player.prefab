@@ -46,7 +46,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4579983643798795605
 Transform:
   m_ObjectHideFlags: 0
@@ -184,7 +184,7 @@ MonoBehaviour:
   scannable:
     serializedVersion: 2
     m_Bits: 4352
-  FIRE_RATE_INTERVAL: 0.05
+  FIRE_RATE_INTERVAL: 1
   TOTAL_SHOTS_PER_INTERVAL: 1000
 --- !u!136 &2146551133154451579
 CapsuleCollider:

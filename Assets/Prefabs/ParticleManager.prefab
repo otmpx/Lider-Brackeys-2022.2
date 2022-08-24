@@ -43,8 +43,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dda10bbb431c194e8c6ea68bdb78198, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particleMesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+  particleMesh: {fileID: 289301614986012343, guid: 74c7c84e2d4251148922c81ca61dc500, type: 3}
   particleMaterial: {fileID: 2100000, guid: 11fd1f109fa10094788288e6e0e3ac1b, type: 2}
-  particleSize: 0.01
+  particleSize: 0.5
   testParticles: 0
   regionSize: 10

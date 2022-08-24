@@ -48,10 +48,15 @@ public class Player : Actor
             moveDir = Vector3.zero;
         isShooting = Input.GetKey(KeyCode.Mouse0);
         transform.localEulerAngles = new Vector3(0, cam.transform.localEulerAngles.y, 0);
-
-        if (Input.GetMouseButton(0))
+        if (isShooting)
             Fire();
     }
+    //protected override void FixedUpdate()
+    //{
+    //    base.FixedUpdate();
+    //    if (isShooting)
+    //        FireFrame();
+    //}
 
     private void Fire()
     {
@@ -62,12 +67,25 @@ public class Player : Actor
             //Physics.Raycast()
             for (int i = 0; i < TOTAL_SHOTS_PER_INTERVAL; i++)
             {
-                var dir = GetRandomTargetDirBox().normalized;
-                Debug.DrawRay(cam.transform.position, dir, Color.black, FIRE_RATE_INTERVAL);
+                var dir = GetRandomTargetDirCircle().normalized;
+                Debug.DrawRay(cam.transform.position, dir, Color.green, FIRE_RATE_INTERVAL);
                 if (Physics.Raycast(cam.transform.position, dir, out var hit, MAX_RAYCAST_DIST, scannable))
                 {
                     ParticleManager.AddParticle(hit.point);
                 }
+            }
+            lastFired = Time.time;
+        }
+    }
+    void FireFrame()
+    {
+        for (int i = 0; i < TOTAL_SHOTS_PER_INTERVAL; i++)
+        {
+            var dir = GetRandomTargetDirCircle().normalized;
+            Debug.DrawRay(cam.transform.position, dir, Color.green, FIRE_RATE_INTERVAL);
+            if (Physics.Raycast(cam.transform.position, dir, out var hit, MAX_RAYCAST_DIST, scannable))
+            {
+                ParticleManager.AddParticle(hit.point);
             }
         }
     }
@@ -83,7 +101,7 @@ public class Player : Actor
 
     Vector3 GetRandomTargetDirCircle()
     {
-        var randVec = Random.insideUnitCircle;
+        var randVec = Random.insideUnitCircle * shootRange;
         var randY = cam.transform.up * randVec.y;
         var randX = cam.transform.right * randVec.x;
         return cam.transform.forward + randX + randY;

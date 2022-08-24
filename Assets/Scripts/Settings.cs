@@ -18,18 +18,19 @@ public class Settings : MonoBehaviour
         instance = this;
         povController = LevelDirector.Instance.vCam.GetComponentPipeline().First(cb => cb is CinemachinePOV) as CinemachinePOV;
         //headBob = LevelDirector.Instance.vCam.GetComponentPipeline().First(cb => cb is CinemachineBasicMultiChannelPerlin) as CinemachineBasicMultiChannelPerlin;
-        soundSlider.onValueChanged.AddListener((float value) => UpdateSoundSlider(value));
-        AudioManager.Instance.masterMixer.GetFloat("sfxVolume", out float soundDB);
-        soundSlider.value = Mathf.Pow(10.0f, soundDB / 20.0f);
-        musicSlider.onValueChanged.AddListener((float value) => UpdateMusicSlider(value));
-        AudioManager.Instance.masterMixer.GetFloat("musicVolume", out float musicDB);
-        musicSlider.value = Mathf.Pow(10.0f, musicDB / 20.0f);
+
+        //soundSlider.onValueChanged.AddListener((float value) => UpdateSoundSlider(value));
+        //AudioManager.Instance.masterMixer.GetFloat("sfxVolume", out float soundDB);
+        //soundSlider.value = Mathf.Pow(10.0f, soundDB / 20.0f);
+        //musicSlider.onValueChanged.AddListener((float value) => UpdateMusicSlider(value));
+        //AudioManager.Instance.masterMixer.GetFloat("musicVolume", out float musicDB);
+        //musicSlider.value = Mathf.Pow(10.0f, musicDB / 20.0f);
 
         povController.m_HorizontalAxis.m_SpeedMode = AxisState.SpeedMode.InputValueGain;
         povController.m_VerticalAxis.m_SpeedMode = AxisState.SpeedMode.InputValueGain;
 
-        povController.m_HorizontalAxis.m_MaxSpeed = 1f;
-        povController.m_VerticalAxis.m_MaxSpeed = 1f;
+        //povController.m_HorizontalAxis.m_MaxSpeed = 1f;
+        //povController.m_VerticalAxis.m_MaxSpeed = 1f;
     }
     private void Update()
     {
