@@ -3,24 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class PointChunkHolderGeneric<T>
-{
-    public List<T> points;
-    public MaterialPropertyBlock propBlock;
 
-    public PointChunkHolderGeneric()
-    {
-        points = new List<T>();
-        propBlock = new MaterialPropertyBlock();
-        //Size of array cant be mutated but the properties can so just ensure the index doesnt go over this
-        var init = Enumerable.Repeat((Vector4)Color.white, ParticleManager.MAX_POINTS_IN_CHUNK).ToArray();
-        propBlock.SetVectorArray(ParticleManager.COLOR_SHADER_PROPERTY, init);
-    }
-}
+//public class PointChunkHolderGeneric<T>
+//{
+//    public List<T> points;
+//    public MaterialPropertyBlock propBlock;
+
+//    public PointChunkHolderGeneric()
+//    {
+//        points = new List<T>();
+//        propBlock = new MaterialPropertyBlock();
+//        var init = Enumerable.Repeat((Vector4)Color.white, ParticleManager.MAX_POINTS_IN_CHUNK).ToArray();
+//        propBlock.SetVectorArray(ParticleManager.COLOR_SHADER_PROPERTY, init);
+//    }
+//}
+
 public class PointChunkHolder
 {
-    public Vector2[] points = new Vector2[ParticleManager.MAX_POINTS_IN_CHUNK];
+    public Vector3[] points = new Vector3[ParticleManager.MAX_POINTS_IN_CHUNK];
     public MaterialPropertyBlock propBlock;
+    public int counter;
 
     public PointChunkHolder()
     {
@@ -37,9 +39,9 @@ public class ParticleManager : MonoBehaviour
     public Mesh particleMesh;
     public Material particleMaterial;
     public float particleSize = 1f;
-    private static Dictionary<GameObject, PointChunkHolderGeneric<Vector3>> dynamicLocations;
-    private static Dictionary<GameObject, PointChunkHolderGeneric<TimedVector>> enemyLocations;
-    private static List<PointChunkHolderGeneric<Vector3>> staticLocations;
+    //private static Dictionary<GameObject, PointChunkHolderTimed> dynamicLocations;
+    //private static Dictionary<GameObject, PointChunkHolderTimed> enemyLocations;
+    private static List<PointChunkHolder> staticLocations;
 
     public static ParticleManager instance;
 
@@ -50,14 +52,14 @@ public class ParticleManager : MonoBehaviour
     public int testParticles = 10000;
     public float regionSize = 10f;
 
-    public const int MAX_POINTS_IN_CHUNK = 100;
+    public const int MAX_POINTS_IN_CHUNK = 1000;
 
     private void Awake()
     {
         instance = this;
         //Colors would include the alpha which can be interped with time
-        staticLocations = new List<PointChunkHolderGeneric<Vector3>>();
-        staticLocations.Add(new PointChunkHolderGeneric<Vector3>());
+        staticLocations = new List<PointChunkHolder>();
+        staticLocations.Add(new PointChunkHolder());
     }
 
     void Start()
@@ -79,13 +81,13 @@ public class ParticleManager : MonoBehaviour
         //block.SetVectorArray(colourShaderProperty, colourArr);
         foreach (var staticChunk in staticLocations)
         {
-            if (staticChunk.points.Count == 0) continue;
+            if (staticChunk.points.Length == 0) continue;
             //Easier to store and Serialize stuff in vectors than matrix(decide which is more memory and perforamnce efficient)
-            var arr = staticChunk.points.Select((point => Matrix4x4.TRS(point, Quaternion.identity, scaleRef))).ToList();
+            var arr = staticChunk.points.Select((point => Matrix4x4.TRS(point, Quaternion.identity, scaleRef))).ToArray();
             //var blockColorArr = staticChunk.points.Select(l => (Vector4)Color.white).ToArray();
             //staticChunk.propBlock.SetVectorArray(COLOR_SHADER_PROPERTY, blockColorArr);
 
-            Graphics.DrawMeshInstanced(particleMesh, 0, particleMaterial, arr, staticChunk.propBlock);
+            Graphics.DrawMeshInstanced(particleMesh, 0, particleMaterial, arr, arr.Length, staticChunk.propBlock);
         }
 
 
@@ -105,12 +107,15 @@ public class ParticleManager : MonoBehaviour
 
     public static void AddParticle(Vector3 loc)
     {
-        if (staticLocations.Last().points.Count >= MAX_POINTS_IN_CHUNK)
+        if (staticLocations.Last().counter >= MAX_POINTS_IN_CHUNK - 1)
         {
-            staticLocations.Add(new PointChunkHolderGeneric<Vector3>());
+            staticLocations.Add(new PointChunkHolder());
         }
 
-        staticLocations.Last().points.Add(loc);
+        var lastChunk = staticLocations.Last();
+
+        lastChunk.points[lastChunk.counter] = loc;
+        lastChunk.counter++;
     }
 
     public static void AddParticleToGameObject(Vector3 loc, GameObject parent)
