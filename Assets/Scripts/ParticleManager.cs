@@ -50,7 +50,7 @@ public class ParticleManager : MonoBehaviour
     public int testParticles = 10000;
     public float regionSize = 10f;
 
-    public const int MAX_POINTS_IN_CHUNK = 100;
+    public const int MAX_POINTS_IN_CHUNK = 1000;
 
     private void Awake()
     {
