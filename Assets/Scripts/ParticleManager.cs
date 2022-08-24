@@ -3,14 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class PointChunkHolder<T>
+public class PointChunkHolderGeneric<T>
 {
     public List<T> points;
     public MaterialPropertyBlock propBlock;
 
-    public PointChunkHolder()
+    public PointChunkHolderGeneric()
     {
         points = new List<T>();
+        propBlock = new MaterialPropertyBlock();
+        //Size of array cant be mutated but the properties can so just ensure the index doesnt go over this
+        var init = Enumerable.Repeat((Vector4)Color.white, ParticleManager.MAX_POINTS_IN_CHUNK).ToArray();
+        propBlock.SetVectorArray(ParticleManager.COLOR_SHADER_PROPERTY, init);
+    }
+}
+public class PointChunkHolder
+{
+    public Vector2[] points = new Vector2[ParticleManager.MAX_POINTS_IN_CHUNK];
+    public MaterialPropertyBlock propBlock;
+
+    public PointChunkHolder()
+    {
         propBlock = new MaterialPropertyBlock();
         //Size of array cant be mutated but the properties can so just ensure the index doesnt go over this
         var init = Enumerable.Repeat((Vector4)Color.white, ParticleManager.MAX_POINTS_IN_CHUNK).ToArray();
@@ -24,9 +37,9 @@ public class ParticleManager : MonoBehaviour
     public Mesh particleMesh;
     public Material particleMaterial;
     public float particleSize = 1f;
-    private static Dictionary<GameObject, PointChunkHolder<Vector3>> dynamicLocations;
-    private static Dictionary<GameObject, PointChunkHolder<TimedVector>> enemyLocations;
-    private static List<PointChunkHolder<Vector3>> staticLocations;
+    private static Dictionary<GameObject, PointChunkHolderGeneric<Vector3>> dynamicLocations;
+    private static Dictionary<GameObject, PointChunkHolderGeneric<TimedVector>> enemyLocations;
+    private static List<PointChunkHolderGeneric<Vector3>> staticLocations;
 
     public static ParticleManager instance;
 
@@ -37,14 +50,14 @@ public class ParticleManager : MonoBehaviour
     public int testParticles = 10000;
     public float regionSize = 10f;
 
-    public const int MAX_POINTS_IN_CHUNK = 1000;
+    public const int MAX_POINTS_IN_CHUNK = 100;
 
     private void Awake()
     {
         instance = this;
         //Colors would include the alpha which can be interped with time
-        staticLocations = new List<PointChunkHolder<Vector3>>();
-        staticLocations.Add(new PointChunkHolder<Vector3>());
+        staticLocations = new List<PointChunkHolderGeneric<Vector3>>();
+        staticLocations.Add(new PointChunkHolderGeneric<Vector3>());
     }
 
     void Start()
@@ -60,18 +73,10 @@ public class ParticleManager : MonoBehaviour
         //https://toqoz.fyi/thousands-of-meshes.html
         //Have to use Drawmeshinstanced instead of DrawMeshIndirect because compute shaders not supported in Webgl
         //DrawMeshInstanceIndirect is generally better and faster but it uses compute buffers which dont exist for webgl 
-        DrawMeshes();
 
-        
-
-        //Draw and remove expired timedParticles on Enemies
-
-    }
-
-    void DrawMeshes()
-    {
         //Draw all the static particles
         Vector3 scaleRef = Vector3.one * particleSize;
+        //block.SetVectorArray(colourShaderProperty, colourArr);
         foreach (var staticChunk in staticLocations)
         {
             if (staticChunk.points.Count == 0) continue;
@@ -82,6 +87,10 @@ public class ParticleManager : MonoBehaviour
 
             Graphics.DrawMeshInstanced(particleMesh, 0, particleMaterial, arr, staticChunk.propBlock);
         }
+
+
+        //Draw and remove expired timedParticles on Enemies
+
     }
 
     public void SpawnTest()
@@ -98,7 +107,7 @@ public class ParticleManager : MonoBehaviour
     {
         if (staticLocations.Last().points.Count >= MAX_POINTS_IN_CHUNK)
         {
-            staticLocations.Add(new PointChunkHolder<Vector3>());
+            staticLocations.Add(new PointChunkHolderGeneric<Vector3>());
         }
 
         staticLocations.Last().points.Add(loc);
