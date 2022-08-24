@@ -6,8 +6,8 @@ using Cinemachine;
 using System.Linq;
 public class Settings : MonoBehaviour
 {
-    //[Range(0.1f, 10f)]
-    //public float aimSensitivity = 1f;
+    [Range(0.1f, 10f)]
+    public float aimSensitivity = 1f;
     public static Settings instance;
     public Slider soundSlider;
     public Slider musicSlider;
@@ -24,8 +24,16 @@ public class Settings : MonoBehaviour
         musicSlider.onValueChanged.AddListener((float value) => UpdateMusicSlider(value));
         AudioManager.Instance.masterMixer.GetFloat("musicVolume", out float musicDB);
         musicSlider.value = Mathf.Pow(10.0f, musicDB / 20.0f);
-        povController.m_HorizontalAxis.m_MaxSpeed = 1;
-        povController.m_VerticalAxis.m_MaxSpeed = 1;
+
+        povController.m_HorizontalAxis.m_SpeedMode = AxisState.SpeedMode.InputValueGain;
+        povController.m_VerticalAxis.m_SpeedMode = AxisState.SpeedMode.InputValueGain;
+
+        povController.m_HorizontalAxis.m_MaxSpeed = 1f;
+        povController.m_VerticalAxis.m_MaxSpeed = 1f;
+    }
+    private void Update()
+    {
+        SetSensitivity(aimSensitivity);
     }
     public void UpdateSoundSlider(float value)
     {

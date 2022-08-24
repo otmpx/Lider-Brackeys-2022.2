@@ -179,15 +179,13 @@ MonoBehaviour:
   targetPos: {x: 0, y: 0, z: 0}
   targetDir: {x: 0, y: 0, z: 0}
   moveSpeed: 5
-  mouseSens: 300
   vCamFollow: {fileID: 1097916676}
   shootRange: 0.15
   scannable:
     serializedVersion: 2
     m_Bits: 4352
-  povController: {fileID: 0}
   FIRE_RATE_INTERVAL: 0.05
-  TOTAL_SHOTS_PER_INTERVAL: 250
+  TOTAL_SHOTS_PER_INTERVAL: 1000
 --- !u!136 &2146551133154451579
 CapsuleCollider:
   m_ObjectHideFlags: 0

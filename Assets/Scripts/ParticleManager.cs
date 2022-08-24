@@ -37,7 +37,7 @@ public class ParticleManager : MonoBehaviour
     public int testParticles = 10000;
     public float regionSize = 10f;
 
-    public const int MAX_POINTS_IN_CHUNK = 100;
+    public const int MAX_POINTS_IN_CHUNK = 1000;
 
     private void Awake()
     {
@@ -60,10 +60,18 @@ public class ParticleManager : MonoBehaviour
         //https://toqoz.fyi/thousands-of-meshes.html
         //Have to use Drawmeshinstanced instead of DrawMeshIndirect because compute shaders not supported in Webgl
         //DrawMeshInstanceIndirect is generally better and faster but it uses compute buffers which dont exist for webgl 
+        DrawMeshes();
 
+        
+
+        //Draw and remove expired timedParticles on Enemies
+
+    }
+
+    void DrawMeshes()
+    {
         //Draw all the static particles
         Vector3 scaleRef = Vector3.one * particleSize;
-        //block.SetVectorArray(colourShaderProperty, colourArr);
         foreach (var staticChunk in staticLocations)
         {
             if (staticChunk.points.Count == 0) continue;
@@ -74,10 +82,6 @@ public class ParticleManager : MonoBehaviour
 
             Graphics.DrawMeshInstanced(particleMesh, 0, particleMaterial, arr, staticChunk.propBlock);
         }
-
-
-        //Draw and remove expired timedParticles on Enemies
-
     }
 
     public void SpawnTest()
