@@ -1,13 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Cinemachine;
 using System.Linq;
 
 public class Player : Actor
 {
     public float moveSpeed;
-    public float mouseSens;
     public Transform vCamFollow;
     public float shootRange = 2.5f;
     public LayerMask scannable;
@@ -15,7 +13,6 @@ public class Player : Actor
     Vector2 input;
     bool isShooting;
 
-    [HideInInspector] public CinemachinePOV povController;
     //[HideInInspector] public CinemachineBasicMultiChannelPerlin headBob;
     Camera cam;
 
@@ -31,8 +28,6 @@ public class Player : Actor
         base.Awake();
         Instance = this;
         rb = GetComponent<Rigidbody>();
-        povController = LevelDirector.Instance.vCam.GetComponentPipeline().First(cb => cb is CinemachinePOV) as CinemachinePOV;
-        //headBob = LevelDirector.Instance.vCam.GetComponentPipeline().First(cb => cb is CinemachineBasicMultiChannelPerlin) as CinemachineBasicMultiChannelPerlin;
         LevelDirector.Instance.vCam.Follow = vCamFollow;
         Cursor.lockState = CursorLockMode.Locked;
         cam = Camera.main;
@@ -46,7 +41,6 @@ public class Player : Actor
     protected override void Update()
     {
         base.Update();
-        SetSensitivity();
         Vector3 inputDir = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
         if (inputDir.magnitude > 1e-7)
             moveDir = transform.TransformDirection(inputDir).normalized;
@@ -93,12 +87,6 @@ public class Player : Actor
         var randY = cam.transform.up * randVec.y;
         var randX = cam.transform.right * randVec.x;
         return cam.transform.forward + randX + randY;
-    }
-
-    public void SetSensitivity()
-    {
-        povController.m_HorizontalAxis.m_MaxSpeed = mouseSens;
-        povController.m_VerticalAxis.m_MaxSpeed = mouseSens;
     }
 }
 
