@@ -37,12 +37,9 @@ Shader "Unlit/InstancedSpec"
 
 			float4 _Colours[1023];
 			sampler2D _MainTex;
-			float4 _MainTex_ST;
 
 //https://github.com/AlfonsoLRz/PointCloudRendering/blob/main/PointCloudRendering/Assets/Shaders/Points/pointCloud-frag.glsl
 			//Need the uv coord for rounding on sphere
-
-
 
 			v2f vert(appdata v,uint instanceID: SV_InstanceID)
 			{
@@ -50,7 +47,8 @@ Shader "Unlit/InstancedSpec"
 
 				v2f o;
 				o.vertex = UnityObjectToClipPos(v.vertex);
-				o.uv = TRANSFORM_TEX(v.uv, _MainTex);
+                //Can just pass the UV directly wihthout Maintex
+                o.uv = v.uv;
 
 #ifdef UNITY_INSTANCING_ENABLED
 				o.colour = _Colours[instanceID];
