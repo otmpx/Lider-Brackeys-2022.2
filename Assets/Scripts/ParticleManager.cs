@@ -35,14 +35,27 @@ public class PointChunkHolder
     }
 }
 
+public class DynamicPointChunkHolder : PointChunkHolder
+{
+    private readonly GameObject _gameObject;
+    private readonly Color initColor;
+
+    public DynamicPointChunkHolder(GameObject gameObject, Color initColor) : base()
+    {
+        _gameObject = gameObject;
+        this.initColor = initColor;
+    }
+
+}
+
 public class ParticleManager : MonoBehaviour
 {
     [Header("variability")]
     public Mesh particleMesh;
     public Material particleMaterial;
     public float particleSize = 1f;
-    //private static Dictionary<GameObject, PointChunkHolderTimed> dynamicLocations;
-    //private static Dictionary<GameObject, PointChunkHolderTimed> enemyLocations;
+    private static Dictionary<GameObject, DynamicPointChunkHolder> dynamicLocations;
+    private static Dictionary<GameObject, DynamicPointChunkHolder> enemyLocations;
     private static List<PointChunkHolder> staticLocations;
 
     public static ParticleManager instance;
@@ -54,7 +67,7 @@ public class ParticleManager : MonoBehaviour
     public int testParticles = 10000;
     public float regionSize = 10f;
 
-    public const int MAX_POINTS_IN_CHUNK = 1000;
+    public const int MAX_POINTS_IN_CHUNK = 1023;
 
     private void Awake()
     {
@@ -67,7 +80,10 @@ public class ParticleManager : MonoBehaviour
     void Start()
     {
         //https://forum.unity.com/threads/drawmeshinstancedindirect-not-support-webgl.1285415/ 
-        SpawnTest();
+
+#if UNITY_EDITOR
+        SpawnTest(testParticles);
+#endif
 
     }
 
@@ -98,14 +114,12 @@ public class ParticleManager : MonoBehaviour
 
     }
 
-    public void SpawnTest()
+    public void SpawnTest(int toSpawn)
     {
-
-        for (int i = 0; i < testParticles; i++)
+        for (int i = 0; i < toSpawn; i++)
         {
             AddParticle(Random.insideUnitSphere * regionSize);
         }
-
     }
 
     public static void AddParticle(Vector3 loc)

@@ -50,6 +50,11 @@ public class Player : Actor
         transform.localEulerAngles = new Vector3(0, cam.transform.localEulerAngles.y, 0);
         if (isShooting)
             Fire();
+
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+            ParticleManager.instance.SpawnTest(100000);
+        if (Input.GetKeyDown(KeyCode.Alpha9))
+            ParticleManager.instance.SpawnTest(1000000);
     }
     //protected override void FixedUpdate()
     //{
