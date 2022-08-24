@@ -181,14 +181,14 @@ MonoBehaviour:
   moveSpeed: 5
   mouseSens: 300
   vCamFollow: {fileID: 1097916676}
-  shootRange: 2.5
+  shootRange: 0.15
   scannable:
     serializedVersion: 2
     m_Bits: 4480
   povController: {fileID: 0}
   headBob: {fileID: 0}
-  FIRE_RATE_INTERVAL: 0.1
-  TOTAL_SHOTS_PER_INTERVAL: 5
+  FIRE_RATE_INTERVAL: 0.05
+  TOTAL_SHOTS_PER_INTERVAL: 250
 --- !u!136 &2146551133154451579
 CapsuleCollider:
   m_ObjectHideFlags: 0

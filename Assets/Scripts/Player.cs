@@ -16,7 +16,7 @@ public class Player : Actor
     bool isShooting;
 
     [HideInInspector] public CinemachinePOV povController;
-    [HideInInspector] public CinemachineBasicMultiChannelPerlin headBob;
+    //[HideInInspector] public CinemachineBasicMultiChannelPerlin headBob;
     Camera cam;
 
     public static Player Instance;
@@ -32,9 +32,9 @@ public class Player : Actor
         Instance = this;
         rb = GetComponent<Rigidbody>();
         povController = LevelDirector.Instance.vCam.GetComponentPipeline().First(cb => cb is CinemachinePOV) as CinemachinePOV;
-        headBob = LevelDirector.Instance.vCam.GetComponentPipeline().First(cb => cb is CinemachineBasicMultiChannelPerlin) as CinemachineBasicMultiChannelPerlin;
+        //headBob = LevelDirector.Instance.vCam.GetComponentPipeline().First(cb => cb is CinemachineBasicMultiChannelPerlin) as CinemachineBasicMultiChannelPerlin;
         LevelDirector.Instance.vCam.Follow = vCamFollow;
-        //Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Locked;
         cam = Camera.main;
     }
     protected override void Start()

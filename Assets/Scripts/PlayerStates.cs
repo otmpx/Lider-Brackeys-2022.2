@@ -21,11 +21,11 @@ public class PlayerState : BaseState
 public class Idle : PlayerState
 {
     public Idle(Player sm) : base(sm) { }
-    public override void OnEnter()
-    {
-        base.OnEnter();
-        player.headBob.m_FrequencyGain = 0.5f;
-    }
+    //public override void OnEnter()
+    //{
+    //    base.OnEnter();
+    //    player.headBob.m_FrequencyGain = 0.5f;
+    //}
     public override void Update()
     {
         base.Update();
@@ -41,11 +41,11 @@ public class Idle : PlayerState
 public class Move : PlayerState
 {
     public Move(Player sm) : base(sm) { }
-    public override void OnEnter()
-    {
-        base.OnEnter();
-        player.headBob.m_FrequencyGain = 2f;
-    }
+    //public override void OnEnter()
+    //{
+    //    base.OnEnter();
+    //    player.headBob.m_FrequencyGain = 2f;
+    //}
     public override void Update()
     {
         base.Update();
@@ -61,9 +61,9 @@ public class Move : PlayerState
 public class Damaged : PlayerState
 {
     public Damaged(Player sm) : base(sm) { }
-    public override void OnEnter()
-    {
-        base.OnEnter();
-        player.headBob.m_FrequencyGain = 0;
-    }
+    //public override void OnEnter()
+    //{
+    //    base.OnEnter();
+    //    player.headBob.m_FrequencyGain = 0;
+    //}
 }
