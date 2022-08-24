@@ -70,7 +70,7 @@ public class Player : Actor
             {
                 var dir = GetRandomTargetDirBox().normalized;
                 Debug.DrawRay(cam.transform.position, dir, Color.black, FIRE_RATE_INTERVAL);
-                if (Physics.Raycast(cam.transform.position, dir, out var hit, MAX_RAYCAST_DIST))
+                if (Physics.Raycast(cam.transform.position, dir, out var hit, MAX_RAYCAST_DIST, scannable))
                 {
                     ParticleManager.AddParticle(hit.point);
                 }

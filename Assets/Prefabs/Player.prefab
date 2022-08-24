@@ -46,7 +46,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4579983643798795605
 Transform:
   m_ObjectHideFlags: 0
@@ -184,9 +184,8 @@ MonoBehaviour:
   shootRange: 0.15
   scannable:
     serializedVersion: 2
-    m_Bits: 4480
+    m_Bits: 4352
   povController: {fileID: 0}
-  headBob: {fileID: 0}
   FIRE_RATE_INTERVAL: 0.05
   TOTAL_SHOTS_PER_INTERVAL: 250
 --- !u!136 &2146551133154451579
