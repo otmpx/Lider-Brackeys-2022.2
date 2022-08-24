@@ -5,9 +5,9 @@ using Utils;
 
 public class Actor : StateMachine
 {
-    [HideInNormalInspector] public Rigidbody rb;
+    public Rigidbody rb;
+    public CapsuleCollider col;
     [HideInNormalInspector] public Animator anim;
-    [HideInInspector] public CapsuleCollider col;
 
     [HideInNormalInspector] public Vector3 moveDir;
     [HideInNormalInspector] public Vector3 targetPos;
@@ -44,9 +44,9 @@ public class Actor : StateMachine
 
     protected virtual void Awake()
     {
-        rb = GetComponent<Rigidbody>();
+        //rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
-        col = GetComponent<CapsuleCollider>();
+        //col = GetComponent<CapsuleCollider>();
         sound = GetComponents<AudioSource>()[0];
     }
 

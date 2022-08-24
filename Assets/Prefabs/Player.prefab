@@ -172,9 +172,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02d37cc7893bc234a8462eec2c5314d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
+  rb: {fileID: 2146551133154451578}
+  col: {fileID: 2146551133154451579}
   anim: {fileID: 0}
-  col: {fileID: 0}
   moveDir: {x: 0, y: 0, z: 0}
   targetPos: {x: 0, y: 0, z: 0}
   targetDir: {x: 0, y: 0, z: 0}
