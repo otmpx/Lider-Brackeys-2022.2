@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+//using System.Drawing;
 using System.Linq;
 using UnityEngine;
 
@@ -20,7 +21,8 @@ using UnityEngine;
 
 public class PointChunkHolder
 {
-    public Vector3[] points = new Vector3[ParticleManager.MAX_POINTS_IN_CHUNK];
+    //public Vector3[] points = new Vector3[ParticleManager.MAX_POINTS_IN_CHUNK];
+    public Matrix4x4[] pointMats = new Matrix4x4[ParticleManager.MAX_POINTS_IN_CHUNK];
     public MaterialPropertyBlock propBlock;
     public int counter;
 
@@ -81,13 +83,14 @@ public class ParticleManager : MonoBehaviour
         //block.SetVectorArray(colourShaderProperty, colourArr);
         foreach (var staticChunk in staticLocations)
         {
-            if (staticChunk.points.Length == 0) continue;
+            if (staticChunk.pointMats.Length == 0) continue;
             //Easier to store and Serialize stuff in vectors than matrix(decide which is more memory and perforamnce efficient)
-            var arr = staticChunk.points.Select((point => Matrix4x4.TRS(point, Quaternion.identity, scaleRef))).ToArray();
+            //var arr = staticChunk.points.Select((point => Matrix4x4.TRS(point, Quaternion.identity, scaleRef))).ToArray();
             //var blockColorArr = staticChunk.points.Select(l => (Vector4)Color.white).ToArray();
             //staticChunk.propBlock.SetVectorArray(COLOR_SHADER_PROPERTY, blockColorArr);
 
-            Graphics.DrawMeshInstanced(particleMesh, 0, particleMaterial, arr, arr.Length, staticChunk.propBlock);
+            //Graphics.DrawMeshInstanced(particleMesh, 0, particleMaterial, arr, arr.Length, staticChunk.propBlock);
+            Graphics.DrawMeshInstanced(particleMesh, 0, particleMaterial, staticChunk.pointMats,staticChunk.pointMats.Length, staticChunk.propBlock);
         }
 
 
@@ -114,7 +117,10 @@ public class ParticleManager : MonoBehaviour
 
         var lastChunk = staticLocations.Last();
 
-        lastChunk.points[lastChunk.counter] = loc;
+        //lastChunk.points[lastChunk.counter] = loc;
+        Vector3 scaleRef = Vector3.one * instance.particleSize;
+        lastChunk.pointMats[lastChunk.counter] = Matrix4x4.TRS(loc, Quaternion.identity, scaleRef);
+
         lastChunk.counter++;
     }
 
