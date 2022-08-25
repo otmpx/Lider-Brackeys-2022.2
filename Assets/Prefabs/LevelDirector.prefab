@@ -47,29 +47,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allRooms:
   - sceneName: Crossroads
+    levelPrompt: Find all 3 coins...
     enemySpawns: 0
     objectiveSpawns: 3
   - sceneName: Castle
+    levelPrompt: That was a freebie. Try finding all 3 coins now...
     enemySpawns: 0
     objectiveSpawns: 4
   - sceneName: Jumpscare
+    levelPrompt: ...
     enemySpawns: 0
     objectiveSpawns: 1
   - sceneName: Skirmish
+    levelPrompt: You are not alone...
     enemySpawns: 1
     objectiveSpawns: 5
   - sceneName: Barracks
+    levelPrompt: They don't like to be seen...
     enemySpawns: 2
     objectiveSpawns: 4
-  - sceneName: Church
-    enemySpawns: 3
-    objectiveSpawns: 3
   - sceneName: Village
-    enemySpawns: 4
+    levelPrompt: What have you done?...
+    enemySpawns: 3
     objectiveSpawns: 4
+  - sceneName: Church
+    levelPrompt: Put these foolish ambitions to rest...
+    enemySpawns: 4
+    objectiveSpawns: 3
   vCam: {fileID: 4275708265608854808}
   coinsCollected: 0
   coinsRequired: 3
+  roomId: 0
 --- !u!114 &2335712619780368405
 MonoBehaviour:
   m_ObjectHideFlags: 0

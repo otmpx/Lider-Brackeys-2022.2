@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 public class RoomSettings
 {
     public string sceneName;
+    public string levelPrompt;
     public int enemySpawns;
     public int objectiveSpawns;
 }

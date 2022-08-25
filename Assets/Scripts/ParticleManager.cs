@@ -99,7 +99,8 @@ public class ParticleManager : MonoBehaviour
 
     public static void RemoveDynamicGO(Transform parent)
     {
-        foreach (Transform child in parent)
+        var recursiveChildren = parent.gameObject.GetComponentsInChildren<Transform>();
+        foreach (Transform child in recursiveChildren)
         {
             dynamicLocations.Remove(child);
         }

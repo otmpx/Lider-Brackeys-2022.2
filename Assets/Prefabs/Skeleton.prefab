@@ -851,6 +851,8 @@ MonoBehaviour:
   distToPlayer: 0
   killRange: 5
   isAggro: 0
+  triggerPoint: 500
+  chaseDur: 10
 --- !u!195 &6645822205875947785
 NavMeshAgent:
   m_ObjectHideFlags: 0

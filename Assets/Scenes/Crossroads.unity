@@ -31746,6 +31746,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1108609519130253872, guid: 394b429759130cf4d94d63e735d5909c, type: 3}
+      propertyPath: showControls
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1108609519130253873, guid: 394b429759130cf4d94d63e735d5909c, type: 3}
       propertyPath: m_Name
       value: Startprompt

@@ -18,7 +18,7 @@ public class Jumpscare : MonoBehaviour
             // Cut music here
             timeBeforeActivation -= Time.deltaTime;
         }
-        if (timeBeforeActivation < 0 && !Player.Instance.isShooting)
+        if (timeBeforeActivation < 0 && !active)
             active = true;
 
         if (!active) return;
