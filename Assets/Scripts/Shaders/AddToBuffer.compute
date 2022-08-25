@@ -3,7 +3,7 @@
 
 RWStructuredBuffer<StaticPointDef> newAdds;
 int currPointCount;
-int numParticlesSpawned;
+int numPoints2Add;
 
 
 //This is shared with the shader
@@ -23,8 +23,11 @@ struct StaticPointDef {
 void AddPoints (uint3 id : SV_DispatchThreadID)
 {
     uint i = id.x;
-    //uint j = id.y;
+    uint j = id.y;
+    if (i < currPointCount || i> currPointCount + numPoints2Add || j > numPoints2Add -1) {
+        return;
+    }
 
-    particles[i] = newAdds[j];
-
+    uint pointAddOffset = i - currPointCount;
+    particles[i] = newAdds[pointAddOffset];
 }
