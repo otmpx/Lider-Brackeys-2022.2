@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1653293882866251708}
   - component: {fileID: 5339317234460503753}
   - component: {fileID: 5721798841304558396}
+  - component: {fileID: 3935103493903989697}
   m_Layer: 3
   m_Name: GameObject
   m_TagString: Untagged
@@ -61,6 +62,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3935103493903989697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1444783816958320572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: faff7aa036d2701438858510b96c0497, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactSound: {fileID: 11400000, guid: bd3ee0e93c3398c4d8ce7a17fc318b49, type: 2}
+  <pitchMultiplier>k__BackingField: 0.75
+  <spatialBlend>k__BackingField: 0.5
+  mixer: {fileID: 2326203730981228694, guid: f4954f8ca2bbb8548903404e21ac98ee, type: 2}
 --- !u!1 &6038192664499909824
 GameObject:
   m_ObjectHideFlags: 0
@@ -72,9 +89,8 @@ GameObject:
   - component: {fileID: 6377141671537323642}
   - component: {fileID: 8011889466129883615}
   - component: {fileID: 5245290918190077205}
-  - component: {fileID: -1507882930975267619}
   - component: {fileID: 6703429654985418090}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: stool
   m_TagString: Stool
   m_Icon: {fileID: 0}
@@ -145,22 +161,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-1507882930975267619
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6038192664499909824}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: faff7aa036d2701438858510b96c0497, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactSound: {fileID: 11400000, guid: bd3ee0e93c3398c4d8ce7a17fc318b49, type: 2}
-  <pitchMultiplier>k__BackingField: 0.75
-  <spatialBlend>k__BackingField: 0.5
-  mixer: {fileID: 2326203730981228694, guid: f4954f8ca2bbb8548903404e21ac98ee, type: 2}
 --- !u!64 &6703429654985418090
 MeshCollider:
   m_ObjectHideFlags: 0

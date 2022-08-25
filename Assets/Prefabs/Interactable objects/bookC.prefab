@@ -11,9 +11,8 @@ GameObject:
   - component: {fileID: 3574541529273605639}
   - component: {fileID: 447132897203392930}
   - component: {fileID: 2436586253276407144}
-  - component: {fileID: 1975932565664550228}
   - component: {fileID: 2711538629123916418}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: bookC
   m_TagString: BookC
   m_Icon: {fileID: 0}
@@ -85,22 +84,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &1975932565664550228
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4238030433323599037}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: faff7aa036d2701438858510b96c0497, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactSound: {fileID: 11400000, guid: bd3ee0e93c3398c4d8ce7a17fc318b49, type: 2}
-  <pitchMultiplier>k__BackingField: 2
-  <spatialBlend>k__BackingField: 0.5
-  mixer: {fileID: 2326203730981228694, guid: f4954f8ca2bbb8548903404e21ac98ee, type: 2}
 --- !u!64 &2711538629123916418
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -126,6 +109,7 @@ GameObject:
   - component: {fileID: 3853495825194592117}
   - component: {fileID: 4527335759939972291}
   - component: {fileID: 7010046440491103307}
+  - component: {fileID: 7101716336619303269}
   m_Layer: 3
   m_Name: GameObject
   m_TagString: Untagged
@@ -176,3 +160,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7101716336619303269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6680482998800349659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: faff7aa036d2701438858510b96c0497, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactSound: {fileID: 11400000, guid: bd3ee0e93c3398c4d8ce7a17fc318b49, type: 2}
+  <pitchMultiplier>k__BackingField: 2
+  <spatialBlend>k__BackingField: 0.5
+  mixer: {fileID: 2326203730981228694, guid: f4954f8ca2bbb8548903404e21ac98ee, type: 2}
