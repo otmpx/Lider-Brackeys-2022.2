@@ -13,6 +13,8 @@ public class Player : Actor
     public LayerMask dynamicObjectMask;
 
     [HideInInspector] public bool isShooting;
+    [HideInInspector] public bool disableShooting = false;
+    public static event System.Action fireEvent;
 
     //[HideInInspector] public CinemachineBasicMultiChannelPerlin headBob;
     Camera cam;
@@ -47,7 +49,11 @@ public class Player : Actor
             moveDir = transform.TransformDirection(inputDir).normalized;
         else
             moveDir = Vector3.zero;
-        isShooting = Input.GetKey(KeyCode.Mouse0);
+        if (disableShooting)
+            isShooting = false;
+        else
+            isShooting = Input.GetKey(KeyCode.Mouse0);
+
         transform.localEulerAngles = new Vector3(0, cam.transform.localEulerAngles.y, 0);
         if (isShooting)
             Fire();
@@ -96,6 +102,7 @@ public class Player : Actor
                     }
                 }
             }
+            fireEvent?.Invoke();
             lastFired = Time.time;
         }
     }

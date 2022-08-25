@@ -45,7 +45,7 @@ public class RoomSaver : MonoBehaviour
 
     public void SaveRoom()
     {
-        var roomIndex = LevelDirector.roomId;
+        var roomIndex = LevelDirector.Instance.roomId;
         //Hasnt instantiated save structs
         if (roomSaves.Count - 1 < roomIndex)
         {
@@ -80,7 +80,7 @@ public class RoomSaver : MonoBehaviour
 
     public void LoadRoom(Scene arg0, LoadSceneMode arg1)
     {
-        var roomIndex = LevelDirector.roomId;
+        var roomIndex = LevelDirector.Instance.roomId;
         if (roomSaves.Count - 1 < roomIndex)
         {
             return;

@@ -1,6 +1,7 @@
 using Cinemachine;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design.Serialization;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -19,8 +20,8 @@ public class LevelDirector : MonoBehaviour
     //public static int currentRoomIndex = 0;
     public int coinsCollected;
     public int coinsRequired = 3;
-    public static int roomId;
-    public static RoomSettings CurrentRoom => Instance.allRooms[roomId];
+    public int roomId;
+    public static RoomSettings CurrentRoom => Instance.allRooms[Instance.roomId];
     private void Awake()
     {
         if (Instance == null)

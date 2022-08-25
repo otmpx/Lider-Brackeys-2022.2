@@ -105,6 +105,20 @@ public class ParticleManager : MonoBehaviour
         }
     }
 
+    public static int GetTotalPointsOnObjects(Transform[] objs)
+    {
+
+        int sumPoints = 0;
+        foreach (var currentTrans in objs)
+        {
+            if (dynamicLocations.TryGetValue(currentTrans, out var chunkHolderList))
+            {
+                sumPoints += chunkHolderList.Sum(chunkHolder => chunkHolder.counter);
+            }
+        }
+        return sumPoints;
+    }
+
     void Start()
     {
         //https://forum.unity.com/threads/drawmeshinstancedindirect-not-support-webgl.1285415/ 
@@ -203,7 +217,7 @@ public class ParticleManager : MonoBehaviour
         //Ensure that this doesnt just randomly get offset
         currentTotalPoints += locs.Count;
 
-        
+
     }
 
 

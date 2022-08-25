@@ -32,6 +32,7 @@ public class Jumpscare : MonoBehaviour
         if (Player.Instance.isShooting)
         {
             // Play jumpscare sound and effects
+            Player.Instance.disableShooting = true;
         }
     }
 }

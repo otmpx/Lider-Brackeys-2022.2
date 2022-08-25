@@ -53,7 +53,7 @@ MonoBehaviour:
     enemySpawns: 0
     objectiveSpawns: 4
   - sceneName: Jumpscare
-    enemySpawns: 1
+    enemySpawns: 0
     objectiveSpawns: 1
   - sceneName: Skirmish
     enemySpawns: 1
