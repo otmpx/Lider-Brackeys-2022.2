@@ -9,6 +9,8 @@ public class Player : Actor
     public Transform vCamFollow;
     public float shootRange = 2.5f;
     public LayerMask scannable;
+    [Tooltip("This should only be one selection")]
+    public LayerMask dynamicObjectMask;
 
     Vector2 input;
     bool isShooting;
@@ -76,7 +78,15 @@ public class Player : Actor
                 Debug.DrawRay(cam.transform.position, dir, Color.green, FIRE_RATE_INTERVAL);
                 if (Physics.Raycast(cam.transform.position, dir, out var hit, MAX_RAYCAST_DIST, scannable))
                 {
-                    ParticleManager.AddParticle(hit.point);
+                    if (hit.collider.gameObject.layer == Mathf.Log(dynamicObjectMask, 2))
+                    {
+                        var localHitPoint = hit.collider.transform.worldToLocalMatrix.MultiplyPoint3x4(hit.point);
+                        ParticleManager.AddParticleToGameObject(localHitPoint, hit.collider.gameObject);
+                    }
+                    else
+                    {
+                        ParticleManager.AddParticle(hit.point);
+                    }
                 }
             }
             lastFired = Time.time;
