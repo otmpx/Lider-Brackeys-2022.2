@@ -33,6 +33,11 @@ public class LevelDirector : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+            RegisterCoin();
+    }
     void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;

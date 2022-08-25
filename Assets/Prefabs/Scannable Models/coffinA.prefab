@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 456974672483849603}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: coffinA
-  m_TagString: World
+  m_TagString: CyanStaticSurface
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 0

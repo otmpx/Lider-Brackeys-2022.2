@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2783439690322215601}
   - component: {fileID: 7444709495735258396}
   - component: {fileID: 138250881225954939}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: farm_wheat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,9 +108,9 @@ GameObject:
   - component: {fileID: 2044286846039681537}
   - component: {fileID: 4303808777282526923}
   - component: {fileID: 5820478246973107318}
-  m_Layer: 12
+  m_Layer: 11
   m_Name: farm_plot
-  m_TagString: World
+  m_TagString: CyanStaticSurface
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8

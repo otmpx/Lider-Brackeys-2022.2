@@ -12,15 +12,14 @@ public class Player : Actor
     [Tooltip("This should only be one selection")]
     public LayerMask dynamicObjectMask;
 
-    Vector2 input;
-    bool isShooting;
+    [HideInInspector] public bool isShooting;
 
     //[HideInInspector] public CinemachineBasicMultiChannelPerlin headBob;
     Camera cam;
 
     public static Player Instance;
 
-    float lastFired = 0f;
+    [HideInInspector] public float lastFired = 0f;
     public float FIRE_RATE_INTERVAL = 0.1f;
     public int TOTAL_SHOTS_PER_INTERVAL = 5;
     const float MAX_RAYCAST_DIST = 1000f;
@@ -52,11 +51,12 @@ public class Player : Actor
         transform.localEulerAngles = new Vector3(0, cam.transform.localEulerAngles.y, 0);
         if (isShooting)
             Fire();
-
+#if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.Alpha0))
             ParticleManager.instance.SpawnTest(100000);
         if (Input.GetKeyDown(KeyCode.Alpha9))
             ParticleManager.instance.SpawnTest(1000000);
+#endif
     }
     //protected override void FixedUpdate()
     //{
@@ -79,7 +79,7 @@ public class Player : Actor
                 if (Physics.Raycast(cam.transform.position, dir, out var hit, MAX_RAYCAST_DIST, scannable))
                 {
                     var layer = hit.collider.gameObject.layer;
-                    if ((dynamicObjectMask & (1 << layer)) == 1)
+                    if ((dynamicObjectMask & (1 << layer)) !=0)
                     //if (layer == Mathf.Log(dynamicObjectMask, 2))
                     {
                         var localHitPoint = hit.collider.transform.worldToLocalMatrix.MultiplyPoint3x4(hit.point);
@@ -88,6 +88,10 @@ public class Player : Actor
                     else
                     {
                         //Run check with dictionary
+                        //if (hit.collider.CompareTag("CyanStaticSurface"))
+                        //    ParticleManager.AddParticle(hit.point, Color.cyan);
+                        //if (hit.collider.CompareTag("BlueStaticSurface"))
+                        //    ParticleManager.AddParticle(hit.point, Color.blue);
                         ParticleManager.AddParticle(hit.point);
                     }
                 }
@@ -95,18 +99,18 @@ public class Player : Actor
             lastFired = Time.time;
         }
     }
-    void FireFrame()
-    {
-        for (int i = 0; i < TOTAL_SHOTS_PER_INTERVAL; i++)
-        {
-            var dir = GetRandomTargetDirCircle().normalized;
-            Debug.DrawRay(cam.transform.position, dir, Color.green, FIRE_RATE_INTERVAL);
-            if (Physics.Raycast(cam.transform.position, dir, out var hit, MAX_RAYCAST_DIST, scannable))
-            {
-                ParticleManager.AddParticle(hit.point);
-            }
-        }
-    }
+    //void FireFrame()
+    //{
+    //    for (int i = 0; i < TOTAL_SHOTS_PER_INTERVAL; i++)
+    //    {
+    //        var dir = GetRandomTargetDirCircle().normalized;
+    //        Debug.DrawRay(cam.transform.position, dir, Color.green, FIRE_RATE_INTERVAL);
+    //        if (Physics.Raycast(cam.transform.position, dir, out var hit, MAX_RAYCAST_DIST, scannable))
+    //        {
+    //            ParticleManager.AddParticle(hit.point);
+    //        }
+    //    }
+    //}
 
     Vector3 GetRandomTargetDirBox()
     {

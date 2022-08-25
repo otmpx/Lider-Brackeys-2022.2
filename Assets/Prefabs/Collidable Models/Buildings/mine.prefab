@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 5777757912471807159}
   - component: {fileID: 8631799031028600957}
   - component: {fileID: 5994798155601810649}
-  m_Layer: 12
+  m_Layer: 11
   m_Name: mine
-  m_TagString: World
+  m_TagString: CyanStaticSurface
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8

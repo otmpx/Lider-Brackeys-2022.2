@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2813911158408130645}
   - component: {fileID: 8692600997269501032}
   - component: {fileID: 1076158677584476302}
-  m_Layer: 12
+  m_Layer: 11
   m_Name: mill_blades
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,9 +94,9 @@ GameObject:
   - component: {fileID: 5427354743812593033}
   - component: {fileID: 7833203598617731395}
   - component: {fileID: 6744496785799518799}
-  m_Layer: 12
+  m_Layer: 11
   m_Name: mill
-  m_TagString: World
+  m_TagString: CyanStaticSurface
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
