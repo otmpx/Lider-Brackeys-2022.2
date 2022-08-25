@@ -78,13 +78,16 @@ public class Player : Actor
                 Debug.DrawRay(cam.transform.position, dir, Color.green, FIRE_RATE_INTERVAL);
                 if (Physics.Raycast(cam.transform.position, dir, out var hit, MAX_RAYCAST_DIST, scannable))
                 {
-                    if (hit.collider.gameObject.layer == Mathf.Log(dynamicObjectMask, 2))
+                    var layer = hit.collider.gameObject.layer;
+                    if ((dynamicObjectMask & (1 << layer)) == 1)
+                    //if (layer == Mathf.Log(dynamicObjectMask, 2))
                     {
                         var localHitPoint = hit.collider.transform.worldToLocalMatrix.MultiplyPoint3x4(hit.point);
-                        ParticleManager.AddParticleToGameObject(localHitPoint, hit.collider.gameObject);
+                        ParticleManager.AddParticleToGameObject(localHitPoint, hit.collider.transform);
                     }
                     else
                     {
+                        //Run check with dictionary
                         ParticleManager.AddParticle(hit.point);
                     }
                 }

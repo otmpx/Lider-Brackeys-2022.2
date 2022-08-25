@@ -36,7 +36,6 @@ Shader "Unlit/InstancedSpec"
 			};
 
 			float4 _Colours[1023];
-			float _Times[1023];
 			sampler2D _MainTex;
 
 //https://github.com/AlfonsoLRz/PointCloudRendering/blob/main/PointCloudRendering/Assets/Shaders/Points/pointCloud-frag.glsl
