@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8082722033204383141}
   - component: {fileID: 4212701496471785726}
   - component: {fileID: 2968437454366818628}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: character_skeleton_minion_armRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48,7 +48,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1359180878005031593}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 4527898419294327819}
   - component: {fileID: 407257375620388767}
   - component: {fileID: 6640355400731197750}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: character_skeleton_minion_eyes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -145,7 +145,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1624244568668598831}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -204,7 +204,7 @@ GameObject:
   - component: {fileID: 4303568057094253459}
   - component: {fileID: 67810525906543925}
   - component: {fileID: 1859448965019061911}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: character_skeleton_minion_head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -234,7 +234,7 @@ SkinnedMeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1795794334671480797}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -368,7 +368,7 @@ GameObject:
   - component: {fileID: 3633709342637642380}
   - component: {fileID: 8588467109568394410}
   - component: {fileID: 349867771347834628}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: character_skeleton_minion_jaw
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -404,7 +404,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4190882675971831481}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -464,7 +464,7 @@ GameObject:
   - component: {fileID: 8759175960150260970}
   - component: {fileID: 6803302316321884192}
   - component: {fileID: 6165996139379127096}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: axeDouble_common
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -500,7 +500,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5002042442377783797}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -561,7 +561,7 @@ GameObject:
   - component: {fileID: 8391977698769535110}
   - component: {fileID: 6022082397652677708}
   - component: {fileID: 5329290719844904575}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: character_skeleton_minion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -597,7 +597,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5229313005742183833}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -657,7 +657,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6645822205217665266}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: armRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -689,7 +689,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6645822205225754193}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: handSlotRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -720,7 +720,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6645822205832752562}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: armLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -752,7 +752,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6645822205852694203}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: KayKit Animated Character
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -978,7 +978,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6645822206010434001}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: handSlotLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1008,7 +1008,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6645822206096134556}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1042,7 +1042,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6645822206111905324}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1076,7 +1076,7 @@ GameObject:
   - component: {fileID: 2724554763097885565}
   - component: {fileID: 436391301432603947}
   - component: {fileID: 2966791189851380706}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: character_skeleton_minion_armLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1112,7 +1112,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9134538905123135874}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

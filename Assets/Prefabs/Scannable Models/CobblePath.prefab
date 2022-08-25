@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4844084325041093773}
   m_Layer: 8
   m_Name: pathCobbled
-  m_TagString: Untagged
+  m_TagString: CyanStaticSurface
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -110,7 +110,7 @@ GameObject:
   - component: {fileID: 5271731531822118670}
   m_Layer: 8
   m_Name: pathCobbled (1)
-  m_TagString: Untagged
+  m_TagString: CyanStaticSurface
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -201,9 +201,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5710531909947397411}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CobblePath
-  m_TagString: Untagged
+  m_TagString: CyanStaticSurface
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -239,7 +239,7 @@ GameObject:
   - component: {fileID: 3991364351463855630}
   m_Layer: 8
   m_Name: pathCobbled (2)
-  m_TagString: Untagged
+  m_TagString: CyanStaticSurface
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

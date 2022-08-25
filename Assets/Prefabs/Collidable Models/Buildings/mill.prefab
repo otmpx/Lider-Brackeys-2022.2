@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 2813911158408130645}
   - component: {fileID: 8692600997269501032}
   - component: {fileID: 1076158677584476302}
-  m_Layer: 12
+  - component: {fileID: 43504667347341517}
+  m_Layer: 11
   m_Name: mill_blades
-  m_TagString: Untagged
+  m_TagString: CyanStaticSurface
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
@@ -47,7 +48,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4323783503522598456}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -82,6 +83,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &43504667347341517
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4323783503522598456}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2253164947046986940, guid: 31be6baf3f973f349a8dc1f840704c35, type: 3}
 --- !u!1 &8626044046529544342
 GameObject:
   m_ObjectHideFlags: 0
@@ -94,9 +109,9 @@ GameObject:
   - component: {fileID: 5427354743812593033}
   - component: {fileID: 7833203598617731395}
   - component: {fileID: 6744496785799518799}
-  m_Layer: 12
+  m_Layer: 11
   m_Name: mill
-  m_TagString: World
+  m_TagString: CyanStaticSurface
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
@@ -131,7 +146,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8626044046529544342}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

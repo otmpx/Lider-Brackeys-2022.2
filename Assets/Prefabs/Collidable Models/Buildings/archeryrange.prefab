@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 7877880567750180207}
   - component: {fileID: 5383822366308780453}
   - component: {fileID: 5888405501108873331}
-  m_Layer: 12
+  m_Layer: 11
   m_Name: archeryrange
-  m_TagString: World
+  m_TagString: CyanStaticSurface
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
@@ -48,7 +48,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5888405501108873328}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

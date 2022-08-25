@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5863592539194074754}
   m_Layer: 8
   m_Name: treeD
-  m_TagString: World
+  m_TagString: CyanStaticSurface
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8

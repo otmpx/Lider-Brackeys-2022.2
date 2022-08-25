@@ -59,7 +59,7 @@ GameObject:
   - component: {fileID: 519089519447364924}
   m_Layer: 8
   m_Name: lampPost
-  m_TagString: World
+  m_TagString: CyanStaticSurface
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8

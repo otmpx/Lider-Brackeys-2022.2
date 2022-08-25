@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3520678801000351415}
   m_Layer: 8
   m_Name: fencePost
-  m_TagString: World
+  m_TagString: CyanStaticSurface
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8

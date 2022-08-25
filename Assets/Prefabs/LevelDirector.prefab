@@ -48,7 +48,7 @@ MonoBehaviour:
   allRooms:
   - sceneName: Crossroads
     enemySpawns: 0
-    objectiveSpawns: 5
+    objectiveSpawns: 3
   - sceneName: Castle
     enemySpawns: 0
     objectiveSpawns: 4
@@ -57,16 +57,16 @@ MonoBehaviour:
     objectiveSpawns: 1
   - sceneName: Skirmish
     enemySpawns: 1
-    objectiveSpawns: 4
+    objectiveSpawns: 5
   - sceneName: Barracks
     enemySpawns: 2
-    objectiveSpawns: 3
+    objectiveSpawns: 4
   - sceneName: Church
     enemySpawns: 3
     objectiveSpawns: 3
   - sceneName: Village
     enemySpawns: 4
-    objectiveSpawns: 3
+    objectiveSpawns: 4
   vCam: {fileID: 4275708265608854808}
   coinsCollected: 0
   coinsRequired: 3
@@ -82,7 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0046b8d3460cac04a95ec60b8fcc0cc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aimSensitivity: 1
+  aimSensitivity: 3
   soundSlider: {fileID: 0}
   musicSlider: {fileID: 0}
   povController: {fileID: 0}
