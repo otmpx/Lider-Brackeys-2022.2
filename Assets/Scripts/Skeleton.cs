@@ -8,12 +8,14 @@ namespace Enemy
     public class Skeleton : Actor
     {
         private Transform[] children;
+        public Transform lookAt;
         [HideInInspector] public NavMeshAgent agent;
         public float distToPlayer;
         public float killRange;
         public bool isAggro = false;
 
-        public int triggerPoint = 500;
+        public int soundTriggerPoint = 10;
+        public int aggroTriggerPoint = 150;
         public float chaseDur = 10f;
 
         protected override void Awake()
@@ -49,7 +51,11 @@ namespace Enemy
         //}
         void DetectTriggerPoints()
         {
-            if (ParticleManager.GetTotalPointsOnObjects(children) >= triggerPoint)
+            if (!isAggro && ParticleManager.GetTotalPointsOnObjects(children) >= soundTriggerPoint)
+            {
+                // Play sound effect
+            }
+            if (ParticleManager.GetTotalPointsOnObjects(children) >= aggroTriggerPoint)
                 isAggro = true;
         }
         public void Respawn()
@@ -140,19 +146,20 @@ namespace Enemy
         public Attack(Skeleton daddy) : base(daddy)
         {
             isTimed = true;
-            age = 0.6f;
+            age = 2f;
         }
         public override void OnEnter()
         {
             base.OnEnter();
-            // Face camera towards enemy
-            skeleton.anim.CrossFadeInFixedTime(Actor.MeleeKey, transitionDur);
+            skeleton.transform.rotation = Quaternion.LookRotation(skeleton.targetDir);
+            if (!(Player.Instance.currentState is Damaged))
+                Player.Instance.ChangeState(new Damaged(Player.Instance, skeleton));
+            skeleton.anim.CrossFadeInFixedTime(Actor.BiteKey, transitionDur);
         }
-        public override void Update()
+        public override void OnExit()
         {
-            base.Update();
-            skeleton.transform.rotation = Quaternion.Lerp(skeleton.transform.rotation, Quaternion.LookRotation(skeleton.targetDir), Mathf.Clamp01(1 - age / 0.3f));
-            // Do some shit with camera and jumpscares i guess
+            base.OnExit();
+            LevelDirector.instance.ReloadLevel();
         }
     }
     //public class Wake : BaseEnemyState

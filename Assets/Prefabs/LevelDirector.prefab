@@ -58,20 +58,20 @@ MonoBehaviour:
     levelPrompt: ...
     enemySpawns: 0
     objectiveSpawns: 1
-  - sceneName: Skirmish
+  - sceneName: Barracks
     levelPrompt: You are not alone...
     enemySpawns: 1
-    objectiveSpawns: 5
-  - sceneName: Barracks
+    objectiveSpawns: 4
+  - sceneName: Village
     levelPrompt: They don't like to be seen...
     enemySpawns: 2
     objectiveSpawns: 4
-  - sceneName: Village
-    levelPrompt: What have you done?...
+  - sceneName: Skirmish
+    levelPrompt: Maybe if you outrun them...
     enemySpawns: 3
-    objectiveSpawns: 4
+    objectiveSpawns: 5
   - sceneName: Church
-    levelPrompt: Put these foolish ambitions to rest...
+    levelPrompt: Is this... Escape?
     enemySpawns: 4
     objectiveSpawns: 3
   vCam: {fileID: 4275708265608854808}
@@ -101,6 +101,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 499008223313104475}
     m_Modifications:
+    - target: {fileID: 87092929485901583, guid: a97daf584e91edf4e932c6f171b8f901, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 87092929485901583, guid: a97daf584e91edf4e932c6f171b8f901, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 87092929485901583, guid: a97daf584e91edf4e932c6f171b8f901, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 87092929485901583, guid: a97daf584e91edf4e932c6f171b8f901, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
     - target: {fileID: 4275708265365932784, guid: a97daf584e91edf4e932c6f171b8f901, type: 3}
       propertyPath: m_Name
       value: VirtualCam

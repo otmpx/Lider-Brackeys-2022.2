@@ -15,20 +15,25 @@ public class RoomSettings
 }
 public class LevelDirector : MonoBehaviour
 {
-    public static LevelDirector Instance;
+    public static LevelDirector instance;
     public RoomSettings[] allRooms;
     public CinemachineVirtualCamera vCam;
     //public static int currentRoomIndex = 0;
     public int coinsCollected;
     public int coinsRequired = 3;
     public int roomId;
-    public static RoomSettings CurrentRoom => Instance.allRooms[Instance.roomId];
+    public static RoomSettings CurrentRoom => instance.allRooms[instance.roomId];
+    [HideInInspector] public CinemachinePOV povController;
     private void Awake()
     {
-        if (Instance == null)
+        if (instance == null)
         {
-            Instance = this;
-            DontDestroyOnLoad(Instance);
+            instance = this;
+            DontDestroyOnLoad(instance);
+            povController = instance.vCam.GetComponentPipeline().First(cb => cb is CinemachinePOV) as CinemachinePOV;
+            povController.m_HorizontalAxis.m_SpeedMode = AxisState.SpeedMode.InputValueGain;
+            povController.m_VerticalAxis.m_SpeedMode = AxisState.SpeedMode.InputValueGain;
+            Settings.instance.SetSensitivity();
         }
         else
         {
@@ -60,7 +65,7 @@ public class LevelDirector : MonoBehaviour
     public void ReloadLevel()
     {
         // RoomSaver.instance.SaveRoom();
-        FixedRoomSaver.instance.SaveRoom(SceneManager.GetActiveScene());
+        //FixedRoomSaver.instance.SaveRoom(SceneManager.GetActiveScene());
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
@@ -77,9 +82,11 @@ public class LevelDirector : MonoBehaviour
     {
         coinsCollected++;
         if (coinsCollected >= coinsRequired)
-        {
-            roomId++;
-            SceneManager.LoadScene(CurrentRoom.sceneName);
-        }
+            AdvanceLevel();
+    }
+    public void AdvanceLevel()
+    {
+        roomId++;
+        SceneManager.LoadScene(CurrentRoom.sceneName);
     }
 }

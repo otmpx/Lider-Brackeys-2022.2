@@ -34,7 +34,7 @@ public class Coin : MonoBehaviour
     public void PickupCoin()
     {
         // Play pickup sound effect
-        LevelDirector.Instance.RegisterCoin();
+        LevelDirector.instance.RegisterCoin();
         ParticleManager.RemoveDynamicGO(transform);
         Destroy(gameObject);
     }

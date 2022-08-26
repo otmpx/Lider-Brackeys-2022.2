@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using Cinemachine;
 
 public class Player : Actor
 {
     public float moveSpeed;
     public Transform vCamFollow;
+    public CinemachineVirtualCamera deathCam;
     public float shootRange = 2.5f;
     public LayerMask scannable;
     [Tooltip("This should only be one selection")]
@@ -31,7 +33,7 @@ public class Player : Actor
         base.Awake();
         Instance = this;
         rb = GetComponent<Rigidbody>();
-        LevelDirector.Instance.vCam.Follow = vCamFollow;
+        LevelDirector.instance.vCam.Follow = vCamFollow;
         Cursor.lockState = CursorLockMode.Locked;
         cam = Camera.main;
     }
@@ -78,46 +80,34 @@ public class Player : Actor
         if (dt > FIRE_RATE_INTERVAL)
         {
             //Physics.Raycast()
-            for (int i = 0; i < TOTAL_SHOTS_PER_INTERVAL; i++)
-            {
-                var dir = GetRandomTargetDirCircle().normalized;
-                Debug.DrawRay(cam.transform.position, dir, Color.green, FIRE_RATE_INTERVAL);
-                if (Physics.Raycast(cam.transform.position, dir, out var hit, MAX_RAYCAST_DIST, scannable))
-                {
-                    var layer = hit.collider.gameObject.layer;
-                    if ((dynamicObjectMask & (1 << layer)) !=0)
-                    //if (layer == Mathf.Log(dynamicObjectMask, 2))
-                    {
-                        var localHitPoint = hit.collider.transform.worldToLocalMatrix.MultiplyPoint3x4(hit.point);
-                        ParticleManager.AddParticleToGameObject(localHitPoint, hit.collider.transform);
-                    }
-                    else
-                    {
-                        //Run check with dictionary
-                        //if (hit.collider.CompareTag("CyanStaticSurface"))
-                        //    ParticleManager.AddParticle(hit.point, Color.cyan);
-                        //if (hit.collider.CompareTag("BlueStaticSurface"))
-                        //    ParticleManager.AddParticle(hit.point, Color.blue);
-                        ParticleManager.AddParticle(hit.point);
-                    }
-                }
-            }
+            LaunchPoints();
             fireEvent?.Invoke();
-            lastFired = Time.time;
         }
     }
-    //void FireFrame()
-    //{
-    //    for (int i = 0; i < TOTAL_SHOTS_PER_INTERVAL; i++)
-    //    {
-    //        var dir = GetRandomTargetDirCircle().normalized;
-    //        Debug.DrawRay(cam.transform.position, dir, Color.green, FIRE_RATE_INTERVAL);
-    //        if (Physics.Raycast(cam.transform.position, dir, out var hit, MAX_RAYCAST_DIST, scannable))
-    //        {
-    //            ParticleManager.AddParticle(hit.point);
-    //        }
-    //    }
-    //}
+    public void LaunchPoints()
+    {
+        for (int i = 0; i < TOTAL_SHOTS_PER_INTERVAL; i++)
+        {
+            var dir = GetRandomTargetDirCircle().normalized;
+            Debug.DrawRay(cam.transform.position, dir, Color.green, FIRE_RATE_INTERVAL);
+            if (Physics.Raycast(cam.transform.position, dir, out var hit, MAX_RAYCAST_DIST, scannable))
+            {
+                var layer = hit.collider.gameObject.layer;
+                if ((dynamicObjectMask & (1 << layer)) != 0)
+                //if (layer == Mathf.Log(dynamicObjectMask, 2))
+                {
+                    var localHitPoint = hit.collider.transform.worldToLocalMatrix.MultiplyPoint3x4(hit.point);
+                    ParticleManager.AddParticleToGameObject(localHitPoint, hit.collider.transform);
+                }
+                else
+                {
+                    //Run check with dictionary
+                    ParticleManager.AddParticle(hit.point);
+                }
+            }
+        }
+        lastFired = Time.time;
+    }
 
     Vector3 GetRandomTargetDirBox()
     {

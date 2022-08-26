@@ -50,7 +50,7 @@ MonoBehaviour:
   - {fileID: 0}
   coinPos: []
   roomRadius: 35
-  noSpawnRadius: 11
+  noSpawnRadius: 10
   playerPrefab: {fileID: 7161791034960933013, guid: 1fb95b15a2e479647872512145334d9d, type: 3}
   skeletonPrefab: {fileID: 6645822205875947780, guid: f3092b13d5a113b43948c71a47169835, type: 3}
   coinPrefab: {fileID: 8431609352504444874, guid: 69d9cde99fa44d24881a57a40d702d7e, type: 3}
