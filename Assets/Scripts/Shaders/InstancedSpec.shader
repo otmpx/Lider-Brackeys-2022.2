@@ -1,4 +1,4 @@
-Shader "Unlit/InstancedSpec"
+Shader "Custom/InstancedSpec"
 {
 	Properties
 	{

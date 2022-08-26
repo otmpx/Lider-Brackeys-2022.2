@@ -1,23 +1,18 @@
-Shader "Unlit/InstancedSpec"
+Shader "Custom/IndirectInstancedSpec"
 {
-	Properties
-	{
-		//_MainTex("Texture", 2D) = "white" {}
-	}
 	SubShader
 	{
 		Tags { "RenderType" = "Transparent" }
+		//Tags { "RenderType" = "Opaque" }
 		Lighting Off
+			Fog { Mode Off }
+
 		Blend SrcAlpha OneMinusSrcAlpha
 		Pass
 		{
 			CGPROGRAM
 			#pragma vertex vert
 			#pragma fragment frag
-			#pragma instancing_options maxcount:1024
-			//This may not be allowed if the spare buffers were too big, if that was the case, use DrawMeshInstancedIndirect instead
-			#pragma multi_compile_instancing 
-			//https://forum.unity.com/threads/understanding-instancing-and-drawmeshinstanced.445995/
 
 			#include "UnityCG.cginc"
 
@@ -25,40 +20,51 @@ Shader "Unlit/InstancedSpec"
 			{
 				float4 vertex : POSITION;
 				float2 uv : TEXCOORD0;
-				UNITY_VERTEX_INPUT_INSTANCE_ID
 			};
 
 			struct v2f
 			{
 				float2 uv : TEXCOORD0;
-				float4 vertex : SV_POSITION;
-				fixed4 colour : COLOR;
+				float4 pos : SV_POSITION;
+				float4 color : COLOR;
 			};
 
-			float4 _Colours[1023];
-			sampler2D _MainTex;
+			struct StaticPointDef
+			{
+				float4 posScale;
+				float4 color;
+			};
 
-//https://github.com/AlfonsoLRz/PointCloudRendering/blob/main/PointCloudRendering/Assets/Shaders/Points/pointCloud-frag.glsl
-			//Need the uv coord for rounding on sphere
+			StructuredBuffer<StaticPointDef> particles;
 
 			v2f vert(appdata v,uint instanceID: SV_InstanceID)
 			{
-				UNITY_SETUP_INSTANCE_ID(v);
-
 				v2f o;
-				o.vertex = UnityObjectToClipPos(v.vertex);
-                //Can just pass the UV directly wihthout Maintex
-                o.uv = v.uv;
+				StaticPointDef data = particles[instanceID];
 
-#ifdef UNITY_INSTANCING_ENABLED
-				o.colour = _Colours[instanceID];
-#endif
+				//Scale based on size
+				float3 localPosition = v.vertex.xyz * data.posScale.w;
+				float3 worldPosition = data.posScale.xyz + localPosition;
+
+				//https://forum.unity.com/threads/what-is-the-equivalent-of-unityobjecttoclippos-inside-shader-graph.809778/
+				// First, the UnityObjectToClipPos() function.That transforms the mesh vertex position from local object space to clip space, as the function implies.It does that by transforming from object to world space, 
+				// which is easy enough to understand, and then world to clip space using the view projection matrix.Clip space, or more accurately, homogeneous clip space, 
+				// is a special 4 component space that describes the screen space position of a vertex.
+
+				//It converts the vertex to world space first, then multiplies by View Project matrix (VP)
+				//o.vertex = UnityObjectToClipPos(v.vertex);
+
+				o.pos = mul(UNITY_MATRIX_VP, float4(worldPosition, 1.0f));
+
+				o.color = data.color;
+				o.uv = v.uv;
+
 				return o;
 			}
 
 			fixed4 frag(v2f i) : SV_Target
 			{
-				return i.colour;
+				return i.color;
 			}
 			ENDCG
 		}

@@ -5,6 +5,21 @@ using System.ComponentModel.Design.Serialization;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
+
+public static class LidarExtensions
+{
+
+    public static Color ToColor(this PointType type) => type switch
+    {
+        PointType.Static => Color.white,
+        PointType.Dynamic => Color.cyan,
+        PointType.Enemy => Color.red,
+        PointType.Objective => new Color(1, 1, 0, 1)
+    };
+}
+
+
 [Serializable]
 public class RoomSettings
 {

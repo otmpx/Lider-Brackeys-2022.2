@@ -23,8 +23,10 @@ public class Player : Actor
 
     [HideInInspector] public float lastFired = 0f;
     public float FIRE_RATE_INTERVAL = 0.1f;
-    public int TOTAL_SHOTS_PER_INTERVAL = 5;
     const float MAX_RAYCAST_DIST = 1000f;
+
+    public LineRenderer lineRendererPrefab;
+    private LineRenderer[] lines;
 
     protected override void Awake()
     {
@@ -77,15 +79,16 @@ public class Player : Actor
         var dt = Time.time - lastFired;
         if (dt > FIRE_RATE_INTERVAL)
         {
-            //Physics.Raycast()
-            for (int i = 0; i < TOTAL_SHOTS_PER_INTERVAL; i++)
+            //Scale initialised at 0
+            StaticPointDef[] pointsToAdd = new StaticPointDef[ParticleManager.instance.shotsPerInterval];
+            for (int i = 0; i < ParticleManager.instance.shotsPerInterval; i++)
             {
                 var dir = GetRandomTargetDirCircle().normalized;
                 Debug.DrawRay(cam.transform.position, dir, Color.green, FIRE_RATE_INTERVAL);
                 if (Physics.Raycast(cam.transform.position, dir, out var hit, MAX_RAYCAST_DIST, scannable))
                 {
                     var layer = hit.collider.gameObject.layer;
-                    if ((dynamicObjectMask & (1 << layer)) !=0)
+                    if ((dynamicObjectMask & (1 << layer)) != 0)
                     //if (layer == Mathf.Log(dynamicObjectMask, 2))
                     {
                         var localHitPoint = hit.collider.transform.worldToLocalMatrix.MultiplyPoint3x4(hit.point);
@@ -93,17 +96,22 @@ public class Player : Actor
                     }
                     else
                     {
+                        //Method on ParticleManager that returns types of points with dictionary
+                        //pointsToAdd[i].posScale = new Vector4(hit.point.x, hit.point.y, hit.point.z, ParticleManager.instance.particleSize);
+                        //pointsToAdd[i].color = (Vector4)Color.white;
+                        pointsToAdd[i] = ParticleManager.GetPointDef(hit.point, PointType.Static);
                         //Run check with dictionary
                         //if (hit.collider.CompareTag("CyanStaticSurface"))
                         //    ParticleManager.AddParticle(hit.point, Color.cyan);
                         //if (hit.collider.CompareTag("BlueStaticSurface"))
                         //    ParticleManager.AddParticle(hit.point, Color.blue);
-                        ParticleManager.AddParticle(hit.point);
+                        //ParticleManager.AddParticle(hit.point);
                     }
                 }
             }
-            fireEvent?.Invoke();
             lastFired = Time.time;
+            ParticleManager.AddParticleGroup(pointsToAdd);
+            fireEvent?.Invoke();
         }
     }
     //void FireFrame()

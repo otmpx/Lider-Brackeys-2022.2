@@ -1,33 +1,33 @@
 // Each #kernel tells which function to compile; you can have many kernels
 #pragma kernel AddPoints
 
-RWStructuredBuffer<StaticPointDef> newAdds;
-int currPointCount;
-int numPoints2Add;
+struct StaticPointDef {
+	float4 posScale;
+	float4 color;
+};
 
+RWStructuredBuffer<StaticPointDef> newAdds;
+int numPoints2Add;
 
 //This is shared with the shader
 RWStructuredBuffer<StaticPointDef> particles;
-
-struct StaticPointDef {
-    float4 posScale;
-    float4 color;
-};
-
+int currPointCount;
 
 
 //We define our index as one massive buffer so using only one dimension is good for parrellel
 //If we defined our indeces as 2d uv coords, would use [numthreads(8, 8, 1)]
-//[numthreads(64,4,1)] // might use this for multiple indexing of the newAdds
-[numthreads(64,1,1)]
-void AddPoints (uint3 id : SV_DispatchThreadID)
+//[numthreads(64, 4, 1)] // might use this for multiple indexing of the newAdds
+[numthreads(64, 1, 1)]
+void AddPoints(uint3 id : SV_DispatchThreadID)
 {
-    uint i = id.x;
-    uint j = id.y;
-    if (i < currPointCount || i> currPointCount + numPoints2Add || j > numPoints2Add -1) {
-        return;
-    }
+	uint i = id.x;
+	//uint j = id.y;
+	//if (i < currPointCount || i> currPointCount + numPoints2Add || j > numPoints2Add -1) 
+	if (i < currPointCount || i> currPointCount + numPoints2Add -1)
+	{
+		return;
+	}
 
-    uint pointAddOffset = i - currPointCount;
-    particles[i] = newAdds[pointAddOffset];
+	uint pointAddOffset = i - currPointCount;
+	particles[i] = newAdds[pointAddOffset];
 }
