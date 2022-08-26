@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5345506fdc1a5a4488a23dc71911dc9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  triggerPoint: 500
 --- !u!95 &8431609352504444875
 Animator:
   serializedVersion: 3

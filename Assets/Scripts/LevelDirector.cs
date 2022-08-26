@@ -17,6 +17,7 @@ public class LevelDirector : MonoBehaviour
 {
     public static LevelDirector instance;
     public RoomSettings[] allRooms;
+    public Camera cam;
     public CinemachineVirtualCamera vCam;
     //public static int currentRoomIndex = 0;
     public int coinsCollected;
@@ -33,12 +34,10 @@ public class LevelDirector : MonoBehaviour
             povController = instance.vCam.GetComponentPipeline().First(cb => cb is CinemachinePOV) as CinemachinePOV;
             povController.m_HorizontalAxis.m_SpeedMode = AxisState.SpeedMode.InputValueGain;
             povController.m_VerticalAxis.m_SpeedMode = AxisState.SpeedMode.InputValueGain;
-            Settings.instance.SetSensitivity();
+            SetSensitivity();
         }
         else
-        {
             Destroy(gameObject);
-        }
     }
     private void Update()
     {
@@ -88,5 +87,10 @@ public class LevelDirector : MonoBehaviour
     {
         roomId++;
         SceneManager.LoadScene(CurrentRoom.sceneName);
+    }
+    public void SetSensitivity()
+    {
+        instance.povController.m_HorizontalAxis.m_MaxSpeed = Settings.aimSensitivity;
+        instance.povController.m_VerticalAxis.m_MaxSpeed = Settings.aimSensitivity;
     }
 }

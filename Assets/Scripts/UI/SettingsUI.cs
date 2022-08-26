@@ -10,34 +10,34 @@ public class SettingsUI : MonoBehaviour
     private void Awake()
     {
         musicDown.onClick.AddListener(() => SetMusicVol(-0.1f));
-        musicDown.onClick.AddListener(() => AudioManager.instance.PlayUISound());
+        musicDown.onClick.AddListener(() => AudioManager.instance.PlaySFX(AudioManager.instance.buttonAdjustSound));
         musicUp.onClick.AddListener(() => SetMusicVol(0.1f));
-        musicUp.onClick.AddListener(() => AudioManager.instance.PlayUISound());
+        musicUp.onClick.AddListener(() => AudioManager.instance.PlaySFX(AudioManager.instance.buttonAdjustSound));
         soundDown.onClick.AddListener(() => SetSoundVol(-0.1f));
-        soundDown.onClick.AddListener(() => AudioManager.instance.PlayUISound());
+        soundDown.onClick.AddListener(() => AudioManager.instance.PlaySFX(AudioManager.instance.buttonAdjustSound));
         soundUp.onClick.AddListener(() => SetSoundVol(0.1f));
-        soundUp.onClick.AddListener(() => AudioManager.instance.PlayUISound());
+        soundUp.onClick.AddListener(() => AudioManager.instance.PlaySFX(AudioManager.instance.buttonAdjustSound));
         sensDown.onClick.AddListener(() => SetSens(-0.5f));
-        sensDown.onClick.AddListener(() => AudioManager.instance.PlayUISound());
+        sensDown.onClick.AddListener(() => AudioManager.instance.PlaySFX(AudioManager.instance.buttonAdjustSound));
         sensUp.onClick.AddListener(() => SetSens(0.5f));
-        sensUp.onClick.AddListener(() => AudioManager.instance.PlayUISound());
+        sensUp.onClick.AddListener(() => AudioManager.instance.PlaySFX(AudioManager.instance.buttonAdjustSound));
     }
-    private void OnEnable()
+    public void LoadSettings()
     {
         musicDisp.text = Mathf.FloorToInt(Settings.musicVol * 10).ToString();
         soundDisp.text = Mathf.FloorToInt(Settings.soundVol * 10).ToString();
-        sensDisp.text = Mathf.FloorToInt(Settings.aimSensitivity).ToString();
+        sensDisp.text = (Mathf.FloorToInt(Settings.aimSensitivity * 2) - 1).ToString();
     }
     public void SetMusicVol(float value)
     {
-        float vol = Mathf.Clamp01(Settings.musicVol + value);
-        Settings.instance.SetMusicVol(vol);
+        Settings.musicVol = Mathf.Clamp01(Settings.musicVol + value);
+        AudioManager.instance.SetMusicVol(Settings.musicVol);
         musicDisp.text = Mathf.FloorToInt(Settings.musicVol * 10).ToString();
     }
     public void SetSoundVol(float value)
     {
-        float vol = Mathf.Clamp01(Settings.soundVol + value);
-        Settings.instance.SetSoundVol(vol);
+        Settings.soundVol = Mathf.Clamp01(Settings.soundVol + value);
+        AudioManager.instance.SetSfxVol(Settings.soundVol);
         soundDisp.text = Mathf.FloorToInt(Settings.soundVol * 10).ToString();
     }
     public void SetSens(float value)

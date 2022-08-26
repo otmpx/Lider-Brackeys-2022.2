@@ -35,7 +35,7 @@ public class Player : Actor
         rb = GetComponent<Rigidbody>();
         LevelDirector.instance.vCam.Follow = vCamFollow;
         Cursor.lockState = CursorLockMode.Locked;
-        cam = Camera.main;
+        cam = LevelDirector.instance.cam;
     }
     protected override void Start()
     {

@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 499008223313104475}
   - component: {fileID: 499008223313104484}
-  - component: {fileID: 2335712619780368405}
   m_Layer: 0
   m_Name: LevelDirector
   m_TagString: Untagged
@@ -74,25 +73,11 @@ MonoBehaviour:
     levelPrompt: Is this... Escape?
     enemySpawns: 4
     objectiveSpawns: 3
+  cam: {fileID: 87092929594865889}
   vCam: {fileID: 4275708265608854808}
   coinsCollected: 0
   coinsRequired: 3
   roomId: 0
---- !u!114 &2335712619780368405
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 499008223313104474}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0046b8d3460cac04a95ec60b8fcc0cc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  aimSensitivity: 3
-  soundSlider: {fileID: 0}
-  musicSlider: {fileID: 0}
   povController: {fileID: 0}
 --- !u!1001 &243775465
 PrefabInstance:
@@ -187,3 +172,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!20 &87092929594865889 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 87092929485901576, guid: a97daf584e91edf4e932c6f171b8f901, type: 3}
+  m_PrefabInstance: {fileID: 243775465}
+  m_PrefabAsset: {fileID: 0}
