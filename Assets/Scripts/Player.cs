@@ -57,7 +57,7 @@ public class Player : Actor
             isShooting = Input.GetKey(KeyCode.Mouse0);
 
         transform.localEulerAngles = new Vector3(0, cam.transform.localEulerAngles.y, 0);
-        if (isShooting)
+        if (isShooting && !LevelDirector.instance.paused)
             Fire();
 #if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.Alpha0))
