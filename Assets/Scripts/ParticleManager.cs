@@ -106,7 +106,7 @@ public class ParticleManager : MonoBehaviour
 
     const int ADD_POINTS_KERNEL = 0;
 
-    public static int currentTotalPoints;
+    public int currentTotalPoints;
 
     private static readonly int NUM_POINTS_TO_ADD_KEY = Shader.PropertyToID("numPoints2Add");
     private static readonly int CURRENT_POINTS_KEY = Shader.PropertyToID("currPointCount");
@@ -258,13 +258,13 @@ public class ParticleManager : MonoBehaviour
     {
         var cs = instance.pointsCompute;
 
-        cs.SetInt(CURRENT_POINTS_KEY, currentTotalPoints);
+        cs.SetInt(CURRENT_POINTS_KEY, instance.currentTotalPoints);
         cs.SetInt(NUM_POINTS_TO_ADD_KEY, newPoints.Length);
         instance.newPointsBuffer.SetData(newPoints);
         DispatchSafe(cs, MAX_POINTS_IN_BUFFER);
 
         //Ensure that this doesnt just randomly get offset (might just skip points if it does) (compute buffer doesnt run)
-        currentTotalPoints += newPoints.Length;
+        instance.currentTotalPoints += newPoints.Length;
     }
 
     public static void AddParticle(Vector3 loc)
