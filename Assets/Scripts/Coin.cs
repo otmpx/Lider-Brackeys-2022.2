@@ -10,13 +10,13 @@ public class Coin : MonoBehaviour
     private void Awake()
     {
         children = GetComponentsInChildren<Transform>();
-        Player.fireEvent += DetectTriggerPoints;
+        LidarGun.fireEvent += DetectTriggerPoints;
 
     }
 
     private void OnDestroy()
     {
-        Player.fireEvent -= DetectTriggerPoints;
+        LidarGun.fireEvent -= DetectTriggerPoints;
     }
 
     //private void OnTriggerEnter(Collider other)

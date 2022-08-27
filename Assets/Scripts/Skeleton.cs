@@ -24,12 +24,12 @@ namespace Enemy
             children = GetComponentsInChildren<Transform>();
             agent = GetComponent<NavMeshAgent>();
             //Player.fireEvent += Activate;
-            Player.fireEvent += DetectTriggerPoints;
+            LidarGun.fireEvent += DetectTriggerPoints;
         }
         private void OnDisable()
         {
             //Player.fireEvent -= Activate;
-            Player.fireEvent -= DetectTriggerPoints;
+            LidarGun.fireEvent -= DetectTriggerPoints;
         }
         protected override void Start()
         {

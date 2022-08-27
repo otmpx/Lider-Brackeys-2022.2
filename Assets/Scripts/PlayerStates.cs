@@ -82,7 +82,7 @@ public class Damaged : PlayerState
         if (shootAfter < 0 && !shot)
         {
             shot = true;
-            player.LaunchPoints();
+            player.gun.LaunchPoints();
         }
     }
     public override void FixedUpdate()
