@@ -50,37 +50,44 @@ MonoBehaviour:
     levelPrompt: Find all 3 coins...
     enemySpawns: 0
     objectiveSpawns: 3
-    levelTheme: {fileID: 8300000, guid: 2687aa88f2609d7499789d985b147244, type: 3}
-  - sceneName: Castle
+    levelTheme: 1
+    musicVol: 1
+  - sceneName: Barracks
     levelPrompt: That was a freebie. Try finding all 3 coins now...
     enemySpawns: 0
     objectiveSpawns: 4
-    levelTheme: {fileID: 8300000, guid: 2687aa88f2609d7499789d985b147244, type: 3}
+    levelTheme: 1
+    musicVol: 1
   - sceneName: Jumpscare
     levelPrompt: ...
     enemySpawns: 0
     objectiveSpawns: 1
-    levelTheme: {fileID: 8300000, guid: 178a5de6dcd1c274aaec33c33a476728, type: 3}
-  - sceneName: Barracks
+    levelTheme: 2
+    musicVol: 0.2
+  - sceneName: Castle
     levelPrompt: You are not alone...
     enemySpawns: 1
     objectiveSpawns: 4
-    levelTheme: {fileID: 8300000, guid: 86738e432eb288840b868ae865645880, type: 3}
+    levelTheme: 3
+    musicVol: 0.4
   - sceneName: Village
     levelPrompt: They don't like to be seen...
     enemySpawns: 2
     objectiveSpawns: 4
-    levelTheme: {fileID: 8300000, guid: 181b611a496beea429376c87e5ecb3b4, type: 3}
+    levelTheme: 4
+    musicVol: 0.6
   - sceneName: Skirmish
     levelPrompt: Maybe if you outrun them...
     enemySpawns: 3
     objectiveSpawns: 5
-    levelTheme: {fileID: 8300000, guid: 295bf85058d68d146ac15afc1a061dad, type: 3}
+    levelTheme: 5
+    musicVol: 0.5
   - sceneName: Church
     levelPrompt: Your time has come...
     enemySpawns: 4
     objectiveSpawns: 3
-    levelTheme: {fileID: 8300000, guid: 4749d58791cf1e04b98eac105f01a155, type: 3}
+    levelTheme: 6
+    musicVol: 0.5
   cam: {fileID: 87092929594865889}
   vCam: {fileID: 4275708265608854808}
   coinsCollected: 0

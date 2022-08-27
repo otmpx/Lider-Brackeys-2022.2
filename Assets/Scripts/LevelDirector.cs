@@ -27,7 +27,9 @@ public class RoomSettings
     public string levelPrompt;
     public int enemySpawns;
     public int objectiveSpawns;
-    public AudioClip levelTheme;
+    public MusicTheme levelTheme;
+    [Range(0, 1)]
+    public float musicVol;
 }
 public class LevelDirector : MonoBehaviour
 {
@@ -105,7 +107,13 @@ public class LevelDirector : MonoBehaviour
     public void AdvanceLevel()
     {
         roomId++;
-        SceneManager.LoadScene(CurrentRoom.sceneName);
+        if (roomId > allRooms.Length)
+        {
+            SceneManager.LoadScene("End");
+            Destroy(gameObject);
+        }
+        else
+            SceneManager.LoadScene(CurrentRoom.sceneName);
     }
     public void SetSensitivity()
     {

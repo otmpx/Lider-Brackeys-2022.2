@@ -186,7 +186,7 @@ namespace Enemy
         public override void OnEnter()
         {
             base.OnEnter();
-            skeleton.anim.CrossFadeInFixedTime(Actor.DieKey, transitionDur);
+            skeleton.anim.CrossFadeInFixedTime(Actor.FlattenKey, transitionDur);
         }
         public override void OnExit()
         {

@@ -322,7 +322,6 @@ public class ParticleManager : MonoBehaviour
         return sumPoints;
     }
 
-
     public static StaticPointDef GetPointDef(Vector3 loc, PointType type) =>
         new StaticPointDef { posScale = new Vector4(loc.x, loc.y, loc.z, instance.particleSize), color = (Vector4)type.ToColor() };
 

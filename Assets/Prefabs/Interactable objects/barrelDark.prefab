@@ -177,7 +177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faff7aa036d2701438858510b96c0497, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactSound: {fileID: 11400000, guid: bd3ee0e93c3398c4d8ce7a17fc318b49, type: 2}
+  interactSound: {fileID: 11400000, guid: d2ff75bf45eac64418565196af40e367, type: 2}
   <pitchMultiplier>k__BackingField: 0.5
   <spatialBlend>k__BackingField: 0.5
   mixer: {fileID: 2326203730981228694, guid: f4954f8ca2bbb8548903404e21ac98ee, type: 2}

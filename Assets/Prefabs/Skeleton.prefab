@@ -785,7 +785,7 @@ MonoBehaviour:
   distToPlayer: 0
   killRange: 4.5
   isAggro: 0
-  aggroTriggerPoint: 100
+  aggroTriggerPoint: 10
   chaseDur: 10
   aggroCard: {fileID: 11400000, guid: ebc0a2dcbab047948ad1e5cc1d32470b, type: 2}
   attackCard: {fileID: 11400000, guid: 0e2c4ff48b9a1a7478e6c6749eb98ec6, type: 2}
