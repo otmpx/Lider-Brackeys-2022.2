@@ -27,7 +27,7 @@ public class Player : Actor
     public float FIRE_RATE_INTERVAL = 0.1f;
     const float MAX_RAYCAST_DIST = 1000f;
 
-private Vector3[]
+    private Vector3[] lastShotLocs;
 
     protected override void Awake()
     {
