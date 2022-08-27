@@ -13,9 +13,10 @@ public static class LidarExtensions
     public static Color ToColor(this PointType type) => type switch
     {
         PointType.Static => Color.white,
-        PointType.Dynamic => Color.cyan,
+        PointType.Dynamic => Color.blue,
         PointType.Enemy => Color.red,
-        PointType.Objective => new Color(1, 1, 0, 1)
+        PointType.Objective => Color.yellow,
+        _ => throw new NotImplementedException()
     };
 }
 
