@@ -8588,11 +8588,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 87092929594865894, guid: 0183740b1911f3c4496a95d65a2ca683, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.99807775
       objectReference: {fileID: 0}
     - target: {fileID: 87092929594865894, guid: 0183740b1911f3c4496a95d65a2ca683, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: -0.002612969
       objectReference: {fileID: 0}
     - target: {fileID: 499008223313104474, guid: 0183740b1911f3c4496a95d65a2ca683, type: 3}
       propertyPath: m_Name
@@ -8645,6 +8645,10 @@ PrefabInstance:
     - target: {fileID: 499008223313104475, guid: 0183740b1911f3c4496a95d65a2ca683, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 499008223313104484, guid: 0183740b1911f3c4496a95d65a2ca683, type: 3}
+      propertyPath: roomId
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0183740b1911f3c4496a95d65a2ca683, type: 3}

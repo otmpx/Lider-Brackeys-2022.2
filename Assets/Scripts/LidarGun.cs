@@ -16,6 +16,9 @@ public class LidarGun : MonoBehaviour
 
     private Vector3[] lastShotLocs;
 
+    public AudioSource sound;
+    public SoundCard scanCard;
+
     private void Awake()
     {
         cam = LevelDirector.instance.cam;

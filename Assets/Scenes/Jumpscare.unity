@@ -10379,8 +10379,9 @@ MonoBehaviour:
   distFromPlayer: 2
   headRotation: 5
   headRotationSpeed: 50
-  timeBeforeActivation: 3
-  timeBeforeNextScene: 2
+  timeBeforeActivation: 5
+  timeBeforeNextScene: 1.5
+  jumpscareClip: {fileID: 8300000, guid: 3608d25abb5824e41ae3821067daad9c, type: 3}
 --- !u!1001 &866285588
 PrefabInstance:
   m_ObjectHideFlags: 0

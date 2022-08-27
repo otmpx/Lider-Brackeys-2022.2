@@ -65,7 +65,9 @@ public class Move : PlayerState
 public class Damaged : PlayerState
 {
     float shootAfter = 0.25f;
+    float dieAfter = 0.85f;
     bool shot = false;
+    bool dead = false;
     readonly Skeleton target;
     public Damaged(Player sm, Skeleton _target) : base(sm)
     {
@@ -86,6 +88,12 @@ public class Damaged : PlayerState
         {
             shot = true;
             player.gun.LaunchPoints();
+        }
+        dieAfter -= Time.deltaTime;
+        if (dieAfter < 0 && !dead)
+        {
+            dead = true;
+            AudioManager.instance.PlaySFX(player.deathClip, 2f);
         }
     }
     public override void FixedUpdate()

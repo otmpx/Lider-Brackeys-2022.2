@@ -14,6 +14,7 @@ public class Jumpscare : MonoBehaviour
 
     public float timeBeforeNextScene = 2f;
     bool transition = false;
+    public AudioClip jumpscareClip;
     private void Update()
     {
         if (LevelDirector.instance.coinsCollected > 0 && !active)
@@ -36,9 +37,10 @@ public class Jumpscare : MonoBehaviour
         rot.x = Mathf.Cos(Time.time * headRotationSpeed) * headRotation;
         child.transform.localEulerAngles = rot;
 
-        if (Player.Instance.isShooting)
+        if (Player.Instance.isShooting && !transition)
         {
             // Play jumpscare sound and effects
+            AudioManager.instance.PlaySFX(jumpscareClip);
             Player.Instance.disableShooting = true;
             transition = true;
         }

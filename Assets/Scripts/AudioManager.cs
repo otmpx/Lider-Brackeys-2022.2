@@ -15,10 +15,9 @@ public class AudioManager : MonoBehaviour
     public float sfxPitchVariance = 0.1f;
 
     [Header("Music Tracks")]
-    public AudioClip[] lobbyTheme;
+    public AudioClip menuTheme;
 
     [Header("Global SFX")]
-    public AudioClip deathSound;
     public AudioClip buttonPressSound, buttonAdjustSound;
 
     private void Awake()

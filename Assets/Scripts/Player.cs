@@ -25,7 +25,8 @@ public class Player : Actor
     Camera cam;
 
     public LidarGun gun;
-    public SoundCard footstepsCard, scanCard;
+    public SoundCard footstepsCard;
+    public AudioClip deathClip;
 
     protected override void Awake()
     {
@@ -35,7 +36,6 @@ public class Player : Actor
         cam = LevelDirector.instance.cam;
         LevelDirector.instance.vCam.Follow = vCamFollow;
         Cursor.lockState = CursorLockMode.Locked;
-        gun = GetComponent<LidarGun>();
     }
     protected override void Start()
     {
@@ -81,6 +81,7 @@ public class Player : Actor
         {
             gun.LaunchPoints();
             lastFired = Time.time;
+            gun.scanCard.PlaySecondary(gun.sound);
         }
     }
 

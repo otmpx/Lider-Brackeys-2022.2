@@ -9,7 +9,6 @@ using UnityEngine.SceneManagement;
 
 public static class LidarExtensions
 {
-
     public static Color ToColor(this PointType type) => type switch
     {
         PointType.Static => Color.white,
@@ -28,6 +27,7 @@ public class RoomSettings
     public string levelPrompt;
     public int enemySpawns;
     public int objectiveSpawns;
+    public AudioClip levelTheme;
 }
 public class LevelDirector : MonoBehaviour
 {
@@ -43,6 +43,8 @@ public class LevelDirector : MonoBehaviour
     [HideInInspector] public CinemachinePOV povController;
     public PauseUI pauseScreen;
     [HideInInspector] public bool paused = false;
+
+    public AudioClip objectiveSound;
     private void Awake()
     {
         if (instance == null)
@@ -96,6 +98,7 @@ public class LevelDirector : MonoBehaviour
     public void RegisterCoin()
     {
         coinsCollected++;
+        AudioManager.instance.PlaySFX(objectiveSound);
         if (coinsCollected >= coinsRequired)
             AdvanceLevel();
     }
