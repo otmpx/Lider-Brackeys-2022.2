@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Utils;
 
-public class Actor : StateMachine
+public class Actor : StateMachine, ISoundAble
 {
     public Rigidbody rb;
     public CapsuleCollider col;
@@ -15,7 +15,10 @@ public class Actor : StateMachine
     
     [field: HideInNormalInspector]
     public AudioSource sound { get; set; }
-    [field: SerializeField]
+    [field: HideInNormalInspector]
+    public float pitchMultiplier { get; set; } = 1f;
+
+[field: SerializeField]
     #region Animation Keys
 
     public static readonly int IdleKey = Animator.StringToHash("Idle");

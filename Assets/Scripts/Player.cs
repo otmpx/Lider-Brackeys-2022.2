@@ -6,10 +6,12 @@ using Cinemachine;
 
 public class Player : Actor
 {
-    public float moveSpeed;
+    public float walkSpeed;
+    public float runSpeed;
     public Transform vCamFollow;
     public CinemachineVirtualCamera deathCam;
 
+    [HideInInspector] public bool isRunning;
     [HideInInspector] public bool isShooting;
     [HideInInspector] public bool disableShooting = false;
 
@@ -23,6 +25,7 @@ public class Player : Actor
     Camera cam;
 
     public LidarGun gun;
+    public SoundCard footstepsCard, scanCard;
 
     protected override void Awake()
     {
@@ -48,6 +51,7 @@ public class Player : Actor
             moveDir = transform.TransformDirection(inputDir).normalized;
         else
             moveDir = Vector3.zero;
+        isRunning = Input.GetAxisRaw("Vertical") > 0;
         if (disableShooting)
             isShooting = false;
         else

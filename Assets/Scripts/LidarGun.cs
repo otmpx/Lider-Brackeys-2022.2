@@ -45,16 +45,26 @@ public class LidarGun : MonoBehaviour
                 //if (layer == Mathf.Log(dynamicObjectMask, 2))
                 {
                     var localHitPoint = hit.collider.transform.worldToLocalMatrix.MultiplyPoint3x4(hit.point);
-                    ParticleManager.AddParticleToGameObject(localHitPoint, hit.collider.transform, PointType.Dynamic);
+                    if (hit.collider.CompareTag("Objective"))
+                    {
+                        ParticleManager.AddParticleToGameObject(localHitPoint, hit.collider.transform, PointType.Objective);
+                    }
+                    else if (hit.collider.CompareTag("Enemy"))
+                    {
+                        ParticleManager.AddParticleToGameObject(localHitPoint, hit.collider.transform, PointType.Enemy);
+                    }
+                    else
+                        ParticleManager.AddParticleToGameObject(localHitPoint, hit.collider.transform, PointType.Dynamic);
+
                 }
                 else
                 {
-                    pointsToAdd[i] = ParticleManager.GetPointDef(hit.point, PointType.Static);
-                    //ParticleManager.AddParticle(hit.point);
+                    //pointsToAdd[i] = ParticleManager.GetPointDef(hit.point, PointType.Static);
+                    ParticleManager.AddParticle(hit.point);
                 }
             }
         }
-        ParticleManager.AddParticleGroup(pointsToAdd);
+        //ParticleManager.AddParticleGroup(pointsToAdd);
         fireEvent?.Invoke();
 
         ShootLasers();

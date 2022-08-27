@@ -247,14 +247,18 @@ MonoBehaviour:
   moveDir: {x: 0, y: 0, z: 0}
   targetPos: {x: 0, y: 0, z: 0}
   targetDir: {x: 0, y: 0, z: 0}
-  moveSpeed: 5
+  walkSpeed: 3.5
+  runSpeed: 4.5
   vCamFollow: {fileID: 1097916676}
   deathCam: {fileID: 1322853047932863543}
+  isRunning: 0
   isShooting: 0
   disableShooting: 0
   lastFired: 0
   FIRE_RATE_INTERVAL: 1.5
   gun: {fileID: 0}
+  footstepsCard: {fileID: 11400000, guid: b09cade261001384085f50aad9c3422b, type: 2}
+  scanCard: {fileID: 0}
 --- !u!114 &3922711398290005132
 MonoBehaviour:
   m_ObjectHideFlags: 0

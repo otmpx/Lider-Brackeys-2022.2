@@ -196,15 +196,15 @@ public class ParticleManager : MonoBehaviour
         //Have to use Drawmeshinstanced instead of DrawMeshIndirect because compute shaders not supported in Webgl
 
 
-        //Vector3 scaleRef = Vector3.one * particleSize;
-        //foreach (var staticChunk in staticLocations)
-        //{
-        //    //DO NOT USE LINQ HERE BECAUSE IT RUNS A LOT OF GC.ALLOC
-        //    //var arr = staticChunk.points.Select((point => Matrix4x4.TRS(point, Quaternion.identity, scaleRef))).ToArray();
-        //    Graphics.DrawMeshInstanced(particleMesh, 0, particleMaterial, staticChunk.pointMats, staticChunk.pointMats.Length, staticChunk.propBlock);
-        //}
+        Vector3 scaleRef = Vector3.one * particleSize;
+        foreach (var staticChunk in staticLocations)
+        {
+            //DO NOT USE LINQ HERE BECAUSE IT RUNS A LOT OF GC.ALLOC
+            //var arr = staticChunk.points.Select((point => Matrix4x4.TRS(point, Quaternion.identity, scaleRef))).ToArray();
+            Graphics.DrawMeshInstanced(particleMesh, 0, instancedMaterial, staticChunk.pointMats, staticChunk.pointMats.Length, staticChunk.propBlock);
+        }
 
-        Graphics.DrawMeshInstancedIndirect(particleMesh, 0, indirectMaterial, new Bounds(Vector3.zero, Vector3.one * 100), argsBuffer);
+        //Graphics.DrawMeshInstancedIndirect(particleMesh, 0, indirectMaterial, new Bounds(Vector3.zero, Vector3.one * 100), argsBuffer);
 
 
     }
@@ -302,7 +302,8 @@ public class ParticleManager : MonoBehaviour
 
     public static void RemoveDynamicGO(Transform parent)
     {
-        foreach (Transform child in parent)
+        var recursiveChildren = parent.gameObject.GetComponentsInChildren<Transform>();
+        foreach (Transform child in recursiveChildren)
         {
             dynamicLocations.Remove(child);
         }

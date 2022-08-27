@@ -2769,7 +2769,7 @@ GameObject:
   - component: {fileID: 165835249}
   m_Layer: 9
   m_Name: character_skeleton_minion_head
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10343,7 +10343,7 @@ GameObject:
   - component: {fileID: 860931976}
   m_Layer: 9
   m_Name: Head
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19340,7 +19340,7 @@ GameObject:
   - component: {fileID: 1725274125}
   m_Layer: 9
   m_Name: character_skeleton_minion_eyes
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19487,19 +19487,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 87092929594865894, guid: 0183740b1911f3c4496a95d65a2ca683, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.99807775
       objectReference: {fileID: 0}
     - target: {fileID: 87092929594865894, guid: 0183740b1911f3c4496a95d65a2ca683, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: -0.002612969
       objectReference: {fileID: 0}
     - target: {fileID: 87092929594865894, guid: 0183740b1911f3c4496a95d65a2ca683, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: -0.061919264
       objectReference: {fileID: 0}
     - target: {fileID: 87092929594865894, guid: 0183740b1911f3c4496a95d65a2ca683, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: -0.00016210471
       objectReference: {fileID: 0}
     - target: {fileID: 499008223313104474, guid: 0183740b1911f3c4496a95d65a2ca683, type: 3}
       propertyPath: m_Name
@@ -22347,7 +22347,7 @@ GameObject:
   - component: {fileID: 1969200412}
   m_Layer: 9
   m_Name: character_skeleton_minion_jaw
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

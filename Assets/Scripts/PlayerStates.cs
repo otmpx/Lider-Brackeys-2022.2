@@ -41,22 +41,25 @@ public class Idle : PlayerState
 }
 public class Move : PlayerState
 {
+    float lastPlayedFootstep;
+    const float walkSoundIntervals = 0.65f;
+    const float runSoundIntervals = 0.5f;
     public Move(Player sm) : base(sm) { }
-    //public override void OnEnter()
-    //{
-    //    base.OnEnter();
-    //    player.headBob.m_FrequencyGain = 2f;
-    //}
     public override void Update()
     {
         base.Update();
         if (player.moveDir == Vector3.zero)
             player.ChangeState(new Idle(player));
+
+        if (!player.isRunning && Time.time - lastPlayedFootstep < walkSoundIntervals) return;
+        if (player.isRunning && Time.time - lastPlayedFootstep < runSoundIntervals) return;
+        player.footstepsCard.PlayAfterFinish(player);
+        lastPlayedFootstep = Time.time;
     }
     public override void FixedUpdate()
     {
         base.FixedUpdate();
-        player.rb.velocity = player.moveSpeed * player.moveDir;
+        player.rb.velocity = player.isRunning ? player.runSpeed * player.moveDir : player.walkSpeed * player.moveDir;
     }
 }
 public class Damaged : PlayerState
