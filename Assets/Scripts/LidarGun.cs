@@ -45,7 +45,7 @@ public class LidarGun : MonoBehaviour
                 //if (layer == Mathf.Log(dynamicObjectMask, 2))
                 {
                     var localHitPoint = hit.collider.transform.worldToLocalMatrix.MultiplyPoint3x4(hit.point);
-                    ParticleManager.AddParticleToGameObject(localHitPoint, hit.collider.transform);
+                    ParticleManager.AddParticleToGameObject(localHitPoint, hit.collider.transform, PointType.Dynamic);
                 }
                 else
                 {
