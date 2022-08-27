@@ -785,8 +785,8 @@ MonoBehaviour:
   distToPlayer: 0
   killRange: 4.5
   isAggro: 0
-  aggroTriggerPoint: 10
-  chaseDur: 10
+  aggroTriggerPoint: 150
+  chaseDur: 7.5
   aggroCard: {fileID: 11400000, guid: ebc0a2dcbab047948ad1e5cc1d32470b, type: 2}
   attackCard: {fileID: 11400000, guid: 0e2c4ff48b9a1a7478e6c6749eb98ec6, type: 2}
 --- !u!195 &6645822205875947785
@@ -799,7 +799,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 3
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 350

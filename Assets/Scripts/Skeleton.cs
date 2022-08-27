@@ -181,7 +181,7 @@ namespace Enemy
         public Despawn(Skeleton daddy) : base(daddy)
         {
             isTimed = true;
-            age = 1f;
+            age = 15f;
         }
         public override void OnEnter()
         {

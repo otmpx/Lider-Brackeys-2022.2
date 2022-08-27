@@ -43,6 +43,8 @@ public class LevelDirector : MonoBehaviour
     public int roomId;
     public static RoomSettings CurrentRoom => instance.allRooms[instance.roomId];
     [HideInInspector] public CinemachinePOV povController;
+    [HideInInspector] public CinemachineBasicMultiChannelPerlin headBob;
+
     public PauseUI pauseScreen;
     [HideInInspector] public bool paused = false;
 
@@ -54,6 +56,7 @@ public class LevelDirector : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(instance);
             povController = instance.vCam.GetComponentPipeline().First(cb => cb is CinemachinePOV) as CinemachinePOV;
+            headBob = instance.vCam.GetComponentPipeline().First(hb => hb is CinemachineBasicMultiChannelPerlin) as CinemachineBasicMultiChannelPerlin;
             povController.m_HorizontalAxis.m_SpeedMode = AxisState.SpeedMode.InputValueGain;
             povController.m_VerticalAxis.m_SpeedMode = AxisState.SpeedMode.InputValueGain;
             SetSensitivity();
@@ -80,14 +83,11 @@ public class LevelDirector : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         coinsCollected = 0;
-        //currentRoomIndex = SceneManager.GetActiveScene().buildIndex;
     }
 
 
     public void ReloadLevel()
     {
-        // RoomSaver.instance.SaveRoom();
-        //FixedRoomSaver.instance.SaveRoom(SceneManager.GetActiveScene());
         if (paused)
             PauseUnpause();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);

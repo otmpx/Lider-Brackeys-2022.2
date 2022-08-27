@@ -15,8 +15,6 @@ public class Player : Actor
     [HideInInspector] public bool isShooting;
     [HideInInspector] public bool disableShooting = false;
 
-    //[HideInInspector] public CinemachineBasicMultiChannelPerlin headBob;
-
     public static Player Instance;
 
     [HideInInspector] public float lastFired = 0f;

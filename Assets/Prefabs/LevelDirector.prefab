@@ -94,6 +94,7 @@ MonoBehaviour:
   coinsRequired: 3
   roomId: 0
   povController: {fileID: 0}
+  headBob: {fileID: 0}
   pauseScreen: {fileID: 6707456063040309698}
   paused: 0
   objectiveSound: {fileID: 8300000, guid: eb984ea97997b8c49bc9c57ee88d1acd, type: 3}
@@ -104,30 +105,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 499008223313104475}
     m_Modifications:
-    - target: {fileID: 87092929485901583, guid: a97daf584e91edf4e932c6f171b8f901, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 87092929485901583, guid: a97daf584e91edf4e932c6f171b8f901, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 87092929485901583, guid: a97daf584e91edf4e932c6f171b8f901, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.99807775
-      objectReference: {fileID: 0}
-    - target: {fileID: 87092929485901583, guid: a97daf584e91edf4e932c6f171b8f901, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.002612969
-      objectReference: {fileID: 0}
-    - target: {fileID: 87092929485901583, guid: a97daf584e91edf4e932c6f171b8f901, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.061919264
-      objectReference: {fileID: 0}
-    - target: {fileID: 87092929485901583, guid: a97daf584e91edf4e932c6f171b8f901, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.00016210471
-      objectReference: {fileID: 0}
     - target: {fileID: 4275708265365932784, guid: a97daf584e91edf4e932c6f171b8f901, type: 3}
       propertyPath: m_Name
       value: VirtualCam
@@ -176,26 +153,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4739628015695345905, guid: a97daf584e91edf4e932c6f171b8f901, type: 3}
-      propertyPath: m_VerticalAxis.Value
-      value: -0.3000002
-      objectReference: {fileID: 0}
-    - target: {fileID: 4739628015695345905, guid: a97daf584e91edf4e932c6f171b8f901, type: 3}
-      propertyPath: m_HorizontalAxis.Value
-      value: -7.099991
-      objectReference: {fileID: 0}
-    - target: {fileID: 4739628015695345905, guid: a97daf584e91edf4e932c6f171b8f901, type: 3}
-      propertyPath: m_VerticalAxis.m_InputAxisValue
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 4739628015695345905, guid: a97daf584e91edf4e932c6f171b8f901, type: 3}
-      propertyPath: m_HorizontalAxis.m_InputAxisValue
-      value: -0.15
-      objectReference: {fileID: 0}
-    - target: {fileID: 4739628015695345910, guid: a97daf584e91edf4e932c6f171b8f901, type: 3}
-      propertyPath: m_NoiseProfile
-      value: 
-      objectReference: {fileID: 11400000, guid: 46965f9cbaf525742a6da4c2172a99cd, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a97daf584e91edf4e932c6f171b8f901, type: 3}
 --- !u!4 &4275708265608854811 stripped
