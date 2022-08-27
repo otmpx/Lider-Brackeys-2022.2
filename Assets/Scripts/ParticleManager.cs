@@ -283,17 +283,17 @@ public class ParticleManager : MonoBehaviour
         lastChunk.counter++;
     }
 
-    public static void AddParticleToGameObject(Vector3 loc, Transform parent)
+    public static void AddParticleToGameObject(Vector3 loc, Transform parent, PointType type)
     {
         if (!dynamicLocations.ContainsKey(parent))
         {
             dynamicLocations[parent] = new List<DynamicPointChunkHolder>();
-            dynamicLocations[parent].Add(new DynamicPointChunkHolder(parent, Color.blue));
+            dynamicLocations[parent].Add(new DynamicPointChunkHolder(parent, type.ToColor()));
         }
 
         if (dynamicLocations[parent].Last().counter >= MAX_POINTS_IN_CHUNK - 1)
         {
-            dynamicLocations[parent].Add(new DynamicPointChunkHolder(parent, Color.blue));
+            dynamicLocations[parent].Add(new DynamicPointChunkHolder(parent, type.ToColor()));
         }
         var lastChunk = dynamicLocations[parent].Last();
         lastChunk.points[lastChunk.counter] = loc;
