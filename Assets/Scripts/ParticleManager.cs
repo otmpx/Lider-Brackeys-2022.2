@@ -84,14 +84,18 @@ public class ParticleManager : MonoBehaviour
     public static readonly int TIME_SHADER_PROPERTY = Shader.PropertyToID("_Times");
 
     [Header("Testing variables")]
-    public int testParticles = 10000;
+    public int testBunches = 10000;
     public float regionSize = 10f;
 
     public const int MAX_POINTS_IN_CHUNK = 1023;
     //public const int MAX_POINTS_IN_BUFFER = 10_000_000; //Hehe big number
     //public const int MAX_POINTS_IN_BUFFER = 16777216; //OR 8 388 608
     //public const int MAX_POINTS_IN_BUFFER = 4_193_856;
+
+    public const int BASE_POINTS_IN_BUFFER = 4_096;
     public const int MAX_POINTS_IN_BUFFER = 65536;
+    //public readonly static int MAX_POINTS_IN_BUFFER = (int)Mathf.Pow(BASE_POINTS_IN_BUFFER, 2);
+
     // Dispatch number of thread groups cant go over 65535, so may need to use array unpacking for indexing
 
 
@@ -112,6 +116,7 @@ public class ParticleManager : MonoBehaviour
     private static readonly int CURRENT_POINTS_KEY = Shader.PropertyToID("currPointCount");
     private static readonly int NEW_ADD_BUFFER_KEY = Shader.PropertyToID("newAdds");
     private static readonly int STATIC_POINTS_BUFFER_KEY = Shader.PropertyToID("particles");
+    private static readonly int DIMENSION_SIZE_KEY = Shader.PropertyToID("dimensionSize");
 
     private void Awake()
     {
@@ -131,7 +136,7 @@ public class ParticleManager : MonoBehaviour
         InitComputeShader();
 
 #if UNITY_EDITOR
-        SpawnTest(testParticles);
+        //SpawnTest(testBunches);
 #endif
     }
 
@@ -201,7 +206,6 @@ public class ParticleManager : MonoBehaviour
         //{
         //    //DO NOT USE LINQ HERE BECAUSE IT RUNS A LOT OF GC.ALLOC
         //    //var arr = staticChunk.points.Select((point => Matrix4x4.TRS(point, Quaternion.identity, scaleRef))).ToArray();
-        //    Graphics.DrawMeshInstanced(particleMesh, 0, particleMaterial, staticChunk.pointMats, staticChunk.pointMats.Length, staticChunk.propBlock);
         //}
 
         Graphics.DrawMeshInstancedIndirect(particleMesh, 0, indirectMaterial, new Bounds(Vector3.zero, Vector3.one * 100), argsBuffer);
@@ -234,8 +238,18 @@ public class ParticleManager : MonoBehaviour
 
         int numGroupsX = numIterationsX / threadGroupSizes.x;
         int numGroupsY = numIterationsY / threadGroupSizes.y;
-        int numGroupsZ = numIterationsZ / threadGroupSizes.y;
+        int numGroupsZ = numIterationsZ / threadGroupSizes.z;
 
+        cs.Dispatch(kernelIndex, numGroupsX, numGroupsY, numGroupsZ);
+    }
+
+
+    public static void Dispatch(ComputeShader cs, int numIterationsX, int numIterationsY = 1, int numIterationsZ = 1, int kernelIndex = 0)
+    {
+        Vector3Int threadGroupSizes = GetThreadGroupSizes(cs, kernelIndex);
+        int numGroupsX = Mathf.CeilToInt(numIterationsX / (float)threadGroupSizes.x);
+        int numGroupsY = Mathf.CeilToInt(numIterationsY / (float)threadGroupSizes.y);
+        int numGroupsZ = Mathf.CeilToInt(numIterationsZ / (float)threadGroupSizes.z);
         cs.Dispatch(kernelIndex, numGroupsX, numGroupsY, numGroupsZ);
     }
 
@@ -243,10 +257,25 @@ public class ParticleManager : MonoBehaviour
 
     public void SpawnTest(int toSpawn)
     {
-        for (int i = 0; i < toSpawn; i++)
+        //for (int i = 0; i < toSpawn; i++)
+        //{
+        //    AddParticle(Random.insideUnitSphere * regionSize);
+        //}
+
+
+        for (int j = 0; j < toSpawn; j++)
         {
-            AddParticle(Random.insideUnitSphere * regionSize);
+            StaticPointDef[] pointsToAdd = new StaticPointDef[ParticleManager.instance.shotsPerInterval];
+            for (int i = 0; i < ParticleManager.instance.shotsPerInterval; i++)
+            {
+                pointsToAdd[i] = ParticleManager.GetPointDef(Random.insideUnitSphere * regionSize, PointType.Static);
+            }
+
+            AddParticleGroup(pointsToAdd);
+
         }
+
+
     }
 
 
@@ -260,8 +289,29 @@ public class ParticleManager : MonoBehaviour
 
         cs.SetInt(CURRENT_POINTS_KEY, instance.currentTotalPoints);
         cs.SetInt(NUM_POINTS_TO_ADD_KEY, newPoints.Length);
+        cs.SetInt(DIMENSION_SIZE_KEY, BASE_POINTS_IN_BUFFER);
         instance.newPointsBuffer.SetData(newPoints);
-        DispatchSafe(cs, MAX_POINTS_IN_BUFFER);
+
+        DispatchSafe(cs, MAX_POINTS_IN_BUFFER, MAX_POINTS_IN_BUFFER);
+
+        //DispatchSafe(cs, BASE_POINTS_IN_BUFFER, BASE_POINTS_IN_BUFFER, 1, ADD_POINTS_KERNEL);
+
+        //int 
+
+        //Vector3Int threadGroupSizes = GetThreadGroupSizes(cs, ADD_POINTS_KERNEL);
+        ////#if UNITY_EDITOR
+        ////        if (numIterationsX % threadGroupSizes.x != 0 ||
+        ////             numIterationsY % threadGroupSizes.y != 0 ||
+        ////             numIterationsZ % threadGroupSizes.z != 0)
+        ////            throw new System.Exception("Hey man your iterations isnt divisible by the thread");
+        ////#endif
+
+        //int numGroupsX = numIterationsX / threadGroupSizes.x;
+        //int numGroupsY = numIterationsY / threadGroupSizes.y;
+        //int numGroupsZ = numIterationsZ / threadGroupSizes.y;
+
+        //cs.Dispatch(ADD_POINTS_KERNEL, numGroupsX, numGroupsY, numGroupsZ);
+
 
         //Ensure that this doesnt just randomly get offset (might just skip points if it does) (compute buffer doesnt run)
         instance.currentTotalPoints += newPoints.Length;

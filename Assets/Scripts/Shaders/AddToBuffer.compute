@@ -13,17 +13,21 @@ int numPoints2Add;
 RWStructuredBuffer<StaticPointDef> particles;
 int currPointCount;
 
+int dimensionSize;
+
 
 //We define our index as one massive buffer so using only one dimension is good for parrellel
 //If we defined our indeces as 2d uv coords, would use [numthreads(8, 8, 1)]
 //[numthreads(64, 4, 1)] // might use this for multiple indexing of the newAdds
-[numthreads(64, 1, 1)]
+[numthreads(16, 16, 1)]
 void AddPoints(uint3 id : SV_DispatchThreadID)
 {
 	uint i = id.x;
+	//uint i = id.y * dimensionSize + id.x;
+	//uint i = id.x * dimensionSize + id.y;
 	//uint j = id.y;
 	//if (i < currPointCount || i> currPointCount + numPoints2Add || j > numPoints2Add -1) 
-	if (i < currPointCount || i> currPointCount + numPoints2Add -1)
+	if (i < currPointCount || i> currPointCount + numPoints2Add - 1)
 	{
 		return;
 	}
