@@ -7,29 +7,62 @@ namespace Enemy
 {
     public class Skeleton : Actor
     {
+        private Transform[] children;
+        public Transform lookAt;
         [HideInInspector] public NavMeshAgent agent;
         public float distToPlayer;
         public float killRange;
         public bool isAggro = false;
 
+        public int soundTriggerPoint = 10;
+        public int aggroTriggerPoint = 150;
+        public float chaseDur = 10f;
+
         protected override void Awake()
         {
             base.Awake();
+            children = GetComponentsInChildren<Transform>();
             agent = GetComponent<NavMeshAgent>();
+            //Player.fireEvent += Activate;
+            Player.fireEvent += DetectTriggerPoints;
         }
-
+        private void OnDisable()
+        {
+            //Player.fireEvent -= Activate;
+            Player.fireEvent -= DetectTriggerPoints;
+        }
         protected override void Start()
         {
             base.Start();
             currentState = new Idle(this);
             currentState.OnEnter();
         }
-
         protected override void Update()
         {
             base.Update();
             targetPos = Player.Instance.transform.position;
             distToPlayer = (targetPos - transform.position).magnitude;
+        }
+        //void Activate()
+        //{
+        //    if (currentState is null) return;
+        //    currentState = new Wake(this);
+        //    currentState.OnEnter();
+        //}
+        void DetectTriggerPoints()
+        {
+            if (!isAggro && ParticleManager.GetTotalPointsOnObjects(children) >= soundTriggerPoint)
+            {
+                // Play sound effect
+            }
+            if (ParticleManager.GetTotalPointsOnObjects(children) >= aggroTriggerPoint)
+                isAggro = true;
+        }
+        public void Respawn()
+        {
+            SpawnDirector.instance.SpawnEnemy();
+            ParticleManager.RemoveDynamicGO(transform);
+            Destroy(gameObject);
         }
     }
 
@@ -42,11 +75,6 @@ namespace Enemy
             skeleton = daddy;
         }
 
-        public override void OnEnter()
-        {
-            base.OnEnter();
-        }
-
         public override void Update()
         {
             base.Update();
@@ -54,7 +82,7 @@ namespace Enemy
             age -= Time.deltaTime;
             if (age <= 0)
             {
-                sm.ChangeState(new Chase(skeleton));
+                sm.ChangeState(new Idle(skeleton));
             }
         }
 
@@ -83,6 +111,7 @@ namespace Enemy
 
     public class Chase : BaseEnemyState
     {
+        float timer;
         public Chase(Skeleton daddy) : base(daddy) { }
 
         public override void OnEnter()
@@ -99,6 +128,9 @@ namespace Enemy
             skeleton.agent.SetDestination(skeleton.targetPos);
             if (skeleton.distToPlayer < skeleton.killRange)
                 skeleton.ChangeState(new Attack(skeleton));
+            timer += Time.deltaTime;
+            if (timer > skeleton.chaseDur)
+                skeleton.ChangeState(new Despawn(skeleton));
         }
 
         public override void OnExit()
@@ -114,19 +146,70 @@ namespace Enemy
         public Attack(Skeleton daddy) : base(daddy)
         {
             isTimed = true;
-            age = 0.6f;
+            age = 2f;
         }
         public override void OnEnter()
         {
             base.OnEnter();
-            // Face camera towards enemy
-            skeleton.anim.CrossFadeInFixedTime(Actor.MeleeKey, transitionDur);
+            skeleton.transform.rotation = Quaternion.LookRotation(skeleton.targetDir);
+            if (!(Player.Instance.currentState is Damaged))
+                Player.Instance.ChangeState(new Damaged(Player.Instance, skeleton));
+            skeleton.anim.CrossFadeInFixedTime(Actor.BiteKey, transitionDur);
         }
-        public override void Update()
+        public override void OnExit()
         {
-            base.Update();
-            skeleton.transform.rotation = Quaternion.Lerp(skeleton.transform.rotation, Quaternion.LookRotation(skeleton.targetDir), Mathf.Clamp01(1 - age / 0.3f));
-            // Do some shit with camera and jumpscares i guess
+            base.OnExit();
+            LevelDirector.instance.ReloadLevel();
         }
     }
+    //public class Wake : BaseEnemyState
+    //{
+    //    public Wake(Skeleton daddy) : base(daddy)
+    //    {
+    //        isTimed = true;
+    //        age = 2f;
+    //    }
+    //    public override void OnEnter()
+    //    {
+    //        base.OnEnter();
+    //        skeleton.anim.PlayInFixedTime(Actor.WakeKey);
+    //    }
+    //}
+    public class Despawn : BaseEnemyState
+    {
+        public Despawn(Skeleton daddy) : base(daddy)
+        {
+            isTimed = true;
+            age = 1f;
+        }
+        public override void OnEnter()
+        {
+            base.OnEnter();
+            skeleton.anim.CrossFadeInFixedTime(Actor.DieKey, transitionDur);
+        }
+        public override void OnExit()
+        {
+            base.OnExit();
+            skeleton.Respawn();
+        }
+    }
+    //public class Die : BaseEnemyState
+    //{
+    //    public Die(Skeleton daddy) : base(daddy)
+    //    {
+    //        isTimed = true;
+    //        age = 1f;
+    //    }
+    //    public override void OnEnter()
+    //    {
+    //        base.OnEnter();
+    //        skeleton.anim.CrossFadeInFixedTime(Actor.DieKey, transitionDur);
+    //    }
+    //    public override void OnExit()
+    //    {
+    //        base.OnExit();
+    //        ParticleManager.RemoveDynamicGO(skeleton.transform);
+    //        Object.Destroy(skeleton);
+    //    }
+    //}
 }

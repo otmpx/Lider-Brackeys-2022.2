@@ -13,6 +13,6 @@ public class UI : MonoBehaviour
     }
     private void Update()
     {
-        levelCounter.text = $"{LevelDirector.Instance.coinsCollected} / {LevelDirector.Instance.coinsRequired}";
+        levelCounter.text = $"{LevelDirector.instance.coinsCollected} / {LevelDirector.instance.coinsRequired}";
     }
 }

@@ -39,6 +39,7 @@ public class Actor : StateMachine
     public static readonly int CoomKey = Animator.StringToHash("Coom");
     public static readonly int CombustKey = Animator.StringToHash("Combust");
     public static readonly int SummonKey = Animator.StringToHash("Summon");
+    public static readonly int BiteKey = Animator.StringToHash("Bite");
 
     #endregion
 

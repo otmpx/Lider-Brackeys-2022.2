@@ -1,3 +1,4 @@
+using Enemy;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -60,10 +61,33 @@ public class Move : PlayerState
 }
 public class Damaged : PlayerState
 {
-    public Damaged(Player sm) : base(sm) { }
-    //public override void OnEnter()
-    //{
-    //    base.OnEnter();
-    //    player.headBob.m_FrequencyGain = 0;
-    //}
+    float shootAfter = 0.25f;
+    bool shot = false;
+    readonly Skeleton target;
+    public Damaged(Player sm, Skeleton _target) : base(sm)
+    {
+        target = _target;
+    }
+    public override void OnEnter()
+    {
+        base.OnEnter();
+        player.disableShooting = true;
+        player.deathCam.LookAt = target.lookAt;
+        player.deathCam.Priority = 11;
+    }
+    public override void Update()
+    {
+        base.Update();
+        shootAfter -= Time.deltaTime;
+        if (shootAfter < 0 && !shot)
+        {
+            shot = true;
+            player.LaunchPoints();
+        }
+    }
+    public override void FixedUpdate()
+    {
+        base.FixedUpdate();
+        player.rb.velocity = Vector3.zero;
+    }
 }

@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Intro screen/Intro.unity
     guid: 2e4321c69723a214289e7a981fd39546
   - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: e821221155c53d345a7d1ff3e65f8678
+  - enabled: 1
     path: Assets/Scenes/Crossroads.unity
     guid: 64fb047cda4a445b79d2e6d5f74f2284
   - enabled: 1
@@ -21,17 +24,17 @@ EditorBuildSettings:
     path: Assets/Scenes/Jumpscare.unity
     guid: fb36861b341b77d4696d96b81f83a14e
   - enabled: 1
-    path: Assets/Scenes/Skirmish.unity
-    guid: 1d440a265b20b409a84e08f18b92e039
-  - enabled: 1
     path: Assets/Scenes/Barracks.unity
     guid: 364b6e58585fe184a93a5a548f77b1d0
   - enabled: 1
-    path: Assets/Scenes/Church.unity
-    guid: a8fc97d2272a25d489dc38228bed836a
+    path: Assets/Scenes/Skirmish.unity
+    guid: 1d440a265b20b409a84e08f18b92e039
   - enabled: 1
     path: Assets/Scenes/Village.unity
     guid: 8e50f283473098d4c818a4fc957d29b5
+  - enabled: 1
+    path: Assets/Scenes/Church.unity
+    guid: a8fc97d2272a25d489dc38228bed836a
   - enabled: 0
     path: Assets/Scenes/Test.unity
     guid: d977252e4f3ade04cb70637d7ff6a14d

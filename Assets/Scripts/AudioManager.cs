@@ -1,43 +1,35 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.iOS;
 using UnityEngine;
 using UnityEngine.Audio;
 
 
 public class AudioManager : MonoBehaviour
 {
-    public static AudioManager Instance;
-    [Header("Audio")] public AudioSource soundSource;
-    public AudioSource musicSource;
-    public AudioSource secondarySource;
-    public AudioMixer masterMixer;
+    public static AudioManager instance;
+    public AudioMixer mixer;
 
-    [Header("Music Tracks")] public AudioClip themeLoop;
-    public AudioClip bossLoop1;
-    public AudioClip bossLoop2;
-    public AudioClip bossLoop3;
-    public AudioClip endSong;
+    [Header("Audio")]
+    public AudioSource[] musicSources;
+    public AudioSource sfxSource;
+    public float sfxPitchVariance = 0.1f;
 
-    [Header("Global SFX")] public AudioClip wrongdoorSound;
-    public AudioClip correctdoorSound;
-    public AudioClip usegraveSound;
+    [Header("Music Tracks")]
+    public AudioClip[] lobbyTheme;
+
+    [Header("Global SFX")]
     public AudioClip deathSound;
-    public AudioClip emotionalDamage;
-
-
-    public SoundCard[] ambientSounds;
-    public SoundCard testCard;
-
-    private float randomNoiseTimer;
-    private float randomNoiseLerp;
-
+    public AudioClip buttonPressSound, buttonAdjustSound;
 
     private void Awake()
     {
-        if (Instance == null)
+        if (instance == null)
         {
-            Instance = this;
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+            SetMusicVol(Settings.musicVol);
+            SetSfxVol(Settings.soundVol);
         }
         else
         {
@@ -45,33 +37,24 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
-        DontDestroyOnLoad(gameObject);
     }
-    public void PlayMusic(AudioClip track)
+    #region Music
+    #endregion
+    #region Sound
+    public void PlaySFX(AudioClip clip, float volume = 1, float pitch = 1)
     {
-        if (musicSource.clip != track && track != null)
-        {
-            musicSource.clip = track;
-            musicSource.Play();
-        }
+        sfxSource.pitch = pitch + Random.Range(-sfxPitchVariance, sfxPitchVariance);
+        sfxSource.PlayOneShot(clip, volume);
     }
-
-    public void PlaySound(AudioClip sound)
+    #endregion
+    public void SetMusicVol(float value)
     {
-        if (sound == null) return;
-        
-        if (soundSource.clip != sound)
-        {
-            soundSource.clip = sound;
-            soundSource.Play();
-        }
-        else if (!soundSource.isPlaying)
-        {
-            soundSource.Play();
-        }
+        float linear2dB = value == 0 ? -80f : 20f * Mathf.Log10(value);
+        mixer.SetFloat("musicVol", linear2dB);
     }
-
-    public void PlayRandomSound()
+    public void SetSfxVol(float value)
     {
+        float linear2dB = value == 0 ? -80f : 20f * Mathf.Log10(value);
+        mixer.SetFloat("sfxVol", linear2dB);
     }
 }

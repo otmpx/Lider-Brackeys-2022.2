@@ -11,15 +11,22 @@ public class Jumpscare : MonoBehaviour
 
     public float timeBeforeActivation = 3f;
     bool active = false;
+
+    public float timeBeforeNextScene = 2f;
+    bool transition = false;
     private void Update()
     {
-        if (LevelDirector.Instance.coinsCollected > 0)
+        if (LevelDirector.instance.coinsCollected > 0 && !active)
         {
             // Cut music here
             timeBeforeActivation -= Time.deltaTime;
+            Player.Instance.disableShooting = true;
         }
-        if (timeBeforeActivation < 0 && !Player.Instance.isShooting)
+        if (timeBeforeActivation < 0 && !active && !Input.GetKey(KeyCode.Mouse0))
+        {
+            Player.Instance.disableShooting = false;
             active = true;
+        }
 
         if (!active) return;
         transform.position = Player.Instance.vCamFollow.position + Camera.main.transform.forward * distFromPlayer;
@@ -33,6 +40,12 @@ public class Jumpscare : MonoBehaviour
         {
             // Play jumpscare sound and effects
             Player.Instance.disableShooting = true;
+            transition = true;
         }
+
+        if (!transition) return;
+        timeBeforeNextScene -= Time.deltaTime;
+        if (timeBeforeNextScene < 0)
+            LevelDirector.instance.AdvanceLevel();
     }
 }

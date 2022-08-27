@@ -49,8 +49,8 @@ public class SpawnDirector : MonoBehaviour
         int rand = Random.Range(0, spawnPos.Length);
         Player player = Instantiate(playerPrefab, spawnPos[rand].position, Quaternion.identity, transform.parent).GetComponent<Player>();
         // Sets initial rotation to the transform rotation of spawnPos
-        Settings.instance.povController.m_HorizontalAxis.Value = spawnPos[rand].localEulerAngles.y;
-        Settings.instance.povController.m_VerticalAxis.Value = 0;
+        LevelDirector.instance.povController.m_HorizontalAxis.Value = spawnPos[rand].localEulerAngles.y;
+        LevelDirector.instance.povController.m_VerticalAxis.Value = 0;
     }
     public void SpawnEnemy()
     {

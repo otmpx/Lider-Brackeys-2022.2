@@ -10,23 +10,22 @@ public class Coin : MonoBehaviour
     private void Awake()
     {
         children = GetComponentsInChildren<Transform>();
-        Player.fireEvent += CheckEnoughPoints;
+        Player.fireEvent += DetectTriggerPoints;
 
     }
 
     private void OnDestroy()
     {
-        Player.fireEvent -= CheckEnoughPoints;
+        Player.fireEvent -= DetectTriggerPoints;
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-            PickupCoin();
-    }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.CompareTag("Player"))
+    //        PickupCoin();
+    //}
 
-
-    private void CheckEnoughPoints()
+    private void DetectTriggerPoints()
     {
         if(ParticleManager.GetTotalPointsOnObjects(children) >= triggerPoint)
             PickupCoin();
@@ -35,7 +34,7 @@ public class Coin : MonoBehaviour
     public void PickupCoin()
     {
         // Play pickup sound effect
-        LevelDirector.Instance.RegisterCoin();
+        LevelDirector.instance.RegisterCoin();
         ParticleManager.RemoveDynamicGO(transform);
         Destroy(gameObject);
     }
