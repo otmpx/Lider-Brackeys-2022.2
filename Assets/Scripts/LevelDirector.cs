@@ -74,6 +74,7 @@ public class LevelDirector : MonoBehaviour
     void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
