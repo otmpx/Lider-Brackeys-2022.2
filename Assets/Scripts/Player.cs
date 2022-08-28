@@ -18,7 +18,7 @@ public class Player : Actor
     public static Player Instance;
 
     [HideInInspector] public float lastFired = 0f;
-    public float FIRE_RATE_INTERVAL = 0.1f;
+    public static float FIRE_RATE_INTERVAL = 1.5f;
 
     Camera cam;
 
@@ -80,6 +80,7 @@ public class Player : Actor
             gun.LaunchPoints();
             lastFired = Time.time;
             gun.scanCard.PlaySecondary(gun.sound);
+            UI.Instance.TriggerCrosshair();
         }
     }
 

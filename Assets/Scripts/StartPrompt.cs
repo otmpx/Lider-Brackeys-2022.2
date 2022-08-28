@@ -16,6 +16,7 @@ public class StartPrompt : MonoBehaviour
         if (!showControls)
             controls.gameObject.SetActive(false);
         text.text = LevelDirector.CurrentRoom.levelPrompt;
+        UI.Instance.alpha = 0;
     }
     private void Update()
     {
@@ -34,10 +35,13 @@ public class StartPrompt : MonoBehaviour
             textA.a = Mathf.Lerp(1, 0, Mathf.Clamp01((Time.time - startTime) / fadeoutDur));
             text.color = textA;
 
+            UI.Instance.alpha = Mathf.Lerp(0, 1, Mathf.Clamp01((Time.time - startTime) / fadeoutDur));
+
             if (Time.time - startTime > fadeoutDur)
             {
                 controls.gameObject.SetActive(false);
                 text.gameObject.SetActive(false);
+                UI.Instance.alpha = 1;
             }
         }
     }

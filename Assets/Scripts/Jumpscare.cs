@@ -40,7 +40,10 @@ public class Jumpscare : MonoBehaviour
         if (Player.Instance.isShooting && !transition)
         {
             // Play jumpscare sound and effects
-            AudioManager.instance.PlaySFX(jumpscareClip);
+            //AudioManager.instance.PlaySFX(jumpscareClip);
+            AudioManager.instance.sfxSource.pitch = 1;
+            AudioManager.instance.sfxSource.clip = jumpscareClip;
+            AudioManager.instance.sfxSource.Play();
             Player.Instance.disableShooting = true;
             transition = true;
         }
