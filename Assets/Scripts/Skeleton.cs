@@ -14,10 +14,10 @@ namespace Enemy
         public float killRange;
         public bool isAggro = false;
 
-        public int soundTriggerPoint = 10;
         public int aggroTriggerPoint = 150;
         public float chaseDur = 10f;
 
+        public SoundCard aggroCard, attackCard;
         protected override void Awake()
         {
             base.Awake();
@@ -51,12 +51,11 @@ namespace Enemy
         //}
         void DetectTriggerPoints()
         {
-            if (!isAggro && ParticleManager.GetTotalPointsOnObjects(children) >= soundTriggerPoint)
+            if (!isAggro && ParticleManager.GetTotalPointsOnObjects(children) >= aggroTriggerPoint)
             {
-                // Play sound effect
-            }
-            if (ParticleManager.GetTotalPointsOnObjects(children) >= aggroTriggerPoint)
+                aggroCard.Play(this);
                 isAggro = true;
+            }
         }
         public void Respawn()
         {
@@ -155,6 +154,8 @@ namespace Enemy
             if (!(Player.Instance.currentState is Damaged))
                 Player.Instance.ChangeState(new Damaged(Player.Instance, skeleton));
             skeleton.anim.CrossFadeInFixedTime(Actor.BiteKey, transitionDur);
+
+            skeleton.attackCard.Play(skeleton);
         }
         public override void OnExit()
         {
@@ -180,12 +181,12 @@ namespace Enemy
         public Despawn(Skeleton daddy) : base(daddy)
         {
             isTimed = true;
-            age = 1f;
+            age = 15f;
         }
         public override void OnEnter()
         {
             base.OnEnter();
-            skeleton.anim.CrossFadeInFixedTime(Actor.DieKey, transitionDur);
+            skeleton.anim.CrossFadeInFixedTime(Actor.FlattenKey, transitionDur);
         }
         public override void OnExit()
         {

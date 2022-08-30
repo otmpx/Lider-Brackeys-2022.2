@@ -9,13 +9,13 @@ using UnityEngine.SceneManagement;
 
 public static class LidarExtensions
 {
-
     public static Color ToColor(this PointType type) => type switch
     {
         PointType.Static => Color.white,
-        PointType.Dynamic => Color.cyan,
+        PointType.Dynamic => Color.blue,
         PointType.Enemy => Color.red,
-        PointType.Objective => new Color(1, 1, 0, 1)
+        PointType.Objective => Color.yellow,
+        _ => throw new NotImplementedException()
     };
 }
 
@@ -27,6 +27,9 @@ public class RoomSettings
     public string levelPrompt;
     public int enemySpawns;
     public int objectiveSpawns;
+    public MusicTheme levelTheme;
+    [Range(0, 1)]
+    public float musicVol;
 }
 public class LevelDirector : MonoBehaviour
 {
@@ -40,8 +43,12 @@ public class LevelDirector : MonoBehaviour
     public int roomId;
     public static RoomSettings CurrentRoom => instance.allRooms[instance.roomId];
     [HideInInspector] public CinemachinePOV povController;
+    [HideInInspector] public CinemachineBasicMultiChannelPerlin headBob;
+
     public PauseUI pauseScreen;
     [HideInInspector] public bool paused = false;
+
+    public AudioClip objectiveSound;
     private void Awake()
     {
         if (instance == null)
@@ -49,6 +56,7 @@ public class LevelDirector : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(instance);
             povController = instance.vCam.GetComponentPipeline().First(cb => cb is CinemachinePOV) as CinemachinePOV;
+            headBob = instance.vCam.GetComponentPipeline().First(hb => hb is CinemachineBasicMultiChannelPerlin) as CinemachineBasicMultiChannelPerlin;
             povController.m_HorizontalAxis.m_SpeedMode = AxisState.SpeedMode.InputValueGain;
             povController.m_VerticalAxis.m_SpeedMode = AxisState.SpeedMode.InputValueGain;
             SetSensitivity();
@@ -69,19 +77,17 @@ public class LevelDirector : MonoBehaviour
     void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         coinsCollected = 0;
-        //currentRoomIndex = SceneManager.GetActiveScene().buildIndex;
     }
 
 
     public void ReloadLevel()
     {
-        // RoomSaver.instance.SaveRoom();
-        //FixedRoomSaver.instance.SaveRoom(SceneManager.GetActiveScene());
         if (paused)
             PauseUnpause();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -95,13 +101,20 @@ public class LevelDirector : MonoBehaviour
     public void RegisterCoin()
     {
         coinsCollected++;
+        AudioManager.instance.PlaySFX(objectiveSound);
         if (coinsCollected >= coinsRequired)
             AdvanceLevel();
     }
     public void AdvanceLevel()
     {
         roomId++;
-        SceneManager.LoadScene(CurrentRoom.sceneName);
+        if (roomId > allRooms.Length)
+        {
+            SceneManager.LoadScene("End");
+            Destroy(gameObject);
+        }
+        else
+            SceneManager.LoadScene(CurrentRoom.sceneName);
     }
     public void SetSensitivity()
     {

@@ -6,23 +6,25 @@ using Cinemachine;
 
 public class Player : Actor
 {
-    public float moveSpeed;
+    public float walkSpeed;
+    public float runSpeed;
     public Transform vCamFollow;
     public CinemachineVirtualCamera deathCam;
 
+    [HideInInspector] public bool isRunning;
     [HideInInspector] public bool isShooting;
     [HideInInspector] public bool disableShooting = false;
-
-    //[HideInInspector] public CinemachineBasicMultiChannelPerlin headBob;
 
     public static Player Instance;
 
     [HideInInspector] public float lastFired = 0f;
-    public float FIRE_RATE_INTERVAL = 0.1f;
+    public static float FIRE_RATE_INTERVAL = 1.5f;
 
     Camera cam;
 
     public LidarGun gun;
+    public SoundCard footstepsCard;
+    public AudioClip deathClip;
 
     protected override void Awake()
     {
@@ -32,7 +34,6 @@ public class Player : Actor
         cam = LevelDirector.instance.cam;
         LevelDirector.instance.vCam.Follow = vCamFollow;
         Cursor.lockState = CursorLockMode.Locked;
-        gun = GetComponent<LidarGun>();
     }
     protected override void Start()
     {
@@ -48,6 +49,7 @@ public class Player : Actor
             moveDir = transform.TransformDirection(inputDir).normalized;
         else
             moveDir = Vector3.zero;
+        isRunning = Input.GetAxisRaw("Vertical") > 0;
         if (disableShooting)
             isShooting = false;
         else
@@ -77,6 +79,8 @@ public class Player : Actor
         {
             gun.LaunchPoints();
             lastFired = Time.time;
+            gun.scanCard.PlaySecondary(gun.sound);
+            UI.Instance.TriggerCrosshair();
         }
     }
 

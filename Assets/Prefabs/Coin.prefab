@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8431609352504444873}
   m_Layer: 3
   m_Name: Coin
-  m_TagString: Untagged
+  m_TagString: Objective
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5345506fdc1a5a4488a23dc71911dc9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  triggerPoint: 500
+  triggerPoint: 300
 --- !u!95 &8431609352504444875
 Animator:
   serializedVersion: 3
@@ -75,7 +75,7 @@ SphereCollider:
   m_GameObject: {fileID: 8431609352504444868}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.42309755
   m_Center: {x: -0.000000059604645, y: -0.00000014901161, z: -0.00000029802322}
@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 8313769294182856715}
   m_Layer: 9
   m_Name: Mesh
-  m_TagString: Untagged
+  m_TagString: Objective
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

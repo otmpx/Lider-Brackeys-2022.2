@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2968437454366818628}
   m_Layer: 9
   m_Name: character_skeleton_minion_armRight
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -111,7 +111,7 @@ GameObject:
   - component: {fileID: 6640355400731197750}
   m_Layer: 9
   m_Name: character_skeleton_minion_eyes
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -206,7 +206,7 @@ GameObject:
   - component: {fileID: 1859448965019061911}
   m_Layer: 9
   m_Name: character_skeleton_minion_head
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -400,7 +400,7 @@ GameObject:
   - component: {fileID: 349867771347834628}
   m_Layer: 9
   m_Name: character_skeleton_minion_jaw
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -496,7 +496,7 @@ GameObject:
   - component: {fileID: 5329290719844904575}
   m_Layer: 9
   m_Name: character_skeleton_minion
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -592,7 +592,7 @@ GameObject:
   - component: {fileID: 6645822205217665266}
   m_Layer: 9
   m_Name: armRight
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -624,7 +624,7 @@ GameObject:
   - component: {fileID: 6645822205225754193}
   m_Layer: 9
   m_Name: handSlotRight
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -654,7 +654,7 @@ GameObject:
   - component: {fileID: 6645822205832752562}
   m_Layer: 9
   m_Name: armLeft
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -686,7 +686,7 @@ GameObject:
   - component: {fileID: 6645822205852694203}
   m_Layer: 9
   m_Name: KayKit Animated Character
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -785,9 +785,10 @@ MonoBehaviour:
   distToPlayer: 0
   killRange: 4.5
   isAggro: 0
-  soundTriggerPoint: 10
-  aggroTriggerPoint: 100
-  chaseDur: 10
+  aggroTriggerPoint: 150
+  chaseDur: 7.5
+  aggroCard: {fileID: 11400000, guid: ebc0a2dcbab047948ad1e5cc1d32470b, type: 2}
+  attackCard: {fileID: 11400000, guid: 0e2c4ff48b9a1a7478e6c6749eb98ec6, type: 2}
 --- !u!195 &6645822205875947785
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -798,7 +799,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 3
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 350
@@ -917,7 +918,7 @@ GameObject:
   - component: {fileID: 6645822206010434001}
   m_Layer: 9
   m_Name: handSlotLeft
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -947,7 +948,7 @@ GameObject:
   - component: {fileID: 6645822206096134556}
   m_Layer: 9
   m_Name: Body
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -981,7 +982,7 @@ GameObject:
   - component: {fileID: 6645822206111905324}
   m_Layer: 9
   m_Name: Head
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1015,7 +1016,7 @@ GameObject:
   - component: {fileID: 2966791189851380706}
   m_Layer: 9
   m_Name: character_skeleton_minion_armLeft
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

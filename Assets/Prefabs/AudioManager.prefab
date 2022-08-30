@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3462412169146760621}
   - component: {fileID: 3462412169146760608}
   - component: {fileID: 3462412169146760623}
-  - component: {fileID: 3235892265467293825}
+  - component: {fileID: 4677062721967638288}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -49,14 +49,21 @@ MonoBehaviour:
   mixer: {fileID: 24100000, guid: f4954f8ca2bbb8548903404e21ac98ee, type: 2}
   musicSources:
   - {fileID: 3462412169146760623}
-  - {fileID: 3235892265467293825}
+  - {fileID: 4677062721967638288}
   sfxSource: {fileID: 3462412169146760608}
   sfxPitchVariance: 0.1
-  lobbyTheme:
-  - {fileID: 8300000, guid: aa7adf2ffe1b67540bf8924ac17763c8, type: 3}
-  deathSound: {fileID: 8300000, guid: f0bb7b1e1221dd5438ee639b71080412, type: 3}
+  currentTheme: 6
+  menuTheme: {fileID: 8300000, guid: aa7adf2ffe1b67540bf8924ac17763c8, type: 3}
+  forestTheme: {fileID: 8300000, guid: 2687aa88f2609d7499789d985b147244, type: 3}
+  whispersTheme: {fileID: 8300000, guid: 178a5de6dcd1c274aaec33c33a476728, type: 3}
+  echoTheme: {fileID: 8300000, guid: 86738e432eb288840b868ae865645880, type: 3}
+  buildupTheme: {fileID: 8300000, guid: 181b611a496beea429376c87e5ecb3b4, type: 3}
+  suspenseTheme: {fileID: 8300000, guid: 295bf85058d68d146ac15afc1a061dad, type: 3}
+  ringingTheme: {fileID: 8300000, guid: 4749d58791cf1e04b98eac105f01a155, type: 3}
+  fadeDuration: 3
   buttonPressSound: {fileID: 8300000, guid: debc40b7c953906449c119ed7bf5e19d, type: 3}
   buttonAdjustSound: {fileID: 8300000, guid: a849b41b620908a418f379f6ad35d8ff, type: 3}
+  toggle: 0
 --- !u!82 &3462412169146760608
 AudioSource:
   m_ObjectHideFlags: 0
@@ -163,8 +170,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 682675227312942293, guid: f4954f8ca2bbb8548903404e21ac98ee, type: 2}
-  m_audioClip: {fileID: 8300000, guid: aa7adf2ffe1b67540bf8924ac17763c8, type: 3}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
@@ -249,7 +256,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!82 &3235892265467293825
+--- !u!82 &4677062721967638288
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -259,10 +266,10 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -540818338017158441, guid: f4954f8ca2bbb8548903404e21ac98ee, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 2cf7a39167ac73e478e895fe6db2b62c, type: 3}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
   m_Volume: 1
-  m_Pitch: 0
+  m_Pitch: 1
   Loop: 1
   Mute: 0
   Spatialize: 0

@@ -2769,7 +2769,7 @@ GameObject:
   - component: {fileID: 165835249}
   m_Layer: 9
   m_Name: character_skeleton_minion_head
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10343,7 +10343,7 @@ GameObject:
   - component: {fileID: 860931976}
   m_Layer: 9
   m_Name: Head
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10379,8 +10379,9 @@ MonoBehaviour:
   distFromPlayer: 2
   headRotation: 5
   headRotationSpeed: 50
-  timeBeforeActivation: 3
-  timeBeforeNextScene: 2
+  timeBeforeActivation: 5
+  timeBeforeNextScene: 1.5
+  jumpscareClip: {fileID: 8300000, guid: 3608d25abb5824e41ae3821067daad9c, type: 3}
 --- !u!1001 &866285588
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19340,7 +19341,7 @@ GameObject:
   - component: {fileID: 1725274125}
   m_Layer: 9
   m_Name: character_skeleton_minion_eyes
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -22347,7 +22348,7 @@ GameObject:
   - component: {fileID: 1969200412}
   m_Layer: 9
   m_Name: character_skeleton_minion_jaw
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -22,6 +22,7 @@ TagManager:
   - BlueStaticSurface
   - DeflectProjectile
   - DodgeMelee
+  - Objective
   layers:
   - Default
   - TransparentFX
