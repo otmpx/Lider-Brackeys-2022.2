@@ -37,7 +37,7 @@ public class LidarGun : MonoBehaviour
     public void LaunchPoints()
     {
         //Scale initialised at 0
-        StaticPointDef[] pointsToAdd = new StaticPointDef[ParticleManager.instance.shotsPerInterval];
+        Vector4[] pointsToAdd = new Vector4[ParticleManager.instance.shotsPerInterval];
         for (int i = 0; i < ParticleManager.instance.shotsPerInterval; i++)
         {
             var dir = GetRandomTargetDirCircle().normalized;
@@ -62,12 +62,12 @@ public class LidarGun : MonoBehaviour
                 }
                 else
                 {
-                    //pointsToAdd[i] = ParticleManager.GetPointDef(hit.point, PointType.Static);
+                    pointsToAdd[i] = ParticleManager.GetPointDef(hit.point, PointType.Static);
                     ParticleManager.AddParticle(hit.point);
                 }
             }
         }
-        //ParticleManager.AddParticleGroup(pointsToAdd);
+        ParticleManager.AddParticleGroup(pointsToAdd);
         fireEvent?.Invoke();
 
         ShootLasers();

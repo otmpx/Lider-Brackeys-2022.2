@@ -1,50 +1,55 @@
 Shader "Custom/IndirectInstancedSpec"
 {
-	SubShader
+	Properties{
+	_Color("Colour", Color) = (1,1,1,1)
+	}
+
+		SubShader
 	{
-		Tags { "RenderType" = "Transparent" }
-		//Tags { "RenderType" = "Opaque" }
+		//Tags { "RenderType" = "Transparent" }
+		Tags { "RenderType" = "Opaque" }
 		Lighting Off
 			Fog { Mode Off }
 
-		Blend SrcAlpha OneMinusSrcAlpha
+		//Blend SrcAlpha OneMinusSrcAlpha
 		Pass
 		{
 			CGPROGRAM
 			#pragma vertex vert
 			#pragma fragment frag
+			#pragma enable_d3d11_debug_symbols
+			#pragma multi_compile_fwdbase nolightmap nodirlightmap nodynlightmap novertexlight
+			//#pragma multi_compile
+
 
 			#include "UnityCG.cginc"
 
 			struct appdata
 			{
 				float4 vertex : POSITION;
-				float2 uv : TEXCOORD0;
+				//float2 uv : TEXCOORD0;
 			};
 
 			struct v2f
 			{
-				float2 uv : TEXCOORD0;
+				//float2 uv : TEXCOORD0;
 				float4 pos : SV_POSITION;
-				float4 color : COLOR;
+				//PSIZE only supported on opengl not dx11
+				half psize : PSIZE;
 			};
 
-			struct StaticPointDef
-			{
-				float4 posScale;
-				float4 color;
-			};
+			StructuredBuffer<float4> points;
 
-			StructuredBuffer<StaticPointDef> particles;
-
-			v2f vert(appdata v,uint instanceID: SV_InstanceID)
+			//v2f vert(appdata v,uint instanceID: SV_InstanceID)
+			v2f vert(uint instanceID: SV_VertexID)
 			{
 				v2f o;
-				StaticPointDef data = particles[instanceID];
+				float4 posScale = points[instanceID];
 
-				//Scale based on size
-				float3 localPosition = v.vertex.xyz * data.posScale.w;
-				float3 worldPosition = data.posScale.xyz + localPosition;
+				////Scale based on size
+				//float3 localPosition = v.vertex.xyz * posScale.w;
+				//float3 worldPosition = posScale.xyz + localPosition;
+				//float3 worldPosition = float3(0, 0, 0);
 
 				//https://forum.unity.com/threads/what-is-the-equivalent-of-unityobjecttoclippos-inside-shader-graph.809778/
 				// First, the UnityObjectToClipPos() function.That transforms the mesh vertex position from local object space to clip space, as the function implies.It does that by transforming from object to world space, 
@@ -54,17 +59,19 @@ Shader "Custom/IndirectInstancedSpec"
 				//It converts the vertex to world space first, then multiplies by View Project matrix (VP)
 				//o.vertex = UnityObjectToClipPos(v.vertex);
 
-				o.pos = mul(UNITY_MATRIX_VP, float4(worldPosition, 1.0f));
+				o.pos = mul(UNITY_MATRIX_VP, float4(posScale.xyz, 1.0f));
+				//o.pos = UnityObjectToClipPos(float4(posScale.xyz, 1.0f));
+				o.psize = 20;
 
-				o.color = data.color;
-				o.uv = v.uv;
+				//o.uv = v.uv;
 
 				return o;
 			}
+			float4 _Color;
 
 			fixed4 frag(v2f i) : SV_Target
 			{
-				return i.color;
+				return _Color;
 			}
 			ENDCG
 		}

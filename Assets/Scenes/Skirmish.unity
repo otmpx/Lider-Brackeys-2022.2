@@ -9517,6 +9517,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: ParticleManager
       objectReference: {fileID: 0}
+    - target: {fileID: 1252613809704967400, guid: cd4fb2dcb56eb4f79a98f326349611ee, type: 3}
+      propertyPath: testBunches
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1252613809704967400, guid: cd4fb2dcb56eb4f79a98f326349611ee, type: 3}
+      propertyPath: particleMesh
+      value: 
+      objectReference: {fileID: 289301614986012343, guid: 74c7c84e2d4251148922c81ca61dc500, type: 3}
     - target: {fileID: 1252613809704967401, guid: cd4fb2dcb56eb4f79a98f326349611ee, type: 3}
       propertyPath: m_RootOrder
       value: 9

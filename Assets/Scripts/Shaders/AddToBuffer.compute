@@ -6,20 +6,20 @@ struct StaticPointDef {
 	float4 color;
 };
 
-RWStructuredBuffer<StaticPointDef> newAdds;
+RWStructuredBuffer<float4> newAdds;
 int numPoints2Add;
 
 //This is shared with the shader
-RWStructuredBuffer<StaticPointDef> particles;
+RWStructuredBuffer<float4> particles;
 int currPointCount;
 
-int dimensionSize;
+//int dimensionSize;
 
 
 //We define our index as one massive buffer so using only one dimension is good for parrellel
 //If we defined our indeces as 2d uv coords, would use [numthreads(8, 8, 1)]
-//[numthreads(64, 4, 1)] // might use this for multiple indexing of the newAdds
-[numthreads(16, 16, 1)]
+[numthreads(64, 1, 1)] // might use this for multiple indexing of the newAdds
+//[numthreads(16, 16, 1)]
 void AddPoints(uint3 id : SV_DispatchThreadID)
 {
 	uint i = id.x;

@@ -91,9 +91,12 @@ public class ParticleManager : MonoBehaviour
     //public const int MAX_POINTS_IN_BUFFER = 10_000_000; //Hehe big number
     //public const int MAX_POINTS_IN_BUFFER = 16777216; //OR 8 388 608
     //public const int MAX_POINTS_IN_BUFFER = 4_193_856;
+    //public const int MAX_POINTS_IN_BUFFER = 1_000_000; //Hehe big number
 
     public const int BASE_POINTS_IN_BUFFER = 4_096;
-    public const int MAX_POINTS_IN_BUFFER = 65536;
+    //public const int MAX_POINTS_IN_BUFFER = 65536;
+    public int MAX_POINTS = 65536;
+    public static int MAX_POINTS_IN_BUFFER => instance.MAX_POINTS;
     //public readonly static int MAX_POINTS_IN_BUFFER = (int)Mathf.Pow(BASE_POINTS_IN_BUFFER, 2);
 
     // Dispatch number of thread groups cant go over 65535, so may need to use array unpacking for indexing
@@ -142,8 +145,8 @@ public class ParticleManager : MonoBehaviour
 
     void InitComputeShader()
     {
-        staticPointsBuffer = GenerateBuffer<StaticPointDef>(MAX_POINTS_IN_BUFFER);
-        newPointsBuffer = GenerateBuffer<StaticPointDef>(shotsPerInterval);
+        staticPointsBuffer = GenerateBuffer<Vector4>(MAX_POINTS_IN_BUFFER);
+        newPointsBuffer = GenerateBuffer<Vector4>(shotsPerInterval);
 
         pointsCompute.SetBuffer(ADD_POINTS_KERNEL, STATIC_POINTS_BUFFER_KEY, staticPointsBuffer);
 
@@ -157,18 +160,19 @@ public class ParticleManager : MonoBehaviour
         args[3] = (uint)particleMesh.GetBaseVertex(0);
         args[4] = 0; // offset
 
-        StaticPointDef[] particles = new StaticPointDef[shotsPerInterval];
-        for (int i = 0; i < shotsPerInterval; i++)
-        {
-            particles[i] = new StaticPointDef() { posScale = Vector4.zero, color = Color.white };
-        }
+        //StaticPointDef[] particles = new StaticPointDef[MAX_POINTS_IN_BUFFER];
+        //for (int i = 0; i < MAX_POINTS_IN_BUFFER; i++)
+        //{
+        //    particles[i] = new StaticPointDef() { posScale = Vector4.zero, color = Color.white };
+        //}
 
-        staticPointsBuffer.SetData(particles);
+        //staticPointsBuffer.SetData(particles);
 
         argsBuffer = new ComputeBuffer(1, 5 * sizeof(uint), ComputeBufferType.IndirectArguments);
         argsBuffer.SetData(args);
 
-        indirectMaterial.SetBuffer("particles", staticPointsBuffer);
+        //indirectMaterial.SetBuffer("particles", staticPointsBuffer);
+        indirectMaterial.SetBuffer("points", staticPointsBuffer);
     }
 
     void Update()
@@ -210,6 +214,14 @@ public class ParticleManager : MonoBehaviour
 
         //Graphics.DrawMeshInstancedIndirect(particleMesh, 0, indirectMaterial, new Bounds(Vector3.zero, Vector3.one * 100), argsBuffer);
 
+
+    }
+
+    private void OnRenderObject()
+    {
+        indirectMaterial.SetPass(0);
+        indirectMaterial.SetBuffer("points", staticPointsBuffer);
+        Graphics.DrawProceduralNow(MeshTopology.Points, MAX_POINTS_IN_BUFFER, 1);
 
     }
 
@@ -263,17 +275,27 @@ public class ParticleManager : MonoBehaviour
         //}
 
 
-        for (int j = 0; j < toSpawn; j++)
+        //for (int j = 0; j < toSpawn; j++)
+        //{
+        //    //StaticPointDef[] pointsToAdd = new StaticPointDef[ParticleManager.instance.shotsPerInterval];
+        //    Vector4[] pointsToAdd = new Vector4[ParticleManager.instance.shotsPerInterval];
+        //    for (int i = 0; i < ParticleManager.instance.shotsPerInterval; i++)
+        //    {
+        //        pointsToAdd[i] = ParticleManager.GetPointDef(Random.insideUnitSphere * regionSize, PointType.Static);
+        //    }
+
+        //    AddParticleGroup(pointsToAdd);
+
+        //}
+
+
+        Vector4[] pointsToAdd = new Vector4[ParticleManager.instance.MAX_POINTS];
+        for (int i = 0; i < ParticleManager.instance.MAX_POINTS; i++)
         {
-            StaticPointDef[] pointsToAdd = new StaticPointDef[ParticleManager.instance.shotsPerInterval];
-            for (int i = 0; i < ParticleManager.instance.shotsPerInterval; i++)
-            {
-                pointsToAdd[i] = ParticleManager.GetPointDef(Random.insideUnitSphere * regionSize, PointType.Static);
-            }
-
-            AddParticleGroup(pointsToAdd);
-
+            pointsToAdd[i] = ParticleManager.GetPointDef(Random.insideUnitSphere * regionSize, PointType.Static);
         }
+
+        staticPointsBuffer.SetData(pointsToAdd);
 
 
     }
@@ -283,16 +305,16 @@ public class ParticleManager : MonoBehaviour
     /// This is using the new compute shader version and is far faster
     /// </summary>
     /// <param name="locs"></param>
-    public static void AddParticleGroup(StaticPointDef[] newPoints)
+    public static void AddParticleGroup(Vector4[] newPoints)
     {
         var cs = instance.pointsCompute;
 
         cs.SetInt(CURRENT_POINTS_KEY, instance.currentTotalPoints);
         cs.SetInt(NUM_POINTS_TO_ADD_KEY, newPoints.Length);
-        cs.SetInt(DIMENSION_SIZE_KEY, BASE_POINTS_IN_BUFFER);
+        //cs.SetInt(DIMENSION_SIZE_KEY, BASE_POINTS_IN_BUFFER);
         instance.newPointsBuffer.SetData(newPoints);
 
-        DispatchSafe(cs, MAX_POINTS_IN_BUFFER, MAX_POINTS_IN_BUFFER);
+        DispatchSafe(cs, MAX_POINTS_IN_BUFFER);
 
         //DispatchSafe(cs, BASE_POINTS_IN_BUFFER, BASE_POINTS_IN_BUFFER, 1, ADD_POINTS_KERNEL);
 
@@ -372,8 +394,10 @@ public class ParticleManager : MonoBehaviour
         return sumPoints;
     }
 
-    public static StaticPointDef GetPointDef(Vector3 loc, PointType type) =>
-        new StaticPointDef { posScale = new Vector4(loc.x, loc.y, loc.z, instance.particleSize), color = (Vector4)type.ToColor() };
+    //public static StaticPointDef GetPointDef(Vector3 loc, PointType type) =>
+    //    new StaticPointDef { posScale = new Vector4(loc.x, loc.y, loc.z, instance.particleSize), color = (Vector4)type.ToColor() };
+
+    public static Vector4 GetPointDef(Vector3 loc, PointType type) => new Vector4(loc.x, loc.y, loc.z, instance.particleSize);
 
     static ComputeBuffer GenerateBuffer<T>(int size)
     {
