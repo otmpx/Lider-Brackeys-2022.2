@@ -81,7 +81,7 @@ MonoBehaviour:
   - sceneName: Skirmish
     levelPrompt: You can run but you can't hide...
     enemySpawns: 2
-    objectiveSpawns: 4
+    objectiveSpawns: 3
     levelTheme: 5
     musicVol: 0.5
   - sceneName: Church
