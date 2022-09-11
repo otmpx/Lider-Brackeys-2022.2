@@ -61,30 +61,32 @@ MonoBehaviour:
   - sceneName: Jumpscare
     levelPrompt: ...
     enemySpawns: 0
-    objectiveSpawns: 1
+    objectiveSpawns: 2
     levelTheme: 2
     musicVol: 0.2
   - sceneName: Castle
-    levelPrompt: You are not alone...
+    levelPrompt: 'You are not alone...
+
+      Look forward while moving to run.'
     enemySpawns: 1
     objectiveSpawns: 4
     levelTheme: 3
     musicVol: 0.4
   - sceneName: Village
-    levelPrompt: They don't like to be seen...
-    enemySpawns: 2
-    objectiveSpawns: 4
+    levelPrompt: Don't let them catch you...
+    enemySpawns: 1
+    objectiveSpawns: 5
     levelTheme: 4
     musicVol: 0.6
   - sceneName: Skirmish
     levelPrompt: You can run but you can't hide...
-    enemySpawns: 3
-    objectiveSpawns: 5
+    enemySpawns: 2
+    objectiveSpawns: 4
     levelTheme: 5
     musicVol: 0.5
   - sceneName: Church
     levelPrompt: Your time has come...
-    enemySpawns: 4
+    enemySpawns: 2
     objectiveSpawns: 3
     levelTheme: 6
     musicVol: 0.5

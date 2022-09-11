@@ -105,9 +105,7 @@ public class AudioManager : MonoBehaviour
         if (LevelDirector.instance == null)
             musicSources[toggle].volume = 1;
         else
-        {
             musicSources[toggle].volume = LevelDirector.CurrentRoom.musicVol;
-        }
     }
     #endregion
     #region Sound

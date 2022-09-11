@@ -15,11 +15,15 @@ public class Jumpscare : MonoBehaviour
     public float timeBeforeNextScene = 2f;
     bool transition = false;
     public AudioClip jumpscareClip;
+    float musicCutTimer = 2f;
     private void Update()
     {
-        if (LevelDirector.instance.coinsCollected > 0 && !active)
+        if (LevelDirector.instance.coinsCollected >= 2 && !active)
         {
             // Cut music here
+            musicCutTimer -= Time.deltaTime;
+            float lerp = KongrooUtils.RemapRange(musicCutTimer, 2f, 0, Settings.musicVol, 0);
+            AudioManager.instance.SetMusicVol(lerp);
             timeBeforeActivation -= Time.deltaTime;
             Player.Instance.disableShooting = true;
         }
@@ -51,6 +55,9 @@ public class Jumpscare : MonoBehaviour
         if (!transition) return;
         timeBeforeNextScene -= Time.deltaTime;
         if (timeBeforeNextScene < 0)
+        {
+            AudioManager.instance.SetMusicVol(Settings.musicVol);
             LevelDirector.instance.AdvanceLevel();
+        }
     }
 }

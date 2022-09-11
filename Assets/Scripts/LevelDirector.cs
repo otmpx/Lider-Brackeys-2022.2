@@ -24,7 +24,7 @@ public static class LidarExtensions
 public class RoomSettings
 {
     public string sceneName;
-    public string levelPrompt;
+    [TextArea] public string levelPrompt;
     public int enemySpawns;
     public int objectiveSpawns;
     public MusicTheme levelTheme;
