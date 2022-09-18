@@ -36,6 +36,7 @@ public class LevelDirector : MonoBehaviour
     public static LevelDirector instance;
     public RoomSettings[] allRooms;
     public Camera cam;
+    Vignette vignette;
     public CinemachineVirtualCamera vCam;
     //public static int currentRoomIndex = 0;
     public int coinsCollected;
@@ -60,6 +61,7 @@ public class LevelDirector : MonoBehaviour
             povController.m_HorizontalAxis.m_SpeedMode = AxisState.SpeedMode.InputValueGain;
             povController.m_VerticalAxis.m_SpeedMode = AxisState.SpeedMode.InputValueGain;
             SetSensitivity();
+            vignette = cam.GetComponent<Vignette>();
         }
         else
             Destroy(gameObject);
@@ -68,6 +70,12 @@ public class LevelDirector : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
             PauseUnpause();
+        if (Input.GetKeyDown(KeyCode.F1))
+            UI.Instance.gameObject.SetActive(!UI.Instance.isActiveAndEnabled);
+        if (Input.GetKeyDown(KeyCode.F2))
+            vignette.enabled = !vignette.enabled;
+        if (Input.GetKeyDown(KeyCode.F3))
+            AdvanceLevel();
     }
     void OnEnable()
     {

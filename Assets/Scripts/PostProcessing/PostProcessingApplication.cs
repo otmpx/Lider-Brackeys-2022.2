@@ -9,7 +9,7 @@ public class PostProcessingApplication : MonoBehaviour
     public Shader shader;
     protected Material material;
 
-    private Camera cam;
+    Camera cam;
     protected virtual void Awake()
     {
         cam = GetComponent<Camera>();
