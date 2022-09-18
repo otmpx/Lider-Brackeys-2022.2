@@ -74,7 +74,7 @@ public class LevelDirector : MonoBehaviour
             UI.Instance.gameObject.SetActive(!UI.Instance.isActiveAndEnabled);
         if (Input.GetKeyDown(KeyCode.F2))
             vignette.enabled = !vignette.enabled;
-        if (Input.GetKeyDown(KeyCode.F3))
+        if (Input.GetKeyDown(KeyCode.F4))
             AdvanceLevel();
     }
     void OnEnable()

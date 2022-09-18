@@ -23,4 +23,9 @@ public class Settings : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F3))
+            Screen.fullScreenMode = Screen.fullScreen ? FullScreenMode.Windowed : FullScreenMode.ExclusiveFullScreen;
+    }
 }
